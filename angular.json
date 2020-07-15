@@ -5,10 +5,35 @@
   "projects": {
     "ng-experiments": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "lintFix": true
+        },
+        "@schematics/angular:class": {
+          "lintFix": true
+        },
+        "@schematics/angular:directive": {
+          "lintFix": true
+        },
+        "@schematics/angular:guard": {
+          "lintFix": true
+        },
+        "@schematics/angular:interceptor": {
+          "lintFix": true
+        },
+        "@schematics/angular:module": {
+          "lintFix": true
+        },
+        "@schematics/angular:pipe": {
+          "lintFix": true
+        },
+        "@schematics/angular:service": {
+          "lintFix": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "x",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -119,6 +144,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-experiments"
+    }
+  },
+  "defaultProject": "ng-experiments",
+  "cli": {
+    "analytics": false
+  }
 }

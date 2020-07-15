@@ -1,0 +1,21 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  },
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": false,
+  "editor.rulers": [100],
+  "[json]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+	},
+	"files.associations": {
+		"tsconfig.json": "jsonc",
+		"tsconfig.*.json": "jsonc",
+		"angular.json": "jsonc"
+	}
+}

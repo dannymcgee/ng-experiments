@@ -33,21 +33,21 @@ export class Colors {
 		500: '#FF6666',
 	};
 
-	public static primary(shade: number = 300, opacity: number = 1): string {
+	public static primary(shade: ColorShade = 300, opacity: number = 1): string {
 		return this.themeColor('primary', shade, opacity);
 	}
-	public static success(shade: number = 300, opacity: number = 1): string {
+	public static success(shade: ColorShade = 300, opacity: number = 1): string {
 		return this.themeColor('success', shade, opacity);
 	}
-	public static warning(shade: number = 300, opacity: number = 1): string {
+	public static warning(shade: ColorShade = 300, opacity: number = 1): string {
 		return this.themeColor('warning', shade, opacity);
 	}
-	public static danger(shade: number = 300, opacity: number = 1): string {
+	public static danger(shade: ColorShade = 300, opacity: number = 1): string {
 		return this.themeColor('danger', shade, opacity);
 	}
 
-	private static themeColor(name: ThemeColor, shade: number, opacity: number): string {
-		const palette = this[`_${name}`];
+	private static themeColor(name: ThemeColor, shade: ColorShade, opacity: number): string {
+		const palette: ColorPalette = this[`_${name}`];
 		const rgb = palette[shade];
 		const alpha = (opacity >= 0 && opacity <= 1)
 			? opacity

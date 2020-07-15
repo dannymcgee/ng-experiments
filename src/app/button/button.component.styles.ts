@@ -45,7 +45,7 @@ export function buttonStyle(style: ButtonStyle): string {
 
 	return css`
 		${baseState};
-		&:hover, &:active, &.active, &.focus {
+		&:hover, &:active, &.focus {
 			color: #fff;
 		}
 		&:hover {

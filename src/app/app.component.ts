@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import { appBase } from './app.component.styles';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'x-root',
+	templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'ng-experiments';
+
+	@HostBinding('class') hostClass = appBase;
+
 }

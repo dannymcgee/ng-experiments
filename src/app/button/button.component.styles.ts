@@ -1,0 +1,66 @@
+import { css } from 'emotion';
+import { Colors, Mixins, rem } from '@theme';
+import { ButtonStyle } from 'src/app/button/button.types';
+
+export const buttonBase = css`
+	display: inline-flex;
+	align-items: center;
+	height: ${rem(32)};
+	padding: 0 ${rem(24)};
+	border-radius: ${rem(4)};
+	outline: none !important;
+	${Mixins.transition('background', 'color', 'border-color', 'box-shadow')}
+	font: 700 ${rem(14)}/1 sans-serif;
+	cursor: pointer;
+	user-select: none;
+`;
+
+export function buttonStyle(style: ButtonStyle): string {
+	let base = '';
+	let hover = '';
+	let active = '';
+	let focusring = '';
+
+	if (style === 'secondary') {
+		base = Colors.primary();
+		hover = Colors.primary();
+		active = Colors.primary(200);
+		focusring = Colors.primary(500, 0.5);
+	}
+	else {
+		base = Colors[style]();
+		hover = Colors[style](200);
+		active = Colors[style](100);
+		focusring = Colors[style](500, 0.5);
+	}
+
+	const baseState = (style === 'secondary')
+		? css`
+			background: transparent;
+			color: ${base};
+			border: 2px solid ${base};`
+		: css`
+			background: ${base};
+			color: #fff;`;
+
+	return css`
+		${baseState};
+		&:hover, &:active, &.active, &.focus {
+			color: #fff;
+		}
+		&:hover {
+			background: ${hover};
+			border-color: ${hover};
+		}
+		&.focus {
+			background: ${base};
+			border-color: ${base};
+			box-shadow: 0 0 0 4px ${focusring}
+		}
+		&:active,
+		&.active {
+			background: ${active};
+			border-color: ${active};
+		}
+	`;
+}

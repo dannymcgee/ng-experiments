@@ -31,7 +31,6 @@ export class ButtonComponent implements OnInit, OnDestroy {
 		return classes;
 	}
 	@HostBinding('class.focus') isKeyboardFocused: boolean;
-	@HostBinding('class.active') isPressed: boolean;
 
 	protected readonly destroyed = new Subject<void>();
 

@@ -57,8 +57,7 @@ export function buttonStyle(style: ButtonStyle): string {
 			border-color: ${base};
 			box-shadow: 0 0 0 4px ${focusring}
 		}
-		&:active,
-		&.active {
+		&:active {
 			background: ${active};
 			border-color: ${active};
 		}

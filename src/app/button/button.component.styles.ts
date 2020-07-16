@@ -27,12 +27,13 @@ export function buttonStyle(style: ButtonStyle): string {
 		active = Colors.primary(200);
 		focusring = Colors.primary(500, 0.5);
 	}
-	else {
+	else if (typeof Colors[style] === 'function') {
 		base = Colors[style]();
 		hover = Colors[style](200);
 		active = Colors[style](100);
 		focusring = Colors[style](500, 0.5);
 	}
+	else throw new Error(`Tried to get theme color with unknown name: '${style}'`);
 
 	const baseState = (style === 'secondary')
 		? css`

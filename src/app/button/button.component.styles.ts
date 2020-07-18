@@ -1,6 +1,6 @@
 import { css } from 'emotion';
 import { Colors, Mixins, rem } from '@theme';
-import { ButtonStyle } from 'src/app/button/button.types';
+import { ButtonVariant } from 'src/app/button/button.types';
 
 export class ButtonStyles {
 
@@ -17,7 +17,7 @@ export class ButtonStyles {
 		user-select: none;
 	`;
 
-	public variant = (style: ButtonStyle): string => {
+	public variant = (style: ButtonVariant): string => {
 		let base = '';
 		let hover = '';
 		let active = '';

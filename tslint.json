@@ -9,6 +9,7 @@
     },
     "array-type": false,
     "arrow-return-shorthand": true,
+    "only-arrow-functions": false,
     "curly": false,
     "deprecation": {
       "severity": "warning"

@@ -1,10 +1,10 @@
 import { css } from 'emotion';
 import { rem } from '@theme';
-import { EmotionStyler } from '@ng-emotion';
+import { EmotionStylesheet } from '@ng-emotion';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AppStyles extends EmotionStyler
+export class AppStyles extends EmotionStylesheet
 {
 	base: string = css`
 		display: block;

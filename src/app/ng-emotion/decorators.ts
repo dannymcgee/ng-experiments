@@ -1,11 +1,11 @@
 import { first } from 'rxjs/operators';
-import { EmotionComponent, EmotionStyler } from './classes';
+import { EmotionComponent, EmotionStylesheet } from './classes';
 
 type PropertyDecorator = (target: object, key: string|symbol) => void;
 
 export function StyleProperty(): PropertyDecorator {
 	return function<
-		TS extends EmotionStyler,
+		TS extends EmotionStylesheet,
 		T extends EmotionComponent<TS> = any
 	>(
 		component: T,
@@ -35,7 +35,7 @@ export function StyleProperty(): PropertyDecorator {
 
 export function StyleModifier(fnName: string): PropertyDecorator {
 	return function<
-		TS extends EmotionStyler,
+		TS extends EmotionStylesheet,
 		T extends EmotionComponent<TS>,
 	>(
 		component: T,

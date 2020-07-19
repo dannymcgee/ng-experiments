@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { ButtonVariant } from 'src/app/button/button.types';
 import { ThemeColor } from '@theme';
-import { EmotionComponent, EmotionStyler } from '@ng-emotion';
+import { EmotionComponent, EmotionStylesheet } from '@ng-emotion';
 import { AppStyles } from './app.component.styles';
 
 interface VariantOption {
@@ -19,7 +19,7 @@ interface ColorOption {
 	selector: 'x-root',
 	templateUrl: './app.component.html',
 	providers: [{
-		provide: EmotionStyler,
+		provide: EmotionStylesheet,
 		useClass: AppStyles,
 	}]
 })

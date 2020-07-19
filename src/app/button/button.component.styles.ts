@@ -2,10 +2,10 @@ import { css } from 'emotion';
 import { Colors, Mixins, rem, ThemeColor } from '@theme';
 import { ButtonVariant } from 'src/app/button/button.types';
 import { Injectable } from '@angular/core';
-import { EmotionStyler } from 'src/app/ng-emotion/classes';
+import { EmotionStylesheet } from 'src/app/ng-emotion/classes';
 
 @Injectable()
-export class ButtonStyles extends EmotionStyler
+export class ButtonStyles extends EmotionStylesheet
 {
 	base: string = css`
 		display: inline-flex;

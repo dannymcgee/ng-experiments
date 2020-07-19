@@ -3,7 +3,7 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { StyleBindingFn } from 'src/app/ng-emotion/types';
 
 @Injectable()
-export class EmotionStyler
+export class EmotionStylesheet
 {
 	ngeProps = new Map<string, any>();
 	ngeBindings = new Map<string, StyleBindingFn>();
@@ -12,7 +12,7 @@ export class EmotionStyler
 }
 
 @Component({ template: '' })
-export class EmotionComponent<T extends EmotionStyler>
+export class EmotionComponent<T extends EmotionStylesheet>
 	implements OnInit, DoCheck, OnDestroy
 {
 	styles: T;
@@ -27,7 +27,7 @@ export class EmotionComponent<T extends EmotionStyler>
 
 	constructor(
 		public elementRef: ElementRef<HTMLElement>,
-		styles: EmotionStyler,
+		styles: EmotionStylesheet,
 	) {
 		this.styles = styles as T;
 	}

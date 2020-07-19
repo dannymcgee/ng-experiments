@@ -10,7 +10,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { EmotionComponent, EmotionStyler, StyleModifier, StyleProperty } from '@ng-emotion';
+import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProperty } from '@ng-emotion';
 import { ThemeColor } from '@theme';
 import { ButtonVariant } from './button.types';
 import { ButtonStyles } from './button.component.styles';
@@ -19,7 +19,7 @@ import { ButtonStyles } from './button.component.styles';
 	selector: 'button[x-btn], a[x-btn]',
 	templateUrl: './button.component.html',
 	providers: [{
-		provide: EmotionStyler,
+		provide: EmotionStylesheet,
 		useClass: ButtonStyles,
 	}],
 	changeDetection: ChangeDetectionStrategy.OnPush
@@ -35,7 +35,7 @@ export class ButtonComponent extends EmotionComponent<ButtonStyles>
 
 	constructor(
 		public elementRef: ElementRef<HTMLElement>,
-		styles: EmotionStyler,
+		styles: EmotionStylesheet,
 		private focusMonitor: FocusMonitor,
 	) {
 		super(elementRef, styles);

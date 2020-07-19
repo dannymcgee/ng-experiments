@@ -2,7 +2,6 @@ import {
 	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
-	HostBinding,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -34,8 +33,6 @@ export class ButtonComponent extends EmotionComponent<ButtonStyles>
 	@StyleProperty()
 	@Input() color: ThemeColor = 'primary';
 
-	@HostBinding('class.focus') isKeyboardFocused: boolean;
-
 	constructor(
 		public elementRef: ElementRef<HTMLElement>,
 		styles: EmotionStyler,
@@ -50,7 +47,7 @@ export class ButtonComponent extends EmotionComponent<ButtonStyles>
 		this.focusMonitor
 			.monitor(this.elementRef)
 			.pipe(takeUntil(this.onDestroy$))
-			.subscribe((origin) => this.isKeyboardFocused = origin === 'keyboard');
+			.subscribe();
 	}
 
 	ngOnDestroy(): void {

@@ -43,7 +43,7 @@ export class ButtonStyles extends EmotionStyler
 			&:active {
 				background: ${active};
 			}
-			&.focus {
+			&.cdk-keyboard-focused {
 				background: ${hover};
 				box-shadow: 0 0 0 4px ${focusring};
 			}
@@ -79,7 +79,7 @@ export class ButtonStyles extends EmotionStyler
 				background: ${hoverActive};
 				border-color: ${hoverActive};
 			}
-			&.focus {
+			&.cdk-keyboard-focused {
 				border-color: ${base};
 				box-shadow: 0 0 0 4px ${focusring};
 			}
@@ -99,11 +99,11 @@ export class ButtonStyles extends EmotionStyler
 		return css`
 			background: transparent;
 
-			&:hover, &.focus {
+			&:hover, &.cdk-keyboard-focused {
 				background: ${hoverBackground};
 				color: ${hoverText};
 			}
-			&.focus {
+			&.cdk-keyboard-focused {
 				box-shadow: 0 0 0 4px ${focusring};
 			}
 			&:active {

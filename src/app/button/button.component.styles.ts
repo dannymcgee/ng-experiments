@@ -1,8 +1,9 @@
-import { css } from 'emotion';
-import { Colors, Mixins, rem, ThemeColor } from '@theme';
-import { ButtonVariant } from 'src/app/button/button.types';
 import { Injectable } from '@angular/core';
-import { EmotionStylesheet } from 'src/app/ng-emotion/classes';
+import { css } from 'emotion';
+
+import { Colors, Mixins, rem, ThemeColor } from '@theme';
+import { EmotionStylesheet } from '@ng-emotion';
+import { ButtonVariant } from './button.types';
 
 export interface ButtonStyleProps {
 	color?: ThemeColor;

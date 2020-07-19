@@ -1,6 +1,8 @@
 import { ElementRef, OnDestroy, OnInit, Component, Injectable, DoCheck } from '@angular/core';
+
 import { ReplaySubject, Subject, Observable } from 'rxjs';
-import { StyleBindingFn } from 'src/app/ng-emotion/types';
+
+import { StyleBindingFn } from './types';
 
 /**
  * TODO

@@ -1,4 +1,5 @@
 import { first } from 'rxjs/operators';
+
 import { EmotionComponent, EmotionStylesheet } from './classes';
 
 type PropertyDecorator = (target: object, key: string|symbol) => void;
@@ -78,55 +79,3 @@ export function StyleModifier(methodName?: string): PropertyDecorator {
 		});
 	};
 }
-
-// Factories
-/*
-function makePropertyDecorator<
-	A extends any[] = any[],
-	TS extends EmotionStylesheet = EmotionStylesheet,
-	T extends EmotionComponent<TS> = EmotionComponent<TS>,
->(options: {
-	decoratorArgs?: A,
-	setterSideEffects?: <
-			V extends any = any
-		>(
-			component: T,
-			propName: string,
-			newValue: V,
-			...decoratorArgs: A
-		) => V|void,
-}): PropertyDecorator {
-	return decorator(options.decoratorArgs);
-
-	function decorator(decoratorArgs?: A): PropertyDecorator {
-		return function(component: T, propName: string): void {
-
-			function get(): any {
-				return this[`__${propName}__`];
-			}
-
-			function set(value: any): void {
-				if (typeof options.setterSideEffects === 'function') {
-					const _decoratorArgs = decoratorArgs ?? [];
-					const mutatedValue = options.setterSideEffects
-						.call(this, component, propName, value, ..._decoratorArgs);
-
-					if (mutatedValue != null) {
-						this[`__${propName}__`] = mutatedValue;
-
-						return;
-					}
-				}
-
-				this[`__${propName}__`] = value;
-			}
-
-			Object.defineProperty(component, propName, {
-				get, set,
-				enumerable: true,
-				configurable: true,
-			});
-		};
-	}
-}
-*/

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { ButtonVariant } from 'src/app/button/button.types';
 import { ThemeColor } from '@theme';
 import { EmotionComponent, EmotionStylesheet } from '@ng-emotion';
+import { ButtonVariant } from './button/button.types';
 import { AppStyles } from './app.component.styles';
 
 interface VariantOption {

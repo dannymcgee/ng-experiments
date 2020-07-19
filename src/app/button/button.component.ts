@@ -10,7 +10,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProperty } from '@ng-emotion';
+import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '@ng-emotion';
 import { ThemeColor } from '@theme';
 import { ButtonVariant } from './button.types';
 import { ButtonStyles } from './button.component.styles';
@@ -27,10 +27,10 @@ import { ButtonStyles } from './button.component.styles';
 export class ButtonComponent extends EmotionComponent<ButtonStyles>
 	implements OnInit, OnDestroy
 {
-	@StyleModifier('variant')
+	@StyleModifier()
 	@Input('x-btn') variant: ButtonVariant = 'primary';
 
-	@StyleProperty()
+	@StyleProp()
 	@Input() color: ThemeColor = 'primary';
 
 	constructor(

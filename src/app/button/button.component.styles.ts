@@ -4,10 +4,16 @@ import { ButtonVariant } from 'src/app/button/button.types';
 import { Injectable } from '@angular/core';
 import { EmotionStylesheet } from 'src/app/ng-emotion/classes';
 
+export interface ButtonStyleProps {
+	color?: ThemeColor;
+}
+
 @Injectable()
 export class ButtonStyles extends EmotionStylesheet
 {
-	base: string = css`
+	props: ButtonStyleProps = {};
+
+	readonly base: string = css`
 		display: inline-flex;
 		align-items: center;
 		height: ${rem(36)};
@@ -24,7 +30,7 @@ export class ButtonStyles extends EmotionStylesheet
 	`;
 
 	get variantPrimary(): string|null {
-		const color: ThemeColor = this.ngeProps.get('color');
+		const color: ThemeColor = this.props.color;
 
 		if (!color) return null;
 
@@ -51,7 +57,7 @@ export class ButtonStyles extends EmotionStylesheet
 	}
 
 	get variantSecondary(): string|null {
-		const color: ThemeColor = this.ngeProps.get('color');
+		const color: ThemeColor = this.props.color;
 
 		if (!color) return null;
 
@@ -87,7 +93,7 @@ export class ButtonStyles extends EmotionStylesheet
 	}
 
 	get variantTertiary(): string|null {
-		const color: ThemeColor = this.ngeProps.get('color');
+		const color: ThemeColor = this.props.color;
 
 		if (!color) return null;
 

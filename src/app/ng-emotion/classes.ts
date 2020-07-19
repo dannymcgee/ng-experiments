@@ -90,6 +90,7 @@ export class EmotionComponent<T extends EmotionStylesheet>
 		this._onInit$.complete();
 	}
 
+	/** Similar to Angular's `ChangeDetectorRef.markForCheck`, calling this method re-evaluates the component's `@StyleModifier()`-bound stylesheet methods and applies changes where necessary on the next `DoCheck` event. */
 	protected ngeMarkForCheck(): void {
 		this._ngeShouldCheck = true;
 	}

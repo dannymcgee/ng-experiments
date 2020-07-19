@@ -1,40 +1,61 @@
 import { first } from 'rxjs/operators';
-import { EmotionComponent } from './classes';
+import { EmotionComponent, EmotionStyler } from './classes';
 
-export type Constructor<T = any> = new(...args: any[]) => T;
-type ClassDecorator = <T extends Constructor>(constructor: T) => T;
 type PropertyDecorator = (target: object, key: string|symbol) => void;
 
-export function WithEmotion(StylerClass: any): ClassDecorator {
-	return function(ctor: any): any {
-		ctor.prototype.__StylerClass__ = StylerClass;
+export function StyleProperty(): PropertyDecorator {
+	return function<
+		TS extends EmotionStyler,
+		T extends EmotionComponent<TS> = any
+	>(
+		component: T,
+		propName: string
+	): void {
+		function get(): T {
+			return this[`__${propName}__`];
+		}
+
+		function set(value: T): void {
+			this.onInit$.pipe(first()).subscribe(() => {
+				this.styles.ngeProps.set(propName, value);
+				this.ngeMarkForCheck();
+
+				this[`__${propName}__`] = value;
+			});
+		}
+
+		Object.defineProperty(component, propName, {
+			get,
+			set,
+			enumerable: true,
+			configurable: true,
+		});
 	};
 }
 
-export function DynamicStyle(fnName: string): PropertyDecorator {
-	return function(component: EmotionComponent, propName: string|symbol): void {
-		let current: any = component[propName];
-
+export function StyleModifier(fnName: string): PropertyDecorator {
+	return function<
+		TS extends EmotionStyler,
+		T extends EmotionComponent<TS>,
+	>(
+		component: T,
+		propName: string
+	): void {
 		function get(): any {
-			return current;
+			return this[`__${propName}__`];
 		}
 
-		function set(next: any): void {
+		function set(value: any): void {
 			this.onInit$.pipe(first()).subscribe(() => {
-				const { styler, elementRef }: EmotionComponent = this;
-				const stylerFn: (...args: any[]) => string = styler?.[fnName];
-
-				if (next != null
-					&& next !== current
-					&& next.length
-					&& typeof stylerFn === 'function'
-					&& !!elementRef?.nativeElement
-				) {
-					elementRef.nativeElement.classList.add(stylerFn(next));
-
-					current = next;
+				if (typeof this.styles[fnName] === 'function') {
+					if (!this.styles.ngeBindings.has(propName)) {
+						this.styles.ngeBindings.set(propName, this.styles[fnName].bind(this.styles));
+					}
+					this.ngeMarkForCheck();
 				}
 			});
+
+			this[`__${propName}__`] = value;
 		}
 
 		Object.defineProperty(component, propName, {

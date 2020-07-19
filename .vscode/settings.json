@@ -17,5 +17,6 @@
 		"tsconfig.json": "jsonc",
 		"tsconfig.*.json": "jsonc",
 		"angular.json": "jsonc"
-	}
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

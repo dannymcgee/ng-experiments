@@ -4,8 +4,10 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "paths": {
+      "@ng-emotion": ["src/app/ng-emotion"],
+      "@ng-emotion/*": ["src/app/ng-emotion/*"],
       "@theme": ["src/app/theme"],
-      "@theme/*": ["src/app/theme/*"],
+      "@theme/*": ["src/app/theme/*"]
     },
     "types": []
   },

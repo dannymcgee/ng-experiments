@@ -1,69 +1,122 @@
 import { css } from 'emotion';
-import { Colors, Mixins, rem } from '@theme';
+import { Colors, Mixins, rem, ThemeColor } from '@theme';
 import { ButtonVariant } from 'src/app/button/button.types';
+import { Injectable } from '@angular/core';
+import { EmotionStyler } from 'src/app/ng-emotion/classes';
 
-export class ButtonStyles {
-
-	public static base: string = css`
+@Injectable()
+export class ButtonStyles extends EmotionStyler
+{
+	base: string = css`
 		display: inline-flex;
 		align-items: center;
-		height: ${rem(32)};
-		padding: 0 ${rem(24)};
-		border-radius: ${rem(4)};
+		height: ${rem(36)};
+		padding: 0 ${rem(18)};
+		border: 2px solid transparent;
+		border-radius: ${rem(2)};
 		outline: none !important;
 		${Mixins.transition('background', 'color', 'border-color', 'box-shadow')}
-		font: 700 ${rem(14)}/1 sans-serif;
+		font: 600 ${rem(14)}/1 sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 		cursor: pointer;
 		user-select: none;
 	`;
 
-	public variant = (style: ButtonVariant): string => {
-		let base = '';
-		let hover = '';
-		let active = '';
-		let focusring = '';
+	get variantPrimary(): string|null {
+		const color: ThemeColor = this.ngeProps.get('color');
 
-		if (style === 'secondary') {
-			base = Colors.primary();
-			hover = Colors.primary();
-			active = Colors.primary(200);
-			focusring = Colors.primary(500, 0.5);
-		}
-		else if (typeof Colors[style] === 'function') {
-			base = Colors[style]();
-			hover = Colors[style](200);
-			active = Colors[style](100);
-			focusring = Colors[style](500, 0.5);
-		}
-		else throw new Error(`Tried to get theme color with unknown name: '${style}'`);
+		if (!color) return null;
 
-		const baseState = (style === 'secondary')
-			? css`
-				background: transparent;
-				color: ${base};
-				border: 2px solid ${base};`
-			: css`
-				background: ${base};
-				color: #fff;`;
+		const base = Colors[color]();
+		const hover = Colors[color](200);
+		const active = Colors[color](100);
+		const focusring = Colors[color](500, 0.5);
 
 		return css`
-			${baseState};
-			&:hover, &:active, &.focus {
-				color: #fff;
-			}
+			background: ${base};
+			color: #fff;
+
 			&:hover {
 				background: ${hover};
-				border-color: ${hover};
-			}
-			&.focus {
-				background: ${base};
-				border-color: ${base};
-				box-shadow: 0 0 0 4px ${focusring}
 			}
 			&:active {
 				background: ${active};
-				border-color: ${active};
+			}
+			&.focus {
+				background: ${hover};
+				box-shadow: 0 0 0 4px ${focusring};
 			}
 		`;
+	}
+
+	get variantSecondary(): string|null {
+		const color: ThemeColor = this.ngeProps.get('color');
+
+		if (!color) return null;
+
+		const base = Colors[color]();
+		const baseText = Colors[color](200);
+		const border = Colors[color](400);
+		const hoverActive = Colors[color](200);
+		const keyboardActive = Colors[color](500, 0.125);
+		const focusring = Colors[color](500, 0.5);
+
+		return css`
+			background: transparent;
+			color: ${baseText};
+			border-color: ${border};
+
+			&:hover {
+				background: ${base};
+				border-color: ${base};
+				color: #fff;
+			}
+			&:active {
+				background: ${keyboardActive};
+			}
+			&:hover:active {
+				background: ${hoverActive};
+				border-color: ${hoverActive};
+			}
+			&.focus {
+				border-color: ${base};
+				box-shadow: 0 0 0 4px ${focusring};
+			}
+		`;
+	}
+
+	get variantTertiary(): string|null {
+		const color: ThemeColor = this.ngeProps.get('color');
+
+		if (!color) return null;
+
+		const hoverText = Colors[color](200);
+		const hoverBackground = Colors[color](500, 0.0625);
+		const focusring = Colors[color](500, 0.25);
+		const active = Colors[color](500, 0.125);
+
+		return css`
+			background: transparent;
+
+			&:hover, &.focus {
+				background: ${hoverBackground};
+				color: ${hoverText};
+			}
+			&.focus {
+				box-shadow: 0 0 0 4px ${focusring};
+			}
+			&:active {
+				background: ${active};
+			}
+		`;
+	}
+
+	variant(variant: ButtonVariant): string|null {
+		switch (variant) {
+			case 'primary'   : return this.variantPrimary;
+			case 'secondary' : return this.variantSecondary;
+			case 'tertiary'  : return this.variantTertiary;
+		}
 	}
 }

@@ -33,7 +33,7 @@ export class EmotionComponent<T extends EmotionStyler>
 	}
 
 	ngOnInit(): void {
-		this.elementRef.nativeElement.classList.add(this.styles.base);
+		this.ngeAddClass(this.styles.base);
 		this.onInit$.next();
 	}
 
@@ -75,7 +75,7 @@ export class EmotionComponent<T extends EmotionStyler>
 			if (currentValue == null)
 				this.ngeAddClass(newValue);
 			else if (newValue == null)
-				this.ngeRemoveClass(newValue);
+				this.ngeRemoveClass(currentValue);
 			else
 				this.ngeReplaceClass(currentValue, newValue);
 

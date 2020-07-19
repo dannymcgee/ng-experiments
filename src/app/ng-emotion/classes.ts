@@ -1,5 +1,5 @@
 import { ElementRef, OnDestroy, OnInit, Component, Injectable, DoCheck } from '@angular/core';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, Subject, Observable } from 'rxjs';
 import { StyleBindingFn } from 'src/app/ng-emotion/types';
 
 /**
@@ -13,8 +13,6 @@ export class EmotionStylesheet
 	 */
 	props: Record<string, any> = {};
 
-	_ngeBindings = new Map<string, StyleBindingFn>();
-
 	/**
 	 * The base set of styles for this component. Style rules at the "root" level of this property will apply to the component's host element, while nested selectors will be matched to descendants of the component _in an un-encapsulated way_.
 	 *
@@ -27,6 +25,8 @@ export class EmotionStylesheet
 	 * @see StyleProp
 	 */
 	readonly base: string;
+
+	_ngeBindings = new Map<string, StyleBindingFn>();
 }
 
 @Component({ template: '' })
@@ -40,14 +40,17 @@ export class EmotionComponent<T extends EmotionStylesheet>
 	 */
 	styles: T;
 
-	protected _ngeBindingValues = new Map<string, string>();
-	protected _ngeBindingChanges = new Map<string, [string, string]>();
+	private _ngeBindingValues = new Map<string, string>();
+	private _ngeBindingChanges = new Map<string, [string, string]>();
 
-	protected _ngeShouldCheck = false;
-	protected _ngeHasChanges = false;
+	private _ngeShouldCheck = false;
+	private _ngeHasChanges = false;
 
-	protected _onInit$ = new ReplaySubject<void>();
-	protected onDestroy$ = new Subject<void>();
+	private _onInit$ = new ReplaySubject<void>();
+
+	/** Observable which emits when the component is destroyed. Useful for managing subscriptions via the `takeUntil` operator */
+	protected get onDestroy$(): Observable<void> { return this._onDestroy$.asObservable(); }
+	private _onDestroy$ = new Subject<void>();
 
 	constructor(
 		public elementRef: ElementRef<HTMLElement>,
@@ -57,7 +60,7 @@ export class EmotionComponent<T extends EmotionStylesheet>
 	}
 
 	ngOnInit(): void {
-		this.ngeAddClass(this.styles.base);
+		this._ngeAddClass(this.styles.base);
 		this._onInit$.next();
 	}
 
@@ -77,13 +80,13 @@ export class EmotionComponent<T extends EmotionStylesheet>
 		}
 
 		if (this._ngeHasChanges) {
-			this.ngeUpdateBindings();
+			this._ngeUpdateBindings();
 		}
 	}
 
 	ngOnDestroy(): void {
-		this.onDestroy$.next();
-		this.onDestroy$.complete();
+		this._onDestroy$.next();
+		this._onDestroy$.complete();
 		this._onInit$.complete();
 	}
 
@@ -91,17 +94,17 @@ export class EmotionComponent<T extends EmotionStylesheet>
 		this._ngeShouldCheck = true;
 	}
 
-	protected ngeUpdateBindings(): void {
+	private _ngeUpdateBindings(): void {
 		if (this.elementRef?.nativeElement == null)
 			return;
 
 		for (const [key, [currentValue, newValue]] of this._ngeBindingChanges.entries()) {
 			if (currentValue == null)
-				this.ngeAddClass(newValue);
+				this._ngeAddClass(newValue);
 			else if (newValue == null)
-				this.ngeRemoveClass(currentValue);
+				this._ngeRemoveClass(currentValue);
 			else
-				this.ngeReplaceClass(currentValue, newValue);
+				this._ngeReplaceClass(currentValue, newValue);
 
 			this._ngeBindingValues.set(key, newValue);
 		}
@@ -110,15 +113,15 @@ export class EmotionComponent<T extends EmotionStylesheet>
 		this._ngeHasChanges = false;
 	}
 
-	private ngeAddClass(className: string): void {
+	private _ngeAddClass(className: string): void {
 		this.elementRef.nativeElement.classList.add(className);
 	}
 
-	private ngeReplaceClass(prev: string, current: string): void {
+	private _ngeReplaceClass(prev: string, current: string): void {
 		this.elementRef.nativeElement.classList.replace(prev, current);
 	}
 
-	private ngeRemoveClass(className: string): void {
+	private _ngeRemoveClass(className: string): void {
 		this.elementRef.nativeElement.classList.remove(className);
 	}
 }

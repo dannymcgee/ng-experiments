@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { css } from 'emotion';
 
-import { rem } from '@theme';
+import { rem, FontFamily, Mixins, Font } from '@theme';
 import { EmotionStylesheet } from '@ng-emotion';
 
 @Injectable()
@@ -11,6 +11,11 @@ export class AppStyles extends EmotionStylesheet
 	base: string = css`
 		display: block;
 		padding: ${rem(64)};
+
+		h4 {
+			${Mixins.font(Font.H4)}
+			color: #444;
+		}
 
 		section {
 			margin: 0 0 ${rem(48)};
@@ -35,11 +40,11 @@ export class AppStyles extends EmotionStylesheet
 
 		label {
 			display: block;
-			margin: 0 0 ${rem(4)};
-			font-size: ${rem(10)};
-			font-weight: 600;
+			margin: 0 0 ${rem(8)};
+			font: 700 ${rem(10)}/1 ${FontFamily.Gotham};
+			color: #777;
 			text-transform: uppercase;
-			letter-spacing: 0.1em;
+			letter-spacing: 0.05em;
 		}
 
 		select {

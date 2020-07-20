@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { css } from 'emotion';
 
-import { Colors, Mixins, rem, ThemeColor } from '@theme';
+import { Colors, Mixins, rem, ThemeColor, Font } from '@theme';
 import { EmotionStylesheet } from '@ng-emotion';
 import { ButtonVariant } from './button.types';
 
@@ -20,12 +20,10 @@ export class ButtonStyles extends EmotionStylesheet
 		height: ${rem(36)};
 		padding: 0 ${rem(18)};
 		border: 2px solid transparent;
-		border-radius: ${rem(2)};
+		border-radius: ${rem(4)};
 		outline: none !important;
 		${Mixins.transition('background', 'color', 'border-color', 'box-shadow')}
-		font: 600 ${rem(14)}/1 sans-serif;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		${Mixins.font(Font.UI)}
 		cursor: pointer;
 		user-select: none;
 	`;
@@ -63,7 +61,6 @@ export class ButtonStyles extends EmotionStylesheet
 		if (!color) return null;
 
 		const base = Colors[color]();
-		const baseText = Colors[color](200);
 		const border = Colors[color](400);
 		const hoverActive = Colors[color](200);
 		const keyboardActive = Colors[color](500, 0.125);
@@ -71,7 +68,7 @@ export class ButtonStyles extends EmotionStylesheet
 
 		return css`
 			background: transparent;
-			color: ${baseText};
+			color: ${base};
 			border-color: ${border};
 
 			&:hover {

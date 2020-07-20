@@ -2,8 +2,8 @@ export type ThemeColor = 'primary'|'success'|'warning'|'danger';
 export type ColorShade = 100|200|300|400|500;
 export type ColorPalette = { [key in ColorShade]: string };
 
-export class Colors {
-
+export class Colors
+{
 	private static _primary: ColorPalette = {
 		100: '#0066AA',
 		200: '#0077BB',
@@ -59,5 +59,4 @@ export class Colors {
 
 		return `${rgb}${alphaHex}`;
 	}
-
 }

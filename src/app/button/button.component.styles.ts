@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { css } from 'emotion';
 
 import { Colors, Mixins, rem, ThemeColor, Font } from '@theme';
-import { EmotionStylesheet } from '@ng-emotion';
+import { EmotionStylesheet, css } from '@ng-emotion';
 import { ButtonVariant } from './button.types';
 
 export interface ButtonStyleProps {
@@ -15,6 +14,7 @@ export class ButtonStyles extends EmotionStylesheet
 	props: ButtonStyleProps = {};
 
 	readonly base: string = css`
+		label: btn;
 		display: inline-flex;
 		align-items: center;
 		height: ${rem(36)};
@@ -22,8 +22,8 @@ export class ButtonStyles extends EmotionStylesheet
 		border: 2px solid transparent;
 		border-radius: ${rem(4)};
 		outline: none !important;
-		${Mixins.transition('background', 'color', 'border-color', 'box-shadow')}
-		${Mixins.font(Font.UI)}
+		${Mixins.transition('background', 'color', 'border-color', 'box-shadow')};
+		${Mixins.font(Font.UI)};
 		cursor: pointer;
 		user-select: none;
 	`;
@@ -39,6 +39,7 @@ export class ButtonStyles extends EmotionStylesheet
 		const focusring = Colors[color](500, 0.5);
 
 		return css`
+			label: btn--primary;
 			background: ${base};
 			color: #fff;
 
@@ -67,6 +68,7 @@ export class ButtonStyles extends EmotionStylesheet
 		const focusring = Colors[color](500, 0.5);
 
 		return css`
+			label: btn--secondary;
 			background: transparent;
 			color: ${base};
 			border-color: ${border};
@@ -101,6 +103,7 @@ export class ButtonStyles extends EmotionStylesheet
 		const active = Colors[color](500, 0.125);
 
 		return css`
+			label: btn--tertiary;
 			background: transparent;
 
 			&:hover, &.cdk-keyboard-focused {

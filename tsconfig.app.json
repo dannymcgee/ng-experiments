@@ -9,7 +9,13 @@
       "@theme": ["src/app/theme"],
       "@theme/*": ["src/app/theme/*"]
     },
-    "types": []
+    "types": [],
+    "plugins": [{
+      "name": "typescript-styled-plugin",
+      "lint": {
+        "validProperties": ["label"]
+      }
+    }]
   },
   "files": [
     "src/main.ts",

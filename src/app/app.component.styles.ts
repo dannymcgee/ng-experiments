@@ -1,28 +1,66 @@
 import { Injectable } from '@angular/core';
 
-import { css } from 'emotion';
-
-import { rem, FontFamily, Mixins, Font } from '@theme';
-import { EmotionStylesheet } from '@ng-emotion';
+import { rem, Mixins, Font } from '@theme';
+import { EmotionStylesheet, css, injectGlobal } from '@ng-emotion';
 
 @Injectable()
 export class AppStyles extends EmotionStylesheet
 {
-	base: string = css`
-		display: block;
-		padding: ${rem(64)};
+	global: void = injectGlobal`
+		* {
+			box-sizing: border-box;
+			font-kerning: normal;
+		}
 
-		h4 {
-			${Mixins.font(Font.H4)}
+		button {
+			background: unset;
+			border: none;
+			-webkit-appearance: none;
+
+			&:focus {
+				outline: none;
+			}
+		}
+
+		body {
+			margin: 0;
 			color: #444;
 		}
 
-		section {
-			margin: 0 0 ${rem(48)};
-
-			h4 {
+		h1, h2, h3, h4, h5 {
+			&:first-child {
 				margin-top: 0;
 			}
+		}
+
+		p:last-child {
+			margin-bottom: 0;
+		}
+
+		h1 {
+			${Mixins.font(Font.H1)};
+		}
+		h2 {
+			${Mixins.font(Font.H2)};
+		}
+		h3 {
+			${Mixins.font(Font.H3)};
+		}
+		h4 {
+			${Mixins.font(Font.H4)};
+		}
+		h5 {
+			${Mixins.font(Font.H5)};
+		}
+	`;
+
+	base: string = css`
+		label: root;
+		display: block;
+		padding: ${rem(64)};
+
+		section {
+			margin: 0 0 ${rem(48)};
 		}
 
 		button {
@@ -31,20 +69,20 @@ export class AppStyles extends EmotionStylesheet
 	`;
 
 	flex: string = css`
+		label: flex;
 		display: flex;
 		align-items: flex-end;
 	`;
 
 	field: string = css`
+		label: field;
 		margin: 0 ${rem(8)};
 
 		label {
 			display: block;
 			margin: 0 0 ${rem(8)};
-			font: 700 ${rem(10)}/1 ${FontFamily.Gotham};
+			${Mixins.font(Font.Label)}
 			color: #777;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
 		}
 
 		select {
@@ -52,7 +90,10 @@ export class AppStyles extends EmotionStylesheet
 			width: ${rem(180)};
 			height: ${rem(36)};
 			padding: 0 ${rem(8)};
+			border-radius: ${rem(4)};
+			color: #444;
 			border: 2px solid #ccc;
+			${Mixins.font(Font.UI)}
 
 			option {
 				padding: ${rem(4)} ${rem(12)};

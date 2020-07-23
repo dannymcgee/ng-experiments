@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "declaration": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "rootDir": "schematics",
+    "outDir": "../../dist/ng-emotion/schematics",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "target": "es6",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "include": ["schematics/**/*"],
+  "exclude": ["schematics/ng-generate/*/files/**/*"]
+}

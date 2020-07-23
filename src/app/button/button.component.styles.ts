@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
+import { EmotionStylesheet, css } from 'ng-emotion';
 
 import { Colors, Mixins, rem, ThemeColor, Font } from '@theme';
-import { EmotionStylesheet, css } from '@ng-emotion';
 import { ButtonVariant } from './button.types';
 
 export interface ButtonStyleProps {

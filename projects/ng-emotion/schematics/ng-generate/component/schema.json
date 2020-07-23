@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsEmotionComponent",
+  "title": "Emotion Component Schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the component.",
+      "visible": false
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the component.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What should be the name of the component?"
+    },
+    "inlineTemplate": {
+      "description": "Specifies if the template will be in the ts file.",
+      "type": "boolean",
+      "alias": "t"
+    },
+    "changeDetection": {
+      "description": "Specifies the change detection strategy.",
+      "enum": ["Default", "OnPush"],
+      "type": "string",
+      "default": "Default",
+      "alias": "c"
+    },
+    "prefix": {
+      "type": "string",
+      "format": "html-selector",
+      "description": "The prefix to apply to generated selectors.",
+      "alias": "p"
+    },
+    "skipTests": {
+      "type": "boolean",
+      "description": "When true, does not generate a test file."
+    },
+    "skipImport": {
+      "type": "boolean",
+      "description": "Flag to skip the module import.",
+      "default": false
+    },
+    "selector": {
+      "type": "string",
+      "format": "html-selector",
+      "description": "The selector to use for the component."
+    },
+    "module":  {
+      "type": "string",
+      "description": "Allows specification of the declaring module.",
+      "alias": "m"
+    },
+    "export": {
+      "type": "boolean",
+      "default": false,
+      "description": "Specifies if declaring module exports the component."
+    },
+    "entryComponent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Specifies if the component is an entry component of declaring module."
+    }
+  },
+  "required": ["name"]
+}

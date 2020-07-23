@@ -8,9 +8,9 @@ import {
 } from '@angular/core';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
+import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from 'ng-emotion';
 import { takeUntil } from 'rxjs/operators';
 
-import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '@ng-emotion';
 import { ThemeColor } from '@theme';
 import { ButtonVariant } from './button.types';
 import { ButtonStyles } from './button.component.styles';

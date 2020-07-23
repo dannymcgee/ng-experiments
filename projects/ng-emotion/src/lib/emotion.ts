@@ -1,8 +1,5 @@
 import createEmotion from 'create-emotion';
 
-export * from './classes';
-export * from './decorators';
-
 const emotion = createEmotion({
 	key: 'nge',
 });

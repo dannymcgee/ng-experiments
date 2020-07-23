@@ -1,4 +1,5 @@
-import { css } from '@ng-emotion';
+import { css } from 'ng-emotion';
+
 import { Font, FontSize, FontFamily } from './fonts';
 import { rem } from './utils';
 

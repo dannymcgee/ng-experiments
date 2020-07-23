@@ -144,6 +144,46 @@
           }
         }
       }
+    },
+    "ng-emotion": {
+      "projectType": "library",
+      "root": "projects/ng-emotion",
+      "sourceRoot": "projects/ng-emotion/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-emotion/tsconfig.lib.json",
+            "project": "projects/ng-emotion/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-emotion/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-emotion/src/test.ts",
+            "tsConfig": "projects/ng-emotion/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-emotion/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-emotion/tsconfig.lib.json",
+              "projects/ng-emotion/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-experiments",

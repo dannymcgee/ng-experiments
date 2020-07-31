@@ -26,6 +26,12 @@
       },
       "x-prompt": "What should be the name of the component?"
     },
+    "displayBlock": {
+      "description": "Specifies if the stylesheet base will contain `{ display: block; }`.",
+      "type": "boolean",
+      "default": true,
+      "alias": "b"
+    },
     "inlineTemplate": {
       "description": "Specifies if the template will be in the ts file.",
       "type": "boolean",
@@ -40,23 +46,42 @@
     },
     "prefix": {
       "type": "string",
-      "format": "html-selector",
       "description": "The prefix to apply to generated selectors.",
-      "alias": "p"
+      "alias": "p",
+      "oneOf": [
+        {
+          "maxLength": 0
+        },
+        {
+          "minLength": 1,
+          "format": "html-selector"
+        }
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "Adds a developer-defined type to the filename, in the format \"name.type.ts\".",
+      "default": "Component"
     },
     "skipTests": {
       "type": "boolean",
-      "description": "When true, does not generate a test file."
+      "description": "When true, does not generate a test file.",
+      "default": false
+    },
+    "flat": {
+      "type": "boolean",
+      "description": "When true, creates the new files at the top level of the current project.",
+      "default": false
     },
     "skipImport": {
       "type": "boolean",
-      "description": "Flag to skip the module import.",
+      "description": "When true, does not import this component into the owning NgModule.",
       "default": false
     },
     "selector": {
       "type": "string",
       "format": "html-selector",
-      "description": "The selector to use for the component."
+      "description": "The HTML selector to use for this component."
     },
     "module":  {
       "type": "string",
@@ -66,12 +91,29 @@
     "export": {
       "type": "boolean",
       "default": false,
-      "description": "Specifies if declaring module exports the component."
+      "description": "When true, the declaring NgModule exports this component."
     },
-    "entryComponent": {
+    "lintFix": {
       "type": "boolean",
       "default": false,
-      "description": "Specifies if the component is an entry component of declaring module."
+      "description": "When true, applies lint fixes after generating the component."
+    },
+    "onInit": {
+      "type": "boolean",
+      "description": "When false, the OnInit implementation will be skipped. If explicitly set to true and combined with `minimal: true`, this setting overrides the `minimal` setting."
+    },
+    "onDestroy": {
+      "type": "boolean",
+      "description": "When false, the OnDestroy implementation will be skipped. If explicitly set to true and combined with `minimal: true`, this setting overrides the `minimal` setting."
+    },
+    "construct": {
+      "type": "boolean",
+      "description": "When false, the constructor will be omitted. If explicitly set to true and combined with `minimal: true`, this setting overrides the `minimal` setting."
+    },
+    "minimal": {
+      "type": "boolean",
+      "description": "When true, the constructor, OnInit, and OnDestroy implementations will be skipped. Can be overridden by setting `onInit`, `onDestroy`, or `construct` to true individually.",
+      "default": false
     }
   },
   "required": ["name"]

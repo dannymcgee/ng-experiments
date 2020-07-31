@@ -46,6 +46,7 @@ function makeDirectoryInDist(dir: string, dryRun?: boolean): Promise<void> {
 
 	if (dryRun) {
 		console.log(`Creating directory '${path.relative('.', pathToCreate)}'`);
+
 		return Promise.resolve();
 	}
 
@@ -70,6 +71,7 @@ function copyToDist(source: string, dryRun?: boolean): Promise<void> {
 
 	if (dryRun) {
 		console.log(`Copying '.\\${srcRelative}' --> '${path.relative('.', destination)}'`);
+
 		return Promise.resolve();
 	}
 
@@ -102,6 +104,9 @@ function readDirRecursive(dir: string): Promise<File[]> {
 			list.forEach((file) => {
 				file = path.resolve(dir, file);
 				fs.stat(file, (err, stat) => {
+					if (err)
+						reject(err);
+
 					if (stat?.isDirectory()) {
 						results.push({ name: file, type: 'folder' });
 

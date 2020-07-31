@@ -5,7 +5,7 @@
       "description": "Create a component with Emotion CSS-in-JS styling",
       "factory": "./ng-generate/component/index",
       "schema": "./ng-generate/component/schema.json",
-      "aliases": ["nge-component"]
+      "aliases": ["c"]
     }
   }
 }

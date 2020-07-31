@@ -1,37 +1,66 @@
-import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Component<%
+if(construct) {
+	%>, ElementRef<%
+} if(onInit) {
+	%>, OnInit<%
+} if(onDestroy) {
+	%>, OnDestroy<%
+} %> } from '@angular/core';
 import { EmotionComponent, EmotionStylesheet } from 'ng-emotion';
 
 import { <%= classify(name) %>Styles } from './<%= dasherize(name) %>.component.styles';
 
 @Component({
-	selector: '<%= selector %>',<% if(inlineTemplate) { %>
+	selector: '<%= selector %>',<%
+if(inlineTemplate) { %>
 	template: `
 		<p>
 			<%= dasherize(name) %> works!
 		</p>
-	`,<% } else { %>
-	templateUrl: './<%= dasherize(name) %>.component.html',<% } %>
+	`,<%
+} else { %>
+	templateUrl: './<%= dasherize(name) %>.component.html',<%
+} %>
 	providers: [{
 		provide: EmotionStylesheet,
 		useClass: <%= classify(name) %>Styles,
 	}],
 })
 export class <%= classify(name) %><%= classify(type) %>
-	extends EmotionComponent<<%= classify(name) %>Styles><% if(onInit || onDestroy) { %>
-	implements <% } if(onInit) { %>OnInit, <% } if(onDestroy) { %>OnDestroy<% } %>
-{<% if(construct) { %>
+	extends EmotionComponent<<%= classify(name) %>Styles><%
+if(onInit || onDestroy) { %>
+	implements<%
+}
+if(onInit) {
+	%> OnInit<%
+}
+if(onDestroy) {
+	if(onInit) {
+		%>,<%
+	}
+	%> OnDestroy<%
+} %>
+{<%
+if(construct) {
+%>
 	constructor(
 		public elementRef: ElementRef,
 		styles: EmotionStylesheet
 	) {
 		super(elementRef, styles);
 	}
-<% } if(onInit) { %>
+<%
+} if(onInit) {
+%>
 	ngOnInit(): void {
 		super.ngOnInit();
 	}
-<% } if(onDestroy) { %>
+<%
+} if(onDestroy) {
+%>
 	ngOnDestroy(): void {
 		super.ngOnDestroy();
-	}<% } %>
+	}
+<%
 }
+%>}

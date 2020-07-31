@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { EmotionStylesheet, css } from 'ng-emotion';
 
-import { Colors, Mixins, rem, ThemeColor, Font } from '@theme';
+
 import { ButtonVariant } from './button.types';
+import { ThemeColor, rem, Mixins, Font, Colors } from '../theme';
+import { EmotionStylesheet, css } from '../core';
 
 export interface ButtonStyleProps {
 	color?: ThemeColor;
 }
 
 @Injectable()
-export class ButtonStyles extends EmotionStylesheet
-{
+export class ButtonStyles extends EmotionStylesheet {
 	props: ButtonStyleProps = {};
 
 	readonly base: string = css`

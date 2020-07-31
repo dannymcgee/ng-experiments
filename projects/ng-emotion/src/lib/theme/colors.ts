@@ -49,13 +49,15 @@ export class Colors
 	private static themeColor(name: ThemeColor, shade: ColorShade, opacity: number): string {
 		const palette: ColorPalette = this[`_${name}`];
 		const rgb = palette[shade];
-		const alpha = (opacity >= 0 && opacity <= 1)
-			? opacity
-			: 1;
-		const alphaHex = Math.round(alpha * 255)
-			.toString(16)
-			.padStart(2, '0')
-			.toUpperCase();
+		const alpha =
+			(opacity >= 0 && opacity <= 1)
+				? opacity
+				: 1;
+		const alphaHex =
+			Math.round(alpha * 255)
+				.toString(16)
+				.padStart(2, '0')
+				.toUpperCase();
 
 		return `${rgb}${alphaHex}`;
 	}

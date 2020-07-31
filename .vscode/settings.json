@@ -18,5 +18,8 @@
 		"tsconfig.*.json": "jsonc",
 		"angular.json": "jsonc"
   },
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "ngschematics.schematics": [
+    "ng-emotion"
+  ]
 }

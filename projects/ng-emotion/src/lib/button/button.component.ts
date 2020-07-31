@@ -1,40 +1,34 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	ElementRef,
-	Input,
-	OnDestroy,
-	OnInit,
-} from '@angular/core';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { Component, ChangeDetectionStrategy, ElementRef, OnInit, OnDestroy, Input } from '@angular/core';
 
-import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from 'ng-emotion';
 import { takeUntil } from 'rxjs/operators';
 
-import { ThemeColor } from '@theme';
-import { ButtonVariant } from './button.types';
+import { EmotionStylesheet, EmotionComponent, StyleModifier, StyleProp } from '../core';
+import { ThemeColor } from '../theme';
 import { ButtonStyles } from './button.component.styles';
+import { ButtonVariant } from './button.types';
 
 @Component({
-	selector: 'button[x-btn], a[x-btn]',
-	templateUrl: './button.component.html',
+	selector: 'button[nge-btn], a[nge-btn]',
+	template: `<ng-content></ng-content>`,
 	providers: [{
 		provide: EmotionStylesheet,
 		useClass: ButtonStyles,
 	}],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent extends EmotionComponent<ButtonStyles>
+export class ButtonComponent
+	extends EmotionComponent<ButtonStyles>
 	implements OnInit, OnDestroy
 {
 	@StyleModifier()
-	@Input('x-btn') variant: ButtonVariant = 'primary';
+	@Input('nge-btn') variant: ButtonVariant = 'primary';
 
 	@StyleProp()
 	@Input() color: ThemeColor = 'primary';
 
 	constructor(
-		public elementRef: ElementRef<HTMLElement>,
+		public elementRef: ElementRef,
 		styles: EmotionStylesheet,
 		private focusMonitor: FocusMonitor,
 	) {
@@ -46,8 +40,8 @@ export class ButtonComponent extends EmotionComponent<ButtonStyles>
 
 		this.focusMonitor
 			.monitor(this.elementRef)
-			.pipe(takeUntil(this.onDestroy$))
-			.subscribe();
+				.pipe(takeUntil(this.onDestroy$))
+				.subscribe();
 	}
 
 	ngOnDestroy(): void {
@@ -55,5 +49,4 @@ export class ButtonComponent extends EmotionComponent<ButtonStyles>
 
 		this.focusMonitor.stopMonitoring(this.elementRef);
 	}
-
 }

@@ -2,6 +2,7 @@
   "recommendations": [
     "jpoissonnier.vscode-styled-components",
     "angular.ng-template",
-    "ms-vscode.vscode-typescript-tslint-plugin"
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "cyrilletuzi.angular-schematics"
   ]
 }

@@ -1,5 +1,4 @@
-import { css } from 'ng-emotion';
-
+import { css } from '../core';
 import { Font, FontSize, FontFamily } from './fonts';
 import { rem } from './utils';
 
@@ -46,8 +45,12 @@ export namespace Mixins
 	}
 
 	export function heading(
-		size: Exclude<FontSize, FontSize.Small|FontSize.UI|FontSize.Text>
-	): string {
+		size: Exclude<FontSize
+				, FontSize.Small
+				| FontSize.UI
+				| FontSize.Text>
+		): string
+	{
 		return css`
 			font: 700
 				${rem(size)}/1

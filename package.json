@@ -2,6 +2,7 @@
   "name": "ng-experiments",
   "version": "0.0.0",
   "scripts": {
+    "start": "ng serve",
     "ng": "ng",
     "prebuild": "rimraf dist && npm unlink --no-save ng-emotion",
     "build": "npm run ng-emotion:build && npm run ng-emotion:link && ng build",

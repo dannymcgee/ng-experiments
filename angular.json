@@ -147,9 +147,16 @@
     },
     "ng-emotion": {
       "projectType": "library",
+      "schematics": {
+        "ng-emotion:component": {
+          "lintFix": true,
+          "changeDetection": "OnPush",
+          "export": true
+        }
+      },
       "root": "projects/ng-emotion",
       "sourceRoot": "projects/ng-emotion/src",
-      "prefix": "lib",
+      "prefix": "nge",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

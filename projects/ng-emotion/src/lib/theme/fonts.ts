@@ -1,5 +1,4 @@
-export enum FontSize
-{
+export enum FontSize {
 	Small = 13,
 	UI    = 14,
 	Text  = 16,
@@ -10,16 +9,14 @@ export enum FontSize
 	H1    = 36,
 }
 
-export enum FontFamily
-{
+export enum FontFamily {
 	WhitneyUI = `'Whitney SSm UI A', 'Whitney SSm UI B', 'Segoe UI', sans-serif`,
 	WhitneyText = `'Whitney SSm Text A', 'Whitney SSm Text B', 'Segoe UI', sans-serif`,
 	WhitneySmallCaps = `'Whitney SSm SmallCaps A', 'Whitney SSm SmallCaps B', 'Segoe UI', sans-serif`,
 	Operator = `'Operator A', 'Operator B', Georgia, serif`,
 }
 
-export enum Font
-{
+export enum Font {
 	UI,
 	Label,
 	Text,

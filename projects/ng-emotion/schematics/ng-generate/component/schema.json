@@ -41,7 +41,6 @@
       "description": "Specifies the change detection strategy.",
       "enum": ["Default", "OnPush"],
       "type": "string",
-      "default": "Default",
       "alias": "c"
     },
     "prefix": {

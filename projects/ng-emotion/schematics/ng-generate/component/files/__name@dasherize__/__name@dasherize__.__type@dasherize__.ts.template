@@ -1,9 +1,14 @@
 import { Component<%
-if(construct) {
+if (!!changeDetection) {
+	%>, ChangeDetectionStrategy<%
+}
+if (construct) {
 	%>, ElementRef<%
-} if(onInit) {
+}
+if (onInit) {
 	%>, OnInit<%
-} if(onDestroy) {
+}
+if (onDestroy) {
 	%>, OnDestroy<%
 } %> } from '@angular/core';
 import { EmotionComponent, EmotionStylesheet } from 'ng-emotion';
@@ -12,7 +17,7 @@ import { <%= classify(name) %>Styles } from './<%= dasherize(name) %>.component.
 
 @Component({
 	selector: '<%= selector %>',<%
-if(inlineTemplate) { %>
+if (inlineTemplate) { %>
 	template: `
 		<p>
 			<%= dasherize(name) %> works!
@@ -24,24 +29,33 @@ if(inlineTemplate) { %>
 	providers: [{
 		provide: EmotionStylesheet,
 		useClass: <%= classify(name) %>Styles,
-	}],
+	}],<%
+if (!!changeDetection) {
+%>
+	changeDetection: <%
+	if (changeDetection === 'OnPush') {
+		%>ChangeDetectionStrategy.OnPush,<%
+	} else if (changeDetection === 'Default') {
+		%>ChangeDetectionStrategy.Default,<%
+	}
+} %>
 })
 export class <%= classify(name) %><%= classify(type) %>
 	extends EmotionComponent<<%= classify(name) %>Styles><%
-if(onInit || onDestroy) { %>
+if (onInit || onDestroy) { %>
 	implements<%
 }
-if(onInit) {
+if (onInit) {
 	%> OnInit<%
 }
-if(onDestroy) {
-	if(onInit) {
+if (onDestroy) {
+	if (onInit) {
 		%>,<%
 	}
 	%> OnDestroy<%
 } %>
 {<%
-if(construct) {
+if (construct) {
 %>
 	constructor(
 		public elementRef: ElementRef,
@@ -50,13 +64,15 @@ if(construct) {
 		super(elementRef, styles);
 	}
 <%
-} if(onInit) {
+}
+if (onInit) {
 %>
 	ngOnInit(): void {
 		super.ngOnInit();
 	}
 <%
-} if(onDestroy) {
+}
+if (onDestroy) {
 %>
 	ngOnDestroy(): void {
 		super.ngOnDestroy();

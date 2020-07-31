@@ -10,6 +10,6 @@
  *
  * It's a win-win-win!
  */
-export function rem(value: number): string {
+export function rem (value: number): string {
 	return `${value / 16}rem`;
 }

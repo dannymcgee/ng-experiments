@@ -1,3 +1,4 @@
+import { strings } from '@angular-devkit/core';
 import {
 	apply,
 	chain,
@@ -14,18 +15,17 @@ import {
 	Tree,
 	url,
 } from '@angular-devkit/schematics';
-import { strings } from '@angular-devkit/core';
-import { parseName } from '@schematics/angular/utility/parse-name';
-import { buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
-import { Schema as EmotionComponentSchema } from './schema';
-import * as ts from 'typescript';
 import { addDeclarationToModule, addExportToModule } from '@schematics/angular/utility/ast-utils';
-import { applyLintFix } from '@schematics/angular/utility/lint-fix';
 import { InsertChange } from '@schematics/angular/utility/change';
+import { buildRelativePath, findModuleFromOptions } from '@schematics/angular/utility/find-module';
+import { applyLintFix } from '@schematics/angular/utility/lint-fix';
+import { parseName } from '@schematics/angular/utility/parse-name';
+import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
 import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
-import { validateName, validateHtmlSelector } from '@schematics/angular/utility/validation';
+import * as ts from 'typescript';
+import { Schema as EmotionComponentSchema } from './schema';
 
-function buildSelector(
+function buildSelector (
 	{ name, prefix }: EmotionComponentSchema,
 	projectPrefix: string
 	): string
@@ -39,7 +39,7 @@ function buildSelector(
 			: kebab;
 }
 
-function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
+function readIntoSourceFile (host: Tree, modulePath: string): ts.SourceFile {
 	const text = host.read(modulePath);
 
 	if (text === undefined)
@@ -49,7 +49,7 @@ function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
 	return ts.createSourceFile(modulePath, sourceText, ts.ScriptTarget.Latest, true);
 }
 
-function addDeclarationToNgModule(options: EmotionComponentSchema): Rule {
+function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {
 	return (host: Tree): Tree => {
 		if (options.skipImport || !options.module) {
 			return host;
@@ -104,7 +104,7 @@ function addDeclarationToNgModule(options: EmotionComponentSchema): Rule {
 /**
  * Mutates the `onInit`, `onDestroy`, and `construct` options to configure them to the correct settings for user selections.
  */
-function configureBoilerplateOptions(options: EmotionComponentSchema): void {
+function configureBoilerplateOptions (options: EmotionComponentSchema): void {
 	const boilerplateOptions = ['onInit', 'onDestroy', 'construct'];
 
 	for (const optionName of boilerplateOptions) {
@@ -114,20 +114,22 @@ function configureBoilerplateOptions(options: EmotionComponentSchema): void {
 	}
 }
 
-function debugLog(message: string): Rule {
+function debugLog (message: string): Rule {
 	return (host: Tree): Tree => {
+		// tslint:disable:no-console
 		console.log('');
 		console.log(`----- ${message} -----`);
 		console.log(host);
 		console.log(`----- /${message} -----`);
 		console.log('');
+		// tslint:disable:no-console
 
 		return host;
 	};
 }
 
-export default function(options: EmotionComponentSchema): Rule {
-	return async (host: Tree) => {
+export default function (options: EmotionComponentSchema): Rule {
+	return async (host: Tree): Promise<Rule> => {
 		const workspace = await getWorkspace(host);
 		const project = workspace.projects.get(options.project);
 
@@ -156,10 +158,10 @@ export default function(options: EmotionComponentSchema): Rule {
 				? filter((path) => !path.endsWith('.html.template'))
 				: noop(),
 			template({
-				...options,
-				'if-flat': (str: string) => options.flat ? '' : str,
-				...strings,
-			}),
+					...options,
+					'if-flat': (str: string) => options.flat ? '' : str,
+					...strings,
+				}),
 			renameTemplateFiles(),
 			!options.type ? forEach(((file) => {
 				if (!!file.path.match(new RegExp('..'))) {

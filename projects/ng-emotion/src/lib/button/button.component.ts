@@ -1,9 +1,9 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ChangeDetectionStrategy, ElementRef, OnInit, OnDestroy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { EmotionStylesheet, EmotionComponent, StyleModifier, StyleProp } from '../core';
+import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '../core';
 import { ThemeColor } from '../theme';
 import { ButtonStyles } from './button.component.styles';
 import { ButtonVariant } from './button.types';
@@ -27,7 +27,7 @@ export class ButtonComponent
 	@StyleProp()
 	@Input() color: ThemeColor = 'primary';
 
-	constructor(
+	constructor (
 		public elementRef: ElementRef,
 		styles: EmotionStylesheet,
 		private focusMonitor: FocusMonitor,
@@ -35,7 +35,7 @@ export class ButtonComponent
 		super(elementRef, styles);
 	}
 
-	ngOnInit(): void {
+	ngOnInit (): void {
 		super.ngOnInit();
 
 		this.focusMonitor
@@ -44,7 +44,7 @@ export class ButtonComponent
 				.subscribe();
 	}
 
-	ngOnDestroy(): void {
+	ngOnDestroy (): void {
 		super.ngOnDestroy();
 
 		this.focusMonitor.stopMonitoring(this.elementRef);

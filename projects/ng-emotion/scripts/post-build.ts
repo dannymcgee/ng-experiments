@@ -15,7 +15,7 @@ copySchematics();
  *
  * Runs as a postbuild step after building the library with `ng build` and compiling the schematics with TypeScript.
  */
-async function copySchematics(): Promise<void> {
+async function copySchematics (): Promise<void> {
 	const files: File[] = await readDirRecursive('./schematics');
 
 	// Copy schemas
@@ -40,11 +40,12 @@ async function copySchematics(): Promise<void> {
  * @param dir Absolute path to the source directory
  * @param dryRun Whether to just console.log the result and skip the actual operation
  */
-function makeDirectoryInDist(dir: string, dryRun?: boolean): Promise<void> {
+function makeDirectoryInDist (dir: string, dryRun?: boolean): Promise<void> {
 	const relativePath = path.relative('.', dir);
 	const pathToCreate = `${dist}\\${relativePath}`;
 
 	if (dryRun) {
+		// tslint:disable-next-line:no-console
 		console.log(`Creating directory '${path.relative('.', pathToCreate)}'`);
 
 		return Promise.resolve();
@@ -65,11 +66,12 @@ function makeDirectoryInDist(dir: string, dryRun?: boolean): Promise<void> {
  * @param source Absolute path to the file
  * @param dryRun Whether to just console.log the result and skip the actual operation
  */
-function copyToDist(source: string, dryRun?: boolean): Promise<void> {
+function copyToDist (source: string, dryRun?: boolean): Promise<void> {
 	const srcRelative = path.relative('.', source);
 	const destination = `${dist}\\${srcRelative}`;
 
 	if (dryRun) {
+		// tslint:disable-next-line: no-console
 		console.log(`Copying '.\\${srcRelative}' --> '${path.relative('.', destination)}'`);
 
 		return Promise.resolve();
@@ -89,7 +91,7 @@ function copyToDist(source: string, dryRun?: boolean): Promise<void> {
  *
  * @param dir Path to read
  */
-function readDirRecursive(dir: string): Promise<File[]> {
+function readDirRecursive (dir: string): Promise<File[]> {
 	return new Promise((resolve, reject) => {
 		let results: File[] = [];
 
@@ -102,6 +104,7 @@ function readDirRecursive(dir: string): Promise<File[]> {
 				resolve(results);
 
 			list.forEach((file) => {
+				// tslint:disable-next-line: no-parameter-reassignment
 				file = path.resolve(dir, file);
 				fs.stat(file, (err, stat) => {
 					if (err)
@@ -110,11 +113,12 @@ function readDirRecursive(dir: string): Promise<File[]> {
 					if (stat?.isDirectory()) {
 						results.push({ name: file, type: 'folder' });
 
-						readDirRecursive(file).then((res) => {
-							results = results.concat(res);
-							if (!--pending)
-								resolve(results);
-						});
+						readDirRecursive(file)
+							.then((res) => {
+									results = results.concat(res);
+									if (!--pending)
+										resolve(results);
+								});
 					}
 					else {
 						results.push({ name: file, type: 'file' });

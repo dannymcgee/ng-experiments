@@ -9,7 +9,7 @@ type PropertyDecorator = (target: object, key: string|symbol) => void;
  *
  * Changes to any properties decorated with `@StyleProp()` will trigger change detection on all `@StyleModifier()` bindings.
  */
-export function StyleProp(): PropertyDecorator {
+export function StyleProp (): PropertyDecorator {
 	return function<
 		T extends EmotionComponent<TS>,
 		TS extends EmotionStylesheet,
@@ -17,17 +17,19 @@ export function StyleProp(): PropertyDecorator {
 		component: T,
 		propName: string
 	): void {
-		function get(): T[keyof T] {
+		function get (): T[keyof T] {
 			return this[`__${propName}__`];
 		}
 
-		function set(value: T[keyof T]): void {
-			this._onInit$.pipe(first()).subscribe(() => {
-				this.styles.props[propName] = value;
-				this.ngeMarkForCheck();
+		function set (value: T[keyof T]): void {
+			this._onInit$
+				.pipe(first())
+				.subscribe(() => {
+						this.styles.props[propName] = value;
+						this.ngeMarkForCheck();
 
-				this[`__${propName}__`] = value;
-			});
+						this[`__${propName}__`] = value;
+					});
 		}
 
 		Object.defineProperty(component, propName, {
@@ -45,7 +47,7 @@ export function StyleProp(): PropertyDecorator {
  *
  * @param methodName The name of the stylesheet method to apply. If not provided, the method name is assumed to be the same as the decorated property.
  */
-export function StyleModifier(methodName?: string): PropertyDecorator {
+export function StyleModifier (methodName?: string): PropertyDecorator {
 	return function<
 		T extends EmotionComponent<TS>,
 		TS extends EmotionStylesheet,
@@ -53,21 +55,26 @@ export function StyleModifier(methodName?: string): PropertyDecorator {
 		component: T,
 		propName: string
 	): void {
-		function get(): T[keyof T] {
+		function get (): T[keyof T] {
 			return this[`__${propName}__`];
 		}
 
-		function set(value: T[keyof T]): void {
-			this._onInit$.pipe(first()).subscribe(() => {
-				const _methodName = !!methodName ? methodName : propName;
+		function set (value: T[keyof T]): void {
+			this._onInit$
+				.pipe(first())
+				.subscribe(() => {
+						const _methodName = !!methodName ? methodName : propName;
 
-				if (typeof this.styles[_methodName] === 'function') {
-					if (!this.styles._ngeBindings.has(propName)) {
-						this.styles._ngeBindings.set(propName, this.styles[_methodName].bind(this.styles));
-					}
-					this.ngeMarkForCheck();
-				}
-			});
+						if (typeof this.styles[_methodName] === 'function') {
+							if (!this.styles._ngeBindings.has(propName)) {
+								this.styles._ngeBindings.set(
+									propName,
+									this.styles[_methodName].bind(this.styles)
+								);
+							}
+							this.ngeMarkForCheck();
+						}
+					});
 
 			this[`__${propName}__`] = value;
 		}

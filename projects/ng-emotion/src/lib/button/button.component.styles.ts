@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
-
+import { css, EmotionStylesheet } from '../core';
+import { Colors, Font, Mixins, rem, ThemeColor } from '../theme';
 import { ButtonVariant } from './button.types';
-import { ThemeColor, rem, Mixins, Font, Colors } from '../theme';
-import { EmotionStylesheet, css } from '../core';
 
 export interface ButtonStyleProps {
 	color?: ThemeColor;
@@ -28,7 +27,7 @@ export class ButtonStyles extends EmotionStylesheet {
 		user-select: none;
 	`;
 
-	get variantPrimary(): string|null {
+	get variantPrimary (): string|null {
 		const color: ThemeColor = this.props.color;
 
 		if (!color) return null;
@@ -56,7 +55,7 @@ export class ButtonStyles extends EmotionStylesheet {
 		`;
 	}
 
-	get variantSecondary(): string|null {
+	get variantSecondary (): string|null {
 		const color: ThemeColor = this.props.color;
 
 		if (!color) return null;
@@ -92,7 +91,7 @@ export class ButtonStyles extends EmotionStylesheet {
 		`;
 	}
 
-	get variantTertiary(): string|null {
+	get variantTertiary (): string|null {
 		const color: ThemeColor = this.props.color;
 
 		if (!color) return null;
@@ -119,7 +118,7 @@ export class ButtonStyles extends EmotionStylesheet {
 		`;
 	}
 
-	variant(variant: ButtonVariant): string|null {
+	variant (variant: ButtonVariant): string|null {
 		switch (variant) {
 			case 'primary'   : return this.variantPrimary;
 			case 'secondary' : return this.variantSecondary;

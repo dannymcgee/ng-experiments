@@ -1,5 +1,5 @@
-import { ElementRef, OnDestroy, OnInit, Component, Injectable, DoCheck } from '@angular/core';
-import { ReplaySubject, Subject, Observable } from 'rxjs';
+import { Component, DoCheck, ElementRef, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 import { StyleBindingFn } from './types';
 
@@ -27,6 +27,7 @@ export class EmotionStylesheet
 	 */
 	readonly base: string;
 
+	/** @private */
 	_ngeBindings = new Map<string, StyleBindingFn>();
 }
 
@@ -50,22 +51,22 @@ export class EmotionComponent<T extends EmotionStylesheet>
 	private _onInit$ = new ReplaySubject<void>();
 
 	/** Observable which emits when the component is destroyed. Useful for managing subscriptions via the `takeUntil` operator */
-	protected get onDestroy$(): Observable<void> { return this._onDestroy$.asObservable(); }
+	protected get onDestroy$ (): Observable<void> { return this._onDestroy$.asObservable(); }
 	private _onDestroy$ = new Subject<void>();
 
-	constructor(
+	constructor (
 		public elementRef: ElementRef<HTMLElement>,
 		styles: EmotionStylesheet,
 	) {
 		this.styles = styles as T;
 	}
 
-	ngOnInit(): void {
+	ngOnInit (): void {
 		this._ngeAddClass(this.styles.base);
 		this._onInit$.next();
 	}
 
-	ngDoCheck(): void {
+	ngDoCheck (): void {
 		if (this._ngeShouldCheck) {
 			for (const [key, fn] of this.styles._ngeBindings.entries()) {
 				const arg: any = this[key];
@@ -85,18 +86,18 @@ export class EmotionComponent<T extends EmotionStylesheet>
 		}
 	}
 
-	ngOnDestroy(): void {
+	ngOnDestroy (): void {
 		this._onDestroy$.next();
 		this._onDestroy$.complete();
 		this._onInit$.complete();
 	}
 
 	/** Similar to Angular's `ChangeDetectorRef.markForCheck`, calling this method re-evaluates the component's `@StyleModifier()`-bound stylesheet methods and applies changes where necessary on the next `DoCheck` event. */
-	protected ngeMarkForCheck(): void {
+	protected ngeMarkForCheck (): void {
 		this._ngeShouldCheck = true;
 	}
 
-	private _ngeUpdateBindings(): void {
+	private _ngeUpdateBindings (): void {
 		if (this.elementRef?.nativeElement == null)
 			return;
 
@@ -115,15 +116,15 @@ export class EmotionComponent<T extends EmotionStylesheet>
 		this._ngeHasChanges = false;
 	}
 
-	private _ngeAddClass(className: string): void {
+	private _ngeAddClass (className: string): void {
 		this.elementRef.nativeElement.classList.add(className);
 	}
 
-	private _ngeReplaceClass(prev: string, current: string): void {
+	private _ngeReplaceClass (prev: string, current: string): void {
 		this.elementRef.nativeElement.classList.replace(prev, current);
 	}
 
-	private _ngeRemoveClass(className: string): void {
+	private _ngeRemoveClass (className: string): void {
 		this.elementRef.nativeElement.classList.remove(className);
 	}
 }

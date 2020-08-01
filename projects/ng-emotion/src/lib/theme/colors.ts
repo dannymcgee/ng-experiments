@@ -1,6 +1,8 @@
 export type ThemeColor = 'primary'|'success'|'warning'|'danger';
 export type ColorShade = 100|200|300|400|500;
 export type ColorPalette = { [key in ColorShade]: string };
+/** A value between 0 and 1 which represents a percentage. */
+export type Alpha = number;
 
 export class Colors
 {
@@ -22,7 +24,7 @@ export class Colors
 		100: '#CC6600',
 		200: '#DD7700',
 		300: '#EE8800',
-		400: '#DD9900',
+		400: '#FF9900',
 		500: '#FFAA00',
 	};
 	private static _danger: ColorPalette = {
@@ -33,16 +35,16 @@ export class Colors
 		500: '#FF6666',
 	};
 
-	static primary (shade: ColorShade = 300, opacity: number = 1): string {
+	static primary (shade: ColorShade = 300, opacity: Alpha = 1): string {
 		return this.themeColor('primary', shade, opacity);
 	}
-	static success (shade: ColorShade = 300, opacity: number = 1): string {
+	static success (shade: ColorShade = 300, opacity: Alpha = 1): string {
 		return this.themeColor('success', shade, opacity);
 	}
-	static warning (shade: ColorShade = 300, opacity: number = 1): string {
+	static warning (shade: ColorShade = 300, opacity: Alpha = 1): string {
 		return this.themeColor('warning', shade, opacity);
 	}
-	static danger (shade: ColorShade = 300, opacity: number = 1): string {
+	static danger (shade: ColorShade = 300, opacity: Alpha = 1): string {
 		return this.themeColor('danger', shade, opacity);
 	}
 

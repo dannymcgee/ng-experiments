@@ -16,8 +16,7 @@ interface EmotionSchema {
 }
 
 export type Schema = EmotionSchema
-		& Omit<ComponentSchema
-			, 'inlineStyle'
-			| 'viewEncapsulation'
-			| 'style'
-			| 'displayBlock'>;
+		& Omit<ComponentSchema,
+				'inlineStyle'
+				|'viewEncapsulation'
+				|'style'>;

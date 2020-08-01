@@ -1,7 +1,8 @@
+// tslint:disable:member-ordering
 import { Injectable } from '@angular/core';
 
 import { css, EmotionStylesheet } from '../core';
-import { Colors, Font, Mixins, rem, ThemeColor } from '../theme';
+import { Colors, Font, Mixins, Position, rem, ThemeColor } from '../theme';
 import { ButtonVariant } from './button.types';
 
 export interface ButtonStyleProps {
@@ -10,21 +11,40 @@ export interface ButtonStyleProps {
 
 @Injectable()
 export class ButtonStyles extends EmotionStylesheet {
+
 	props: ButtonStyleProps = {};
 
-	readonly base: string = css`
+	borderRadius = css`
+		border-radius: ${rem(4)};
+	`;
+
+	readonly base = css`
 		label: btn;
 		display: inline-flex;
 		align-items: center;
 		height: ${rem(36)};
 		padding: 0 ${rem(18)};
-		border: 2px solid transparent;
-		border-radius: ${rem(4)};
+		${this.borderRadius};
+		border-color: transparent;
+		position: relative;
+		overflow: visible;
 		outline: none !important;
-		${Mixins.transition('background', 'color', 'border-color', 'box-shadow')};
+		${Mixins.transition(
+				'background',
+				'color',
+				'border-color',
+				'box-shadow'
+			)};
 		${Mixins.font(Font.UI)};
 		cursor: pointer;
 		user-select: none;
+
+		.border-frame {
+			${Position.absolute('fill')};
+			${this.borderRadius};
+			border: 2px solid;
+			border-color: inherit;
+		}
 	`;
 
 	get variantPrimary (): string|null {
@@ -45,16 +65,15 @@ export class ButtonStyles extends EmotionStylesheet {
 			&:hover {
 				background: ${hover};
 			}
-			&:active {
-				background: ${active};
-			}
 			&.cdk-keyboard-focused {
 				background: ${hover};
 				box-shadow: 0 0 0 4px ${focusring};
 			}
+			&:active {
+				background: ${active};
+			}
 		`;
 	}
-
 	get variantSecondary (): string|null {
 		const color: ThemeColor = this.props.color;
 
@@ -90,7 +109,6 @@ export class ButtonStyles extends EmotionStylesheet {
 			}
 		`;
 	}
-
 	get variantTertiary (): string|null {
 		const color: ThemeColor = this.props.color;
 
@@ -114,10 +132,10 @@ export class ButtonStyles extends EmotionStylesheet {
 			}
 			&:active {
 				background: ${active};
+				color: ${Colors[color](100)};
 			}
 		`;
 	}
-
 	variant (variant: ButtonVariant): string|null {
 		switch (variant) {
 			case 'primary'   : return this.variantPrimary;
@@ -125,4 +143,15 @@ export class ButtonStyles extends EmotionStylesheet {
 			case 'tertiary'  : return this.variantTertiary;
 		}
 	}
+
+	label = css`
+		label: button__label;
+		position: relative;
+		z-index: 2;
+	`;
+
+	splash = css`
+		label: button__splash;
+		z-index: 1;
+	`;
 }

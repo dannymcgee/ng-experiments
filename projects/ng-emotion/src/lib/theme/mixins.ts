@@ -1,4 +1,5 @@
 import { css } from '../core';
+import { Anim } from './animation';
 import { Font, FontFamily, FontSize } from './fonts';
 import { rem } from './utils';
 
@@ -9,7 +10,7 @@ export namespace Mixins
 
 		return css`
 			transition-property: ${transitionProperties};
-			transition-duration: 100ms;
+			transition-duration: ${Anim.Duration.Short}ms;
 			transition-timing-function: linear;
 		`;
 	}

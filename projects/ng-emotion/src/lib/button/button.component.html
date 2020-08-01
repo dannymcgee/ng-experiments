@@ -1,0 +1,15 @@
+<nge-splash *ngFor="let origin of clicks"
+	[class]="styles.splash"
+	[origin]="origin"
+	[rect]="rect"
+	[color]="color"
+	[shade]="splashShade"
+	[baseOpacity]="splashOpacity"
+	[blendMode]="splashBlendMode"
+></nge-splash>
+<span [class]="styles.label">
+	<ng-content></ng-content>
+</span>
+<span class="border-frame"
+	aria-hidden="true"
+></span>

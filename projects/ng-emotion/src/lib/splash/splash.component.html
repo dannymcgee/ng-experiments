@@ -1,0 +1,25 @@
+<svg
+	[attr.width]="rect.width"
+	[attr.height]="rect.height"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<defs>
+		<radialGradient [id]="id">
+			<stop *ngFor="let stop of stops"
+				[attr.offset]="stop.offset"
+				[attr.stop-color]="
+					color | gradientStopColor
+							: shade
+							: baseOpacity * stop.opacity"
+			></stop>
+		</radialGradient>
+	</defs>
+	<circle [class]="styles.circle"
+		@splashCircle
+		[style.transform-origin]="origin | transformOrigin"
+		[attr.cx]="origin.x"
+		[attr.cy]="origin.y"
+		[attr.r]="radius"
+		attr.fill="url(#{{ id }})"
+	></circle>
+</svg>

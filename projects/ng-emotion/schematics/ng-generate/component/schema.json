@@ -113,6 +113,15 @@
       "type": "boolean",
       "description": "When true, the constructor, OnInit, and OnDestroy implementations will be skipped. Can be overridden by setting `onInit`, `onDestroy`, or `construct` to true individually.",
       "default": false
+    },
+    "internal": {
+      "type": "boolean",
+      "description": "When true, `ng-emotion` dependencies are imported from source instead of installed package. For internal use.",
+      "default": false
+    },
+    "emotionPath": {
+      "type": "string",
+      "description": "Path to the `ng-emotion/core` module. For internal use."
     }
   },
   "required": ["name"]

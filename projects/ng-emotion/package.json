@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "schematics": "./schematics/collection.json",
   "scripts": {
-    "build": "node_modules/.bin/tsc -p tsconfig.schematics.json",
+    "build": "tsc -p tsconfig.schematics.json",
     "dev": "tsc -p tsconfig.schematics.json --watch",
     "postbuild": "ts-node ./scripts/post-build.ts"
   },

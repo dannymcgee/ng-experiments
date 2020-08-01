@@ -6,6 +6,10 @@
     "ng-experiments": {
       "projectType": "application",
       "schematics": {
+        "@schematics/ng-emotion:component": {
+          "internal": true,
+          "emotionPath": "@ng-emotion/core"
+        },
         "@schematics/angular:component": {
           "lintFix": true
         },
@@ -149,9 +153,24 @@
       "projectType": "library",
       "schematics": {
         "ng-emotion:component": {
-          "lintFix": true,
           "changeDetection": "OnPush",
-          "export": true
+          "export": true,
+          "flat": true,
+          "inlineTemplate": true,
+          "internal": true,
+          "lintFix": true
+        },
+        "@schematics/angular:directive": {
+          "lintFix": true
+        },
+        "@schematics/angular:pipe": {
+          "lintFix": true
+        },
+        "@schematics/angular:module": {
+          "lintFix": true
+        },
+        "@schematics/angular:service": {
+          "lintFix": true
         }
       },
       "root": "projects/ng-emotion",

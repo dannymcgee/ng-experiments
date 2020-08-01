@@ -22,7 +22,9 @@ import { applyLintFix } from '@schematics/angular/utility/lint-fix';
 import { parseName } from '@schematics/angular/utility/parse-name';
 import { validateHtmlSelector, validateName } from '@schematics/angular/utility/validation';
 import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
-import * as ts from 'typescript';
+import ts from 'typescript';
+
+import { info, Log, success, warning } from '../../logger';
 import { Schema as EmotionComponentSchema } from './schema';
 
 function buildSelector (
@@ -49,6 +51,47 @@ function readIntoSourceFile (host: Tree, modulePath: string): ts.SourceFile {
 	return ts.createSourceFile(modulePath, sourceText, ts.ScriptTarget.Latest, true);
 }
 
+function buildComponentPath (options: EmotionComponentSchema): string {
+	return `/${options.path}/`
+			+ (options.flat ? '' : strings.dasherize(options.name) + '/')
+			+ strings.dasherize(options.name)
+			+ (options.type ? '.' : '')
+			+ strings.dasherize(options.type);
+}
+
+function buildEmotionPath (options: EmotionComponentSchema): string {
+	if (!options.internal) {
+		if (options.emotionPath)
+			return options.emotionPath;
+
+		return 'ng-emotion';
+	}
+
+	const componentPath = buildComponentPath(options);
+
+	const absolutePath = '/projects/ng-emotion/src/lib/core';
+	const rootPath = absolutePath.replace(/^\/projects\/ng-emotion/, '');
+	const relativePath = buildRelativePath(componentPath, absolutePath);
+
+	const rootSegLength = rootPath.split('/').length;
+	const relativeSegLength = relativePath.split('/').length;
+
+	const chosen = relativeSegLength < rootSegLength
+			? relativePath
+			: absolutePath;
+
+	if ((options as any).dryRun)
+		Log(
+			info(rootPath, 'Absolute Path'),
+			warning(rootSegLength, 'Length'),
+			info(relativePath, 'Relative Path'),
+			warning(relativeSegLength, 'Length'),
+			success(chosen, 'Chosen Path'),
+		);
+
+	return chosen;
+}
+
 function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {
 	return (host: Tree): Tree => {
 		if (options.skipImport || !options.module) {
@@ -58,11 +101,7 @@ function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {
 		const modulePath = options.module;
 		const source = readIntoSourceFile(host, modulePath);
 
-		const componentPath = `/${options.path}/`
-				+ (options.flat ? '' : strings.dasherize(options.name) + '/')
-				+ strings.dasherize(options.name)
-				+ (options.type ? '.' : '')
-				+ strings.dasherize(options.type);
+		const componentPath = buildComponentPath(options);
 		const relativePath = buildRelativePath(modulePath, componentPath);
 		const className = strings.classify(options.name) + strings.classify(options.type);
 
@@ -71,7 +110,8 @@ function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {
 				source,
 				modulePath,
 				className,
-				relativePath);
+				relativePath
+			);
 
 		for (const change of declarationChanges)
 			if (change instanceof InsertChange)
@@ -88,7 +128,8 @@ function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {
 					updatedSource,
 					modulePath,
 					className,
-					relativePath);
+					relativePath
+				);
 
 			for (const change of exportChanges)
 				if (change instanceof InsertChange)
@@ -114,15 +155,9 @@ function configureBoilerplateOptions (options: EmotionComponentSchema): void {
 	}
 }
 
-function debugLog (message: string): Rule {
+function debugLog (label: string): Rule {
 	return (host: Tree): Tree => {
-		// tslint:disable:no-console
-		console.log('');
-		console.log(`----- ${message} -----`);
-		console.log(host);
-		console.log(`----- /${message} -----`);
-		console.log('');
-		// tslint:disable:no-console
+		Log(info(host, label));
 
 		return host;
 	};
@@ -133,6 +168,8 @@ export default function (options: EmotionComponentSchema): Rule {
 		const workspace = await getWorkspace(host);
 		const project = workspace.projects.get(options.project);
 
+		options.type = options.type ?? 'Component';
+
 		if (options.path == null && !!project)
 			options.path = buildDefaultPath(project);
 
@@ -142,13 +179,12 @@ export default function (options: EmotionComponentSchema): Rule {
 		options.name = parsed.name;
 		options.path = parsed.path;
 		options.selector = options.selector || buildSelector(options, project?.prefix ?? '');
+		options.emotionPath = buildEmotionPath(options);
 
 		validateName(options.name);
 		validateHtmlSelector(options.selector);
 
 		configureBoilerplateOptions(options);
-
-		options.type = options.type ?? 'Component';
 
 		const templateSource = apply(url('./files'), [
 			options.skipTests

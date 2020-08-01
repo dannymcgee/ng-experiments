@@ -11,7 +11,7 @@ if (onInit) {
 if (onDestroy) {
 	%>, OnDestroy<%
 } %> } from '@angular/core';
-import { EmotionComponent, EmotionStylesheet } from 'ng-emotion';
+import { EmotionComponent, EmotionStylesheet } from '<%= emotionPath %>';
 
 import { <%= classify(name) %>Styles } from './<%= dasherize(name) %>.component.styles';
 

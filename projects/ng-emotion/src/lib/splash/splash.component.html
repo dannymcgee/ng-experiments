@@ -15,8 +15,7 @@
 		</radialGradient>
 	</defs>
 	<circle [class]="styles.circle"
-		*ngFor="let splash of splashCollection
-			trackBy: splashCollection.trackById"
+		*ngFor="let splash of splashCollection"
 		@splash
 		[style.transform-origin]="splash.origin | transformOrigin"
 		[attr.cx]="splash.origin.x"

@@ -1,5 +1,5 @@
 import { coerceElement } from '@angular/cdk/coercion';
-import { ElementRef, TrackByFunction } from '@angular/core';
+import { ElementRef } from '@angular/core';
 
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { v1 as uuid } from 'uuid';
 import { UUID } from '../core';
 import { CoordinateSpace, Coords, Splash } from './splash.types';
 
+/** Iterable class which manages a collection of splash effect view-model representations. Can be passed directly to an `ngFor` directive in the template to render the effects. */
 export class SplashCollection implements Iterable<Splash> {
 
 	get rect (): DOMRect|undefined {
@@ -24,10 +25,14 @@ export class SplashCollection implements Iterable<Splash> {
 	private _triggerElement: HTMLElement;
 	private _onDestroy$ = new Subject<void>();
 
+	/**
+	 * Iterable class which manages a collection of splash effect view-model representations. Can be passed directly to an `ngFor` directive in the template to render the effects.
+	 *
+	 * @param trigger The element which should spawn splash effects when clicked.
+	 * @param animDuration The lifetime of each effect before being removed from the collection.
+	 */
 	constructor (
-		/** A new splash effect will be created whenever this element is clicked. */
 		trigger: ElementRef<HTMLElement>|HTMLElement,
-		/** Animation duration in ms. */
 		public animDuration: number,
 	) {
 		this._triggerElement = coerceElement(trigger);
@@ -45,8 +50,6 @@ export class SplashCollection implements Iterable<Splash> {
 		for (let splash of this._splashes.values())
 			yield splash;
 	}
-
-	trackById: TrackByFunction<Splash> = (i: number, item: Splash) => item.id;
 
 	/** This method can be called to explicitly re-measure the DOM Rect of the trigger element to account for changes due to resizing */
 	updateRect = (): void => {

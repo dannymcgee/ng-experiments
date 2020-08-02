@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EmotionStylesheet, css } from 'ng-emotion';
+
+import { EmotionStylesheet, css } from '<%= emotionPath %>';
 
 @Injectable()
 export class <%= classify(name) %>Styles extends EmotionStylesheet {

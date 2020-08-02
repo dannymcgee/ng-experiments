@@ -67,28 +67,9 @@ function buildEmotionPath (options: EmotionComponentSchema): string {
 	}
 
 	const componentPath = buildComponentPath(options);
+	const emotionPath = '/projects/ng-emotion/src/lib/core';
 
-	const absolutePath = '/projects/ng-emotion/src/lib/core';
-	const rootPath = absolutePath.replace(/^\/projects\/ng-emotion/, '');
-	const relativePath = buildRelativePath(componentPath, absolutePath);
-
-	const rootSegLength = rootPath.split('/').length;
-	const relativeSegLength = relativePath.split('/').length;
-
-	const chosen = relativeSegLength < rootSegLength
-			? relativePath
-			: absolutePath;
-
-	if ((options as any).dryRun)
-		Log(
-			info(rootPath, 'Absolute Path'),
-			warning(rootSegLength, 'Length'),
-			info(relativePath, 'Relative Path'),
-			warning(relativeSegLength, 'Length'),
-			success(chosen, 'Chosen Path'),
-		);
-
-	return chosen;
+	return buildRelativePath(componentPath, emotionPath);
 }
 
 function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {

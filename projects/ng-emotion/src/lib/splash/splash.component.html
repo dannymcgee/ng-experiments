@@ -1,10 +1,10 @@
 <svg
-	[attr.width]="rect.width"
-	[attr.height]="rect.height"
+	[attr.width]="splashes.rect?.width || 0"
+	[attr.height]="splashes.rect?.height || 0"
 	xmlns="http://www.w3.org/2000/svg"
 >
 	<defs>
-		<radialGradient [id]="id">
+		<radialGradient [id]="gradientId">
 			<stop *ngFor="let stop of stops"
 				[attr.offset]="stop.offset"
 				[attr.stop-color]="
@@ -15,11 +15,13 @@
 		</radialGradient>
 	</defs>
 	<circle [class]="styles.circle"
+		*ngFor="let splash of splashes
+			trackBy: splashes.trackById"
 		@splashCircle
-		[style.transform-origin]="origin | transformOrigin"
-		[attr.cx]="origin.x"
-		[attr.cy]="origin.y"
-		[attr.r]="radius"
-		attr.fill="url(#{{ id }})"
+		[style.transform-origin]="splash.origin | transformOrigin"
+		[attr.cx]="splash.origin.x"
+		[attr.cy]="splash.origin.y"
+		[attr.r]="splash.radius"
+		attr.fill="url(#{{ gradientId }})"
 	></circle>
 </svg>

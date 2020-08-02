@@ -138,8 +138,8 @@ export class ButtonStyles extends EmotionStylesheet {
 		z-index: 2;
 	`;
 
-	splash = css`
-		label: button__splash;
+	splashHost = css`
+		label: button__splash-host;
 		z-index: 1;
 	`;
 }

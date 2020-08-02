@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SplashComponent } from './splash.component';
+import { SplashHostComponent } from './splash.component';
 import { SplashGradientStopColorPipe, TransformOriginPipe } from './splash.pipe';
 
 @NgModule({
 	declarations: [
-		SplashComponent,
+		SplashHostComponent,
 		SplashGradientStopColorPipe,
 		TransformOriginPipe
 	],
@@ -16,7 +16,7 @@ import { SplashGradientStopColorPipe, TransformOriginPipe } from './splash.pipe'
 		CommonModule
 	],
 	exports: [
-		SplashComponent
+		SplashHostComponent
 	]
 })
 export class SplashModule {}

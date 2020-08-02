@@ -1,22 +1,26 @@
 import {
 	ChangeDetectionStrategy,
+	ChangeDetectorRef,
 	Component,
+	ElementRef,
 	HostBinding,
 	Input,
-	OnInit
+	OnDestroy,
+	OnInit,
 } from '@angular/core';
 
 import { v1 as uuid } from 'uuid';
 
-import { EmotionComponent, EmotionStylesheet, StyleProp } from '../core';
-import { Alpha, BlendMode, ColorShade, ThemeColor } from '../css-utils';
+import { takeUntil } from 'rxjs/operators';
+import { EmotionComponent, EmotionStylesheet, StyleProp, UUID } from '../core';
+import { Alpha, Anim, BlendMode, ColorShade, ThemeColor } from '../css-utils';
 import { splashCircle } from './splash.animation';
+import { SplashCollection } from './splash.collection';
 import { SplashStyles } from './splash.component.styles';
 import { SPLASH_GRADIENT_STOPS } from './splash.constants';
-import { Coords } from './splash.types';
 
 @Component({
-	selector: 'nge-splash',
+	selector: 'nge-splash-host',
 	templateUrl: './splash.component.html',
 	providers: [{
 		provide: EmotionStylesheet,
@@ -25,11 +29,11 @@ import { Coords } from './splash.types';
 	animations: [splashCircle],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SplashComponent
-	extends EmotionComponent<SplashStyles> implements OnInit
+export class SplashHostComponent
+	extends EmotionComponent<SplashStyles>
+	implements OnInit, OnDestroy
 {
-	@Input() origin: Coords;
-	@Input() rect: DOMRect;
+	@Input() trigger: ElementRef<HTMLElement>|HTMLElement;
 	@Input() color: ThemeColor;
 	@Input() shade: ColorShade;
 	@Input() baseOpacity: Alpha;
@@ -40,42 +44,34 @@ export class SplashComponent
 	@HostBinding('attr.aria-hidden')
 	ariaHidden = 'true';
 
+	splashes: SplashCollection;
+
 	readonly stops = SPLASH_GRADIENT_STOPS;
-	readonly id = uuid();
-	radius?: number;
+	readonly gradientId: UUID = uuid();
+
+	constructor (
+		public elementRef: ElementRef<HTMLElement>,
+		styles: EmotionStylesheet,
+		private changeDetectorRef: ChangeDetectorRef,
+	) {
+		super(elementRef, styles);
+	}
 
 	ngOnInit (): void {
 		super.ngOnInit();
 
-		if (!this.rect || !this.origin) {
-			console.error(
-					'SplashComponent missing a `rect` or `origin`!',
-					this.elementRef.nativeElement
-				);
-			throw new Error();
-		}
-
-		this.radius = this._calculateRadius();
+		// TODO: Make animation duration configurable
+		this.splashes = new SplashCollection(this.trigger, Anim.Duration.Long);
+		this.splashes.updates$
+			.pipe(takeUntil(this.onDestroy$))
+			.subscribe(() => {
+					this.changeDetectorRef.markForCheck();
+				});
 	}
 
-	/** Radius should be the distance between the click origin and the furthest corner of the DOM rect so the effect always fills the entire element */
-	private _calculateRadius (): number {
-		const { width, height } = this.rect;
-		const corners: Coords[] = [
-			{ x: 0,     y: 0 },      // top left
-			{ x: width, y: 0 },      // top right
-			{ x: width, y: height }, // bottom right
-			{ x: 0,     y: height }, // bottom left
-		];
+	ngOnDestroy (): void {
+		super.ngOnDestroy();
 
-		return corners.reduce((prev, current) => {
-			// distance = √ a² + b²
-			const a = Math.abs(this.origin.x - current.x);
-			const b = Math.abs(this.origin.y - current.y);
-			const distance = Math.sqrt((a * a) + (b * b));
-
-			// Return the largest distance
-			return Math.max(distance, prev);
-		}, 0);
+		this.splashes.destroy();
 	}
 }

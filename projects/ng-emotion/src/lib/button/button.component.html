@@ -1,12 +1,10 @@
-<nge-splash *ngFor="let origin of clicks"
-	[class]="styles.splash"
-	[origin]="origin"
-	[rect]="rect"
+<nge-splash-host [class]="styles.splashHost"
+	[trigger]="elementRef"
 	[color]="color"
 	[shade]="variant | btnSplashShade"
 	[baseOpacity]="variant | btnSplashOpacity"
 	[blendMode]="variant | btnSplashBlendMode"
-></nge-splash>
+></nge-splash-host>
 <span [class]="styles.label">
 	<ng-content></ng-content>
 </span>

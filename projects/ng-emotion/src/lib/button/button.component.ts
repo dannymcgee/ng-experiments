@@ -1,10 +1,8 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
 	ChangeDetectionStrategy,
-	ChangeDetectorRef,
 	Component,
 	ElementRef,
-	HostListener,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -13,7 +11,7 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '../core';
-import { Anim, ThemeColor } from '../css-utils';
+import { ThemeColor } from '../css-utils';
 import { Coords } from '../splash';
 import { ButtonStyles } from './button.component.styles';
 import { ButtonVariant } from './button.types';
@@ -43,7 +41,6 @@ export class ButtonComponent
 	constructor (
 		public elementRef: ElementRef<HTMLElement>,
 		styles: EmotionStylesheet,
-		private changeDetectorRef: ChangeDetectorRef,
 		private focusMonitor: FocusMonitor,
 	) {
 		super(elementRef, styles);
@@ -62,24 +59,5 @@ export class ButtonComponent
 		super.ngOnDestroy();
 
 		this.focusMonitor.stopMonitoring(this.elementRef);
-	}
-
-	@HostListener('mouseenter')
-	onMouseEnter (): void {
-		this.rect = this.elementRef.nativeElement.getBoundingClientRect();
-	}
-
-	@HostListener('mousedown', ['$event'])
-	onMouseDown ({ x, y }: MouseEvent): void {
-		const origin = {
-			x: x - this.rect.left,
-			y: y - this.rect.top,
-		};
-		this.clicks.push(origin);
-
-		setTimeout(() => {
-				this.clicks.shift();
-				this.changeDetectorRef.detectChanges();
-			}, Anim.Duration.Long);
 	}
 }

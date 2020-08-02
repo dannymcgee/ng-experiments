@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Alpha, BlendMode, ColorShade } from '../css-utils';
+import { Alpha, BlendMode, ColorShade } from '../../css-utils';
 import { ButtonVariant } from './button.types';
 
 @Pipe({ name: 'btnSplashBlendMode', pure: true })

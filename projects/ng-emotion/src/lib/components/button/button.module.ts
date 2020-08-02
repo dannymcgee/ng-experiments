@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { SplashModule } from '../splash/splash.module';
+import { SplashModule } from '../splash';
 import { ButtonComponent } from './button.component';
 import {
 	ButtonSplashBlendModePipe,

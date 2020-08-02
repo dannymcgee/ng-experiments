@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { css, EmotionStylesheet } from '../core';
-import { BlendMode, Position } from '../css-utils';
+import { css, EmotionStylesheet } from '../../core';
+import { BlendMode, Position } from '../../css-utils';
 
 export interface SplashStyleProps {
 	blendMode?: BlendMode;

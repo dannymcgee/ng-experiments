@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ButtonVariant } from '@ng-emotion/button';
+import { ButtonVariant } from '@ng-emotion/components';
 import { EmotionComponent, EmotionStylesheet } from '@ng-emotion/core';
 import { ThemeColor } from '@ng-emotion/css-utils';
 

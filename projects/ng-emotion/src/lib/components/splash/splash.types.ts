@@ -1,5 +1,5 @@
-import { UUID } from '../core';
-import { Alpha } from '../css-utils';
+import { UUID } from '../../core';
+import { Alpha } from '../../css-utils';
 
 export interface SplashGradientStop {
 	offset: string;

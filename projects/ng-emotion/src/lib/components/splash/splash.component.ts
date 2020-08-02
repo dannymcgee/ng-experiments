@@ -12,8 +12,8 @@ import {
 import { takeUntil } from 'rxjs/operators';
 import { v1 as uuid } from 'uuid';
 
-import { EmotionComponent, EmotionStylesheet, StyleProp, UUID } from '../core';
-import { Alpha, Anim, BlendMode, ColorShade, ThemeColor } from '../css-utils';
+import { EmotionComponent, EmotionStylesheet, StyleProp, UUID } from '../../core';
+import { Alpha, Anim, BlendMode, ColorShade, ThemeColor } from '../../css-utils';
 import { splash } from './splash.animation';
 import { SplashCollection } from './splash.collection';
 import { SplashStyles } from './splash.component.styles';

@@ -1,8 +1,8 @@
 // tslint:disable:member-ordering
 import { Injectable } from '@angular/core';
 
-import { css, EmotionStylesheet } from '../core';
-import { Colors, Font, Mixins, Position, rem, ThemeColor } from '../css-utils';
+import { css, EmotionStylesheet } from '../../core';
+import { Colors, Font, Mixins, Position, rem, ThemeColor } from '../../css-utils';
 import { ButtonVariant } from './button.types';
 
 export interface ButtonStyleProps {

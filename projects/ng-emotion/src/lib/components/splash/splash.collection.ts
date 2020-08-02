@@ -5,7 +5,7 @@ import { fromEvent, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { v1 as uuid } from 'uuid';
 
-import { UUID } from '../core';
+import { UUID } from '../../core';
 import { CoordinateSpace, Coords, Splash } from './splash.types';
 
 /** Iterable class which manages a collection of splash effect view-model representations. Can be passed directly to an `ngFor` directive in the template to render the effects. */

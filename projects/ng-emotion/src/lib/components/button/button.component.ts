@@ -10,8 +10,8 @@ import {
 
 import { takeUntil } from 'rxjs/operators';
 
-import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '../core';
-import { ThemeColor } from '../css-utils';
+import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '../../core';
+import { ThemeColor } from '../../css-utils';
 import { Coords } from '../splash';
 import { ButtonStyles } from './button.component.styles';
 import { ButtonVariant } from './button.types';

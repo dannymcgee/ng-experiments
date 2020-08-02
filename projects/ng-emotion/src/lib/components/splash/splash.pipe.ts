@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Alpha, Colors, ColorShade, ThemeColor } from '../css-utils';
+import { Alpha, Colors, ColorShade, ThemeColor } from '../../css-utils';
 import { Coords } from './splash.types';
 
 @Pipe({ name: 'splashGradientStopColor', pure: true })

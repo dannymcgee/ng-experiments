@@ -58,14 +58,14 @@ export class ButtonStyles extends EmotionStylesheet {
 			color: #fff;
 
 			&:hover {
-				background: ${Colors.theme(color, 200)};
+				background: ${Colors.theme(color, 400)};
 			}
 			&.cdk-keyboard-focused {
-				background: ${Colors.theme(color, 200)};
-				box-shadow: 0 0 0 4px ${Colors.theme(color, 500, 0.5)};
+				background: ${Colors.theme(color, 400)};
+				box-shadow: 0 0 0 4px ${Colors.theme(color, 100, 0.5)};
 			}
 			&:active {
-				background: ${Colors.theme(color, 100)};
+				background: ${Colors.theme(color, 500)};
 			}
 		`;
 	}
@@ -75,14 +75,14 @@ export class ButtonStyles extends EmotionStylesheet {
 		if (!color) return null;
 
 		const base = Colors.theme(color);
-		const hoverActive = Colors.theme(color, 200);
-		const keyboardActive = Colors.theme(color, 500, 0.125);
+		const hoverActive = Colors.theme(color, 400);
+		const keyboardActive = Colors.theme(color, 100, 0.125);
 
 		return css`
 			label: btn--secondary;
 			background: transparent;
 			color: ${base};
-			border-color: ${Colors.theme(color, 400)};
+			border-color: ${Colors.theme(color, 200)};
 
 			&:hover {
 				background: ${base};
@@ -98,7 +98,7 @@ export class ButtonStyles extends EmotionStylesheet {
 			}
 			&.cdk-keyboard-focused {
 				border-color: ${base};
-				box-shadow: 0 0 0 4px ${Colors.theme(color, 500, 0.5)};
+				box-shadow: 0 0 0 4px ${Colors.theme(color, 100, 0.5)};
 			}
 		`;
 	}
@@ -112,15 +112,15 @@ export class ButtonStyles extends EmotionStylesheet {
 			background: transparent;
 
 			&:hover, &.cdk-keyboard-focused {
-				background: ${Colors.theme(color, 500, 0.0625)};
-				color: ${Colors.theme(color, 200)};
+				background: ${Colors.theme(color, 100, 0.0625)};
+				color: ${Colors.theme(color, 400)};
 			}
 			&.cdk-keyboard-focused {
-				box-shadow: 0 0 0 4px ${Colors.theme(color, 500, 0.25)};
+				box-shadow: 0 0 0 4px ${Colors.theme(color, 100, 0.25)};
 			}
 			&:active {
-				background: ${Colors.theme(color, 500, 0.125)};
-				color: ${Colors.theme(color, 100)};
+				background: ${Colors.theme(color, 100, 0.125)};
+				color: ${Colors.theme(color, 500)};
 			}
 		`;
 	}

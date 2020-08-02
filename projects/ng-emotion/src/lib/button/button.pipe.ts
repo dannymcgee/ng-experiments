@@ -25,7 +25,7 @@ export class ButtonSplashOpacityPipe implements PipeTransform {
 export class ButtonSplashShadePipe implements PipeTransform {
 	transform (variant: ButtonVariant): ColorShade {
 		return variant === 'tertiary'
-				? 200
-				: 500;
+				? 400
+				: 100;
 	}
 }

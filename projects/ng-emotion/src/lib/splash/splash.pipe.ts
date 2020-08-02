@@ -6,7 +6,7 @@ import { Coords } from './splash.types';
 @Pipe({ name: 'splashGradientStopColor', pure: true })
 export class SplashGradientStopColorPipe implements PipeTransform {
 	transform (color: ThemeColor, shade: ColorShade, opacity: Alpha): string {
-		return Colors[color](shade, opacity);
+		return Colors.theme(color, shade, opacity);
 	}
 }
 

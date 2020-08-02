@@ -109,7 +109,7 @@ export class SplashCollection implements Iterable<Splash> {
 
 	/** Radius should be the distance between the origin and the furthest corner of the DOM rect so the effect always fills the entire element */
 	private _calculateRadius ({ x, y }: Coords): number {
-		const { width, height } = this._rect;
+		const { width, height } = this.rect;
 		const corners: Coords[] = [
 			{ x: 0,     y: 0 },      // top left
 			{ x: width, y: 0 },      // top right

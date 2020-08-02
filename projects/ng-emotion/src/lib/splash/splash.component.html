@@ -1,6 +1,6 @@
 <svg
-	[attr.width]="splashes.rect?.width || 0"
-	[attr.height]="splashes.rect?.height || 0"
+	[attr.width]="splashCollection.rect?.width || 0"
+	[attr.height]="splashCollection.rect?.height || 0"
 	xmlns="http://www.w3.org/2000/svg"
 >
 	<defs>
@@ -15,8 +15,8 @@
 		</radialGradient>
 	</defs>
 	<circle [class]="styles.circle"
-		*ngFor="let splash of splashes
-			trackBy: splashes.trackById"
+		*ngFor="let splash of splashCollection
+			trackBy: splashCollection.trackById"
 		@splash
 		[style.transform-origin]="splash.origin | transformOrigin"
 		[attr.cx]="splash.origin.x"

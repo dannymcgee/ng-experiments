@@ -27,7 +27,7 @@ export class ButtonStyles extends EmotionStylesheet {
 		${this.borderRadius};
 		border-color: transparent;
 		position: relative;
-		overflow: visible;
+		overflow: hidden;
 		outline: none !important;
 		${Mixins.transition(
 				'background',

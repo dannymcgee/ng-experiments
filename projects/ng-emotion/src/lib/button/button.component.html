@@ -3,9 +3,9 @@
 	[origin]="origin"
 	[rect]="rect"
 	[color]="color"
-	[shade]="splashShade"
-	[baseOpacity]="splashOpacity"
-	[blendMode]="splashBlendMode"
+	[shade]="variant | btnSplashShade"
+	[baseOpacity]="variant | btnSplashOpacity"
+	[blendMode]="variant | btnSplashBlendMode"
 ></nge-splash>
 <span [class]="styles.label">
 	<ng-content></ng-content>

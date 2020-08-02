@@ -1,4 +1,4 @@
-import { Alpha } from '../theme';
+import { Alpha } from '../css-utils';
 
 export interface SplashGradientStop {
 	offset: string;

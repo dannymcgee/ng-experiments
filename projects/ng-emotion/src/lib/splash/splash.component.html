@@ -8,7 +8,7 @@
 			<stop *ngFor="let stop of stops"
 				[attr.offset]="stop.offset"
 				[attr.stop-color]="
-					color | gradientStopColor
+					color | splashGradientStopColor
 							: shade
 							: baseOpacity * stop.opacity"
 			></stop>

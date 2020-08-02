@@ -13,8 +13,8 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '../core';
+import { Anim, ThemeColor } from '../css-utils';
 import { Coords } from '../splash';
-import { Alpha, Anim, ColorShade, ThemeColor } from '../theme';
 import { ButtonStyles } from './button.component.styles';
 import { ButtonVariant } from './button.types';
 
@@ -37,15 +37,6 @@ export class ButtonComponent
 	@StyleProp()
 	@Input() color: ThemeColor = 'primary';
 
-	get splashShade (): ColorShade {
-		return this.variant === 'primary' || this.variant === 'secondary' ? 500 : 200;
-	}
-	get splashOpacity (): Alpha {
-		return this.variant === 'primary' || this.variant === 'secondary' ? 1 : 0.25;
-	}
-	get splashBlendMode (): string {
-		return this.variant === 'tertiary' ? 'multiply' : 'screen';
-	}
 	rect: DOMRect;
 	clicks: Coords[] = [];
 

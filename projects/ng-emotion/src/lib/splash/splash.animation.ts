@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 
-import { Anim, EaseOut } from '../theme';
+import { Anim, EaseOut } from '../css-utils';
 
 export const splashCircle = trigger('splashCircle', [
 	transition(':enter', [

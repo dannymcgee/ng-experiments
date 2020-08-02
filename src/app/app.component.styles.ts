@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { css, EmotionStylesheet, injectGlobal } from '@ng-emotion/core';
-import { Font, Mixins, rem } from '@ng-emotion/theme';
+import { Font, Mixins, rem } from '@ng-emotion/css-utils';
 
 @Injectable()
 export class AppStyles extends EmotionStylesheet

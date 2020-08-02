@@ -36,22 +36,22 @@ export class Colors
 	};
 
 	static primary (shade: ColorShade = 300, opacity: Alpha = 1): string {
-		return this.themeColor('primary', shade, opacity);
+		return this.theme('primary', shade, opacity);
 	}
 	static success (shade: ColorShade = 300, opacity: Alpha = 1): string {
-		return this.themeColor('success', shade, opacity);
+		return this.theme('success', shade, opacity);
 	}
 	static warning (shade: ColorShade = 300, opacity: Alpha = 1): string {
-		return this.themeColor('warning', shade, opacity);
+		return this.theme('warning', shade, opacity);
 	}
 	static danger (shade: ColorShade = 300, opacity: Alpha = 1): string {
-		return this.themeColor('danger', shade, opacity);
+		return this.theme('danger', shade, opacity);
 	}
 
-	private static themeColor (
+	static theme (
 		name: ThemeColor,
-		shade: ColorShade,
-		opacity: number
+		shade: ColorShade = 300,
+		opacity: Alpha = 1
 	): string {
 		const palette: ColorPalette = this[`_${name}`];
 		const rgb = palette[shade];

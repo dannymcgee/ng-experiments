@@ -9,7 +9,7 @@ import {
 import { v1 as uuid } from 'uuid';
 
 import { EmotionComponent, EmotionStylesheet, StyleProp } from '../core';
-import { Alpha, ColorShade, ThemeColor } from '../theme';
+import { Alpha, BlendMode, ColorShade, ThemeColor } from '../css-utils';
 import { splashCircle } from './splash.animation';
 import { SplashStyles } from './splash.component.styles';
 import { SPLASH_GRADIENT_STOPS } from './splash.constants';
@@ -35,7 +35,7 @@ export class SplashComponent
 	@Input() baseOpacity: Alpha;
 
 	@StyleProp()
-	@Input() blendMode: string;
+	@Input() blendMode: BlendMode;
 
 	@HostBinding('attr.aria-hidden')
 	ariaHidden = 'true';

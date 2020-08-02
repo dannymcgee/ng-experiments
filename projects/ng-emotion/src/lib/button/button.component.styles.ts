@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 import { css, EmotionStylesheet } from '../core';
-import { Colors, Font, Mixins, Position, rem, ThemeColor } from '../theme';
+import { Colors, Font, Mixins, Position, rem, ThemeColor } from '../css-utils';
 import { ButtonVariant } from './button.types';
 
 export interface ButtonStyleProps {
@@ -15,7 +15,7 @@ export class ButtonStyles extends EmotionStylesheet {
 	props: ButtonStyleProps = {};
 
 	borderRadius = css`
-		border-radius: ${rem(4)};
+		border-radius: 0;
 	`;
 
 	readonly base = css`
@@ -52,25 +52,20 @@ export class ButtonStyles extends EmotionStylesheet {
 
 		if (!color) return null;
 
-		const base = Colors[color]();
-		const hover = Colors[color](200);
-		const active = Colors[color](100);
-		const focusring = Colors[color](500, 0.5);
-
 		return css`
 			label: btn--primary;
-			background: ${base};
+			background: ${Colors.theme(color)};
 			color: #fff;
 
 			&:hover {
-				background: ${hover};
+				background: ${Colors.theme(color, 200)};
 			}
 			&.cdk-keyboard-focused {
-				background: ${hover};
-				box-shadow: 0 0 0 4px ${focusring};
+				background: ${Colors.theme(color, 200)};
+				box-shadow: 0 0 0 4px ${Colors.theme(color, 500, 0.5)};
 			}
 			&:active {
-				background: ${active};
+				background: ${Colors.theme(color, 100)};
 			}
 		`;
 	}
@@ -79,17 +74,15 @@ export class ButtonStyles extends EmotionStylesheet {
 
 		if (!color) return null;
 
-		const base = Colors[color]();
-		const border = Colors[color](400);
-		const hoverActive = Colors[color](200);
-		const keyboardActive = Colors[color](500, 0.125);
-		const focusring = Colors[color](500, 0.5);
+		const base = Colors.theme(color);
+		const hoverActive = Colors.theme(color, 200);
+		const keyboardActive = Colors.theme(color, 500, 0.125);
 
 		return css`
 			label: btn--secondary;
 			background: transparent;
 			color: ${base};
-			border-color: ${border};
+			border-color: ${Colors.theme(color, 400)};
 
 			&:hover {
 				background: ${base};
@@ -105,7 +98,7 @@ export class ButtonStyles extends EmotionStylesheet {
 			}
 			&.cdk-keyboard-focused {
 				border-color: ${base};
-				box-shadow: 0 0 0 4px ${focusring};
+				box-shadow: 0 0 0 4px ${Colors.theme(color, 500, 0.5)};
 			}
 		`;
 	}
@@ -114,25 +107,20 @@ export class ButtonStyles extends EmotionStylesheet {
 
 		if (!color) return null;
 
-		const hoverText = Colors[color](200);
-		const hoverBackground = Colors[color](500, 0.0625);
-		const focusring = Colors[color](500, 0.25);
-		const active = Colors[color](500, 0.125);
-
 		return css`
 			label: btn--tertiary;
 			background: transparent;
 
 			&:hover, &.cdk-keyboard-focused {
-				background: ${hoverBackground};
-				color: ${hoverText};
+				background: ${Colors.theme(color, 500, 0.0625)};
+				color: ${Colors.theme(color, 200)};
 			}
 			&.cdk-keyboard-focused {
-				box-shadow: 0 0 0 4px ${focusring};
+				box-shadow: 0 0 0 4px ${Colors.theme(color, 500, 0.25)};
 			}
 			&:active {
-				background: ${active};
-				color: ${Colors[color](100)};
+				background: ${Colors.theme(color, 500, 0.125)};
+				color: ${Colors.theme(color, 100)};
 			}
 		`;
 	}

@@ -3,10 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { SplashModule } from '../splash/splash.module';
 import { ButtonComponent } from './button.component';
+import {
+	ButtonSplashBlendModePipe,
+	ButtonSplashOpacityPipe,
+	ButtonSplashShadePipe,
+} from './button.pipe';
 
 @NgModule({
 	declarations: [
-		ButtonComponent
+		ButtonComponent,
+		ButtonSplashBlendModePipe,
+		ButtonSplashOpacityPipe,
+		ButtonSplashShadePipe
 	],
 	exports: [
 		ButtonComponent

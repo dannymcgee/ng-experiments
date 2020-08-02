@@ -21,9 +21,14 @@ export class AppStyles extends EmotionStylesheet
 			}
 		}
 
+		html, body {
+			height: 100%;
+		}
+
 		body {
 			margin: 0;
 			color: #444;
+			${Mixins.transition('opacity')};
 		}
 
 		h1, h2, h3, h4, h5 {
@@ -55,8 +60,9 @@ export class AppStyles extends EmotionStylesheet
 
 	base: string = css`
 		label: root;
-		display: block;
-		padding: ${rem(64)};
+		display: flex;
+		width: 100%;
+		height: 100%;
 
 		section {
 			margin: 0 0 ${rem(48)};
@@ -98,5 +104,20 @@ export class AppStyles extends EmotionStylesheet
 				padding: ${rem(4)} ${rem(12)};
 			}
 		}
+	`;
+
+	sidenav = css`
+		label: sidenav;
+		flex: 0 0 12.5%;
+		height: 100%;
+		padding: ${rem(64)} 0;
+	`;
+
+	main = css`
+		label: main;
+		flex: 1 0 0;
+		height: 100%;
+		padding: ${rem(64)};
+		overflow-y: auto;
 	`;
 }

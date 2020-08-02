@@ -1,54 +1,78 @@
-<section>
-	<h4>Primary</h4>
-	<button nge-btn="primary">Primary</button>
-	<button nge-btn="primary" color="success">Success</button>
-	<button nge-btn="primary" color="warning">Warning</button>
-	<button nge-btn="primary" color="danger">Danger</button>
-</section>
+<nge-menu [class]="styles.sidenav"
+	size="large"
+	role="navigation"
+>
+	<a nge-menuitem>
+		Lorem Ipsum
+	</a>
+	<a nge-menuitem
+		[active]="true"
+	>
+		Dolor sit Amet
+	</a>
+	<a nge-menuitem>
+		Consectetur
+	</a>
+	<a nge-menuitem>
+		Adipiscing
+	</a>
+	<a nge-menuitem>
+		Elit
+	</a>
+</nge-menu>
+<main [class]="styles.main">
+	<section>
+		<h4>Primary</h4>
+		<button nge-btn="primary">Primary</button>
+		<button nge-btn="primary" color="success">Success</button>
+		<button nge-btn="primary" color="warning">Warning</button>
+		<button nge-btn="primary" color="danger">Danger</button>
+	</section>
 
-<section>
-	<h4>Secondary</h4>
-	<button nge-btn="secondary">Primary</button>
-	<button nge-btn="secondary" color="success">Success</button>
-	<button nge-btn="secondary" color="warning">Warning</button>
-	<button nge-btn="secondary" color="danger">Danger</button>
-</section>
+	<section>
+		<h4>Secondary</h4>
+		<button nge-btn="secondary">Primary</button>
+		<button nge-btn="secondary" color="success">Success</button>
+		<button nge-btn="secondary" color="warning">Warning</button>
+		<button nge-btn="secondary" color="danger">Danger</button>
+	</section>
 
-<section>
-	<h4>Tertiary</h4>
-	<button nge-btn="tertiary">Primary</button>
-	<button nge-btn="tertiary" color="success">Success</button>
-	<button nge-btn="tertiary" color="warning">Warning</button>
-	<button nge-btn="tertiary" color="danger">Danger</button>
-</section>
+	<section>
+		<h4>Tertiary</h4>
+		<button nge-btn="tertiary">Primary</button>
+		<button nge-btn="tertiary" color="success">Success</button>
+		<button nge-btn="tertiary" color="warning">Warning</button>
+		<button nge-btn="tertiary" color="danger">Danger</button>
+	</section>
 
-<section>
-	<h4>Dynamic</h4>
-	<div [class]="styles.flex">
+	<section>
+		<h4>Dynamic</h4>
+		<div [class]="styles.flex">
 
-		<button [nge-btn]="variant" [color]="color">Customize Me</button>
+			<button [nge-btn]="variant" [color]="color">Customize Me</button>
 
-		<div [class]="styles.field">
-			<label for="variant">Variant</label>
-			<select id="variant"
-				name="variant"
-				[(ngModel)]="variant"
-			>
-				<option *ngFor="let option of variants"
-					[value]="option.value"
-				>{{ option.name }}</option>
-			</select>
+			<div [class]="styles.field">
+				<label for="variant">Variant</label>
+				<select id="variant"
+					name="variant"
+					[(ngModel)]="variant"
+				>
+					<option *ngFor="let option of variants"
+						[value]="option.value"
+					>{{ option.name }}</option>
+				</select>
+			</div>
+			<div [class]="styles.field">
+				<label for="color">Color</label>
+				<select id="color"
+					name="color"
+					[(ngModel)]="color"
+				>
+					<option *ngFor="let option of colors"
+						[value]="option.value"
+					>{{ option.name }}</option>
+				</select>
+			</div>
 		</div>
-		<div [class]="styles.field">
-			<label for="color">Color</label>
-			<select id="color"
-				name="color"
-				[(ngModel)]="color"
-			>
-				<option *ngFor="let option of colors"
-					[value]="option.value"
-				>{{ option.name }}</option>
-			</select>
-		</div>
-	</div>
-</section>
+	</section>
+</main>

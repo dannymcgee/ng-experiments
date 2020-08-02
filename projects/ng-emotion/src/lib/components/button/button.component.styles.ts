@@ -14,34 +14,14 @@ export class ButtonStyles extends EmotionStylesheet {
 
 	props: ButtonStyleProps = {};
 
-	borderRadius = css`
-		border-radius: 0;
-	`;
-
-	readonly base = css`
+	base = css`
 		label: btn;
-		display: inline-flex;
-		align-items: center;
+		${Mixins.buttonLike('inline')};
 		height: ${rem(36)};
 		padding: 0 ${rem(18)};
-		${this.borderRadius};
-		border-color: transparent;
-		position: relative;
-		overflow: hidden;
-		outline: none !important;
-		${Mixins.transition(
-				'background',
-				'color',
-				'border-color',
-				'box-shadow',
-			)};
-		${Mixins.font(Font.UI)};
-		cursor: pointer;
-		user-select: none;
 
 		.border-frame {
 			${Position.absolute('fill')};
-			${this.borderRadius};
 			border: 2px solid;
 			border-color: inherit;
 		}

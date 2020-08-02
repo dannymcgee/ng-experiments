@@ -1,0 +1,13 @@
+<nge-splash-host
+	[trigger]="elementRef"
+	[color]="active ? 'primary' : 'background'"
+	[shade]="active ? 100 : 200"
+	[baseOpacity]="active ? 0.15 : 1"
+	blendMode="multiply"
+></nge-splash-host>
+<span [class]="styles.label">
+	<ng-content></ng-content>
+</span>
+<span class="border-frame"
+	aria-hidden="true"
+></span>

@@ -68,16 +68,17 @@ export class EmotionComponent<T extends EmotionStylesheet>
 
 	ngDoCheck (): void {
 		if (this._ngeShouldCheck) {
-			for (const [key, fn] of this.styles._ngeBindings.entries()) {
+			for (let [key, fn] of this.styles._ngeBindings.entries()) {
 				const arg: any = this[key];
-				const newValue = fn(arg);
-				const currentValue = this._ngeBindingValues.get(key);
+				const next = fn(arg);
+				const current = this._ngeBindingValues.get(key);
 
-				if (newValue !== currentValue) {
+				if (next !== current) {
 					this._ngeHasChanges = true;
-					this._ngeBindingChanges.set(key, [currentValue, newValue]);
+					this._ngeBindingChanges.set(key, [current, next]);
 				}
 			}
+
 			this._ngeShouldCheck = false;
 		}
 
@@ -101,15 +102,15 @@ export class EmotionComponent<T extends EmotionStylesheet>
 		if (this.elementRef?.nativeElement == null)
 			return;
 
-		for (const [key, [currentValue, newValue]] of this._ngeBindingChanges.entries()) {
-			if (currentValue == null)
-				this._ngeAddClass(newValue);
-			else if (newValue == null)
-				this._ngeRemoveClass(currentValue);
+		for (const [key, [current, next]] of this._ngeBindingChanges.entries()) {
+			if (current == null)
+				this._ngeAddClass(next);
+			else if (next == null)
+				this._ngeRemoveClass(current);
 			else
-				this._ngeReplaceClass(currentValue, newValue);
+				this._ngeReplaceClass(current, next);
 
-			this._ngeBindingValues.set(key, newValue);
+			this._ngeBindingValues.set(key, next);
 		}
 
 		this._ngeBindingChanges.clear();

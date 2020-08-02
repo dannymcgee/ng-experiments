@@ -9,7 +9,7 @@ type PropertyDecorator = (target: object, key: string|symbol) => void;
  *
  * Changes to any properties decorated with `@StyleProp()` will trigger change detection on all `@StyleModifier()` bindings.
  */
-export function StyleProp (): PropertyDecorator {
+export function StyleProp (name?: string): PropertyDecorator {
 	return function<
 		T extends EmotionComponent<TS>,
 		TS extends EmotionStylesheet,
@@ -25,8 +25,42 @@ export function StyleProp (): PropertyDecorator {
 			this._onInit$
 				.pipe(first())
 				.subscribe(() => {
-						this.styles.props[propName] = value;
+						const _propName = name ?? propName;
+						this.styles.props[_propName] = value;
 						this.ngeMarkForCheck();
+
+						this[`__${propName}__`] = value;
+					});
+		}
+
+		Object.defineProperty(component, propName, {
+			get, set,
+			enumerable: true,
+			configurable: true,
+		});
+	};
+}
+
+export function StyleToggle (): PropertyDecorator {
+	return function<
+		T extends EmotionComponent<TS>,
+		TS extends EmotionStylesheet,
+	>(
+		component: T,
+		propName: string,
+	): void {
+		function get (): boolean {
+			return this[`__${propName}__`];
+		}
+
+		function set (value: boolean): void {
+			this._onInit$
+				.pipe(first())
+				.subscribe(() => {
+						const className = this.styles[propName];
+						if (typeof className === 'string') {
+							this.elementRef.nativeElement.classList.toggle(className, value);
+						}
 
 						this[`__${propName}__`] = value;
 					});

@@ -1,7 +1,9 @@
-import { css } from '../core';
+import { css } from '../../core';
+import { rem } from './a11y';
 import { Anim } from './animation';
 import { Font, FontFamily, FontSize } from './fonts';
-import { rem } from './utils';
+
+export type ButtonSize = 32|36|48;
 
 export namespace Mixins
 {
@@ -44,6 +46,27 @@ export namespace Mixins
 	): string {
 		return css`
 			font: 700 ${rem(size)}/1 ${FontFamily.Operator};
+		`;
+	}
+
+	export function buttonLike (
+		inline: 'inline'|'' = '',
+	): string {
+		return css`
+			display: ${inline + (!!inline ? '-' : '')}flex;
+			align-items: center;
+			border-color: transparent;
+			position: relative;
+			outline: none !important;
+			${transition(
+					'background',
+					'color',
+					'border-color',
+					'box-shadow',
+				)};
+			${font(Font.UI)};
+			cursor: pointer;
+			user-select: none;
 		`;
 	}
 }

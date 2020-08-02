@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Alpha, BlendMode, ColorShade } from '../../css-utils';
+import { Alpha, BlendMode, ColorShade } from '../../utils';
 import { ButtonVariant } from './button.types';
 
 @Pipe({ name: 'btnSplashBlendMode', pure: true })
@@ -16,7 +16,7 @@ export class ButtonSplashBlendModePipe implements PipeTransform {
 export class ButtonSplashOpacityPipe implements PipeTransform {
 	transform (variant: ButtonVariant): Alpha {
 		return variant === 'tertiary'
-				? 0.25
+				? 0.15
 				: 1;
 	}
 }

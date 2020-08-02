@@ -3,9 +3,8 @@ import { ElementRef } from '@angular/core';
 
 import { fromEvent, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { v1 as uuid } from 'uuid';
 
-import { UUID } from '../../core';
+import { ElementId, elementId } from '../../utils';
 import { CoordinateSpace, Coords, Splash } from './splash.types';
 
 /** Iterable class which manages a collection of splash effect view-model representations. Can be passed directly to an `ngFor` directive in the template to render the effects. */
@@ -21,7 +20,7 @@ export class SplashCollection implements Iterable<Splash> {
 	updates$: Observable<void> = this._updates$.asObservable();
 
 	private _rect?: DOMRect;
-	private _splashes = new Map<UUID, Splash>();
+	private _splashes = new Map<ElementId, Splash>();
 	private _triggerElement: HTMLElement;
 	private _onDestroy$ = new Subject<void>();
 
@@ -90,7 +89,7 @@ export class SplashCollection implements Iterable<Splash> {
 			};
 
 		const radius = this._calculateRadius(origin);
-		const id: UUID = uuid();
+		const id: ElementId = elementId('splash');
 		const _timer = setTimeout(() => {
 				this._removeSplash(id);
 			}, this.animDuration + 10) as any;
@@ -105,7 +104,7 @@ export class SplashCollection implements Iterable<Splash> {
 		this._updates$.next();
 	}
 
-	private _removeSplash (id: UUID): void {
+	private _removeSplash (id: ElementId): void {
 		this._splashes.delete(id);
 		this._updates$.next();
 	}

@@ -1,4 +1,4 @@
-import { css, cx } from '../core';
+import { css, cx } from '../../core';
 
 export namespace Position
 {

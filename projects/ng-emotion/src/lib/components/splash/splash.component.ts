@@ -10,10 +10,9 @@ import {
 } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
-import { v1 as uuid } from 'uuid';
 
-import { EmotionComponent, EmotionStylesheet, StyleProp, UUID } from '../../core';
-import { Alpha, Anim, BlendMode, ColorShade, ThemeColor } from '../../css-utils';
+import { EmotionComponent, EmotionStylesheet, StyleProp } from '../../core';
+import { Alpha, Anim, BlendMode, ColorShade, ElementId, elementId, ThemeColor } from '../../utils';
 import { splash } from './splash.animation';
 import { SplashCollection } from './splash.collection';
 import { SplashStyles } from './splash.component.styles';
@@ -47,7 +46,7 @@ export class SplashHostComponent
 	splashCollection: SplashCollection;
 
 	readonly stops = SPLASH_GRADIENT_STOPS;
-	readonly gradientId: UUID = uuid();
+	readonly gradientId: ElementId = elementId('gradient');
 
 	constructor (
 		public elementRef: ElementRef<HTMLElement>,

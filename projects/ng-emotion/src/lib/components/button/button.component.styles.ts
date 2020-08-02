@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 import { css, EmotionStylesheet } from '../../core';
-import { Colors, Font, Mixins, Position, rem, ThemeColor } from '../../css-utils';
+import { Colors, Mixins, Position, rem, ThemeColor } from '../../utils';
 import { ButtonVariant } from './button.types';
 
 export interface ButtonStyleProps {

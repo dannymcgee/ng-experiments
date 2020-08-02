@@ -6,6 +6,14 @@ export type Alpha = number;
 
 export class Colors
 {
+	private static _background: ColorPalette = {
+		100: '#FFFFFF',
+		200: '#F5F5F5',
+		300: '#EEEEEE',
+		400: '#CCCCCC',
+		500: '#AAAAAA',
+	};
+
 	private static _primary: ColorPalette = {
 		100: '#00AAFF',
 		200: '#0099DD',
@@ -49,7 +57,7 @@ export class Colors
 	}
 
 	static theme (
-		name: ThemeColor,
+		name: ThemeColor|'background',
 		shade: ColorShade = 300,
 		opacity: Alpha = 1,
 	): string {

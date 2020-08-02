@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 
-import { Anim, EaseOut } from '../../css-utils';
+import { Anim, EaseOut } from '../../utils';
 
 export const splash = trigger('splash', [
 	transition(':enter', [

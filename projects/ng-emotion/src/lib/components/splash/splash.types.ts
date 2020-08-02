@@ -1,5 +1,4 @@
-import { UUID } from '../../core';
-import { Alpha } from '../../css-utils';
+import { Alpha, ElementId } from '../../utils';
 
 export interface SplashGradientStop {
 	offset: string;
@@ -19,7 +18,7 @@ export enum CoordinateSpace {
 }
 
 export interface Splash {
-	id: UUID;
+	id: ElementId;
 	origin: Coords;
 	radius: number;
 	_timer: number;

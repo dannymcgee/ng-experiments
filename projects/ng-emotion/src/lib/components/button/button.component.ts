@@ -11,8 +11,7 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '../../core';
-import { ThemeColor } from '../../css-utils';
-import { Coords } from '../splash';
+import { ThemeColor } from '../../utils';
 import { ButtonStyles } from './button.component.styles';
 import { ButtonVariant } from './button.types';
 
@@ -34,9 +33,6 @@ export class ButtonComponent
 
 	@StyleProp()
 	@Input() color: ThemeColor = 'primary';
-
-	rect: DOMRect;
-	clicks: Coords[] = [];
 
 	constructor (
 		public elementRef: ElementRef<HTMLElement>,

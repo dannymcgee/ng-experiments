@@ -14,7 +14,7 @@ import { v1 as uuid } from 'uuid';
 import { takeUntil } from 'rxjs/operators';
 import { EmotionComponent, EmotionStylesheet, StyleProp, UUID } from '../core';
 import { Alpha, Anim, BlendMode, ColorShade, ThemeColor } from '../css-utils';
-import { splashCircle } from './splash.animation';
+import { splash } from './splash.animation';
 import { SplashCollection } from './splash.collection';
 import { SplashStyles } from './splash.component.styles';
 import { SPLASH_GRADIENT_STOPS } from './splash.constants';
@@ -26,7 +26,7 @@ import { SPLASH_GRADIENT_STOPS } from './splash.constants';
 		provide: EmotionStylesheet,
 		useClass: SplashStyles,
 	}],
-	animations: [splashCircle],
+	animations: [splash],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SplashHostComponent

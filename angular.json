@@ -156,7 +156,6 @@
           "changeDetection": "OnPush",
           "export": true,
           "flat": true,
-          "inlineTemplate": true,
           "internal": true,
           "lintFix": true
         },

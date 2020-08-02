@@ -51,7 +51,7 @@ export class Colors
 	static theme (
 		name: ThemeColor,
 		shade: ColorShade = 300,
-		opacity: Alpha = 1
+		opacity: Alpha = 1,
 	): string {
 		const palette: ColorPalette = this[`_${name}`];
 		const rgb = palette[shade];

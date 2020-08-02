@@ -14,14 +14,14 @@ import {
 		ButtonComponent,
 		ButtonSplashBlendModePipe,
 		ButtonSplashOpacityPipe,
-		ButtonSplashShadePipe
+		ButtonSplashShadePipe,
 	],
 	exports: [
-		ButtonComponent
+		ButtonComponent,
 	],
 	imports: [
 		CommonModule,
 		SplashModule,
-	]
+	],
 })
 export class ButtonModule {}

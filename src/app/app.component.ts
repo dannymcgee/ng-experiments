@@ -22,7 +22,7 @@ interface ColorOption {
 	providers: [{
 		provide: EmotionStylesheet,
 		useClass: AppStyles,
-	}]
+	}],
 })
 export class AppComponent extends EmotionComponent<AppStyles>
 {

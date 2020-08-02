@@ -17,7 +17,7 @@ describe('component', () => {
 			.toEqual([
 				'/hello-world/hello-world.component.html',
 				'/hello-world/hello-world.component.styles.ts',
-				'/hello-world/hello-world.component.ts'
+				'/hello-world/hello-world.component.ts',
 			]);
 	});
 });

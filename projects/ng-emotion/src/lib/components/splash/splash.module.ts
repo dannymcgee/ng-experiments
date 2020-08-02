@@ -9,14 +9,14 @@ import { SplashGradientStopColorPipe, TransformOriginPipe } from './splash.pipe'
 	declarations: [
 		SplashHostComponent,
 		SplashGradientStopColorPipe,
-		TransformOriginPipe
+		TransformOriginPipe,
 	],
 	imports: [
 		BrowserAnimationsModule,
-		CommonModule
+		CommonModule,
 	],
 	exports: [
-		SplashHostComponent
-	]
+		SplashHostComponent,
+	],
 })
 export class SplashModule {}

@@ -33,7 +33,7 @@ export class ButtonStyles extends EmotionStylesheet {
 				'background',
 				'color',
 				'border-color',
-				'box-shadow'
+				'box-shadow',
 			)};
 		${Mixins.font(Font.UI)};
 		cursor: pointer;

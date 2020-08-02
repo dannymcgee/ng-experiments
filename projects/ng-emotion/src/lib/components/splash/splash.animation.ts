@@ -9,5 +9,5 @@ export const splash = trigger('splash', [
 			animate(`${Anim.Duration.Long}ms ${EaseOut.Sine}`,
 					style({ opacity: 0, transform: 'scale(1.333)' }),
 				),
-		])
+		]),
 ]);

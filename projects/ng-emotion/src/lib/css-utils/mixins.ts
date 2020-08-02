@@ -40,7 +40,7 @@ export namespace Mixins
 	}
 
 	export function heading (
-		size: Exclude<FontSize, FontSize.Small|FontSize.UI|FontSize.Text>
+		size: Exclude<FontSize, FontSize.Small|FontSize.UI|FontSize.Text>,
 	): string {
 		return css`
 			font: 700 ${rem(size)}/1 ${FontFamily.Operator};

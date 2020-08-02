@@ -115,6 +115,13 @@
         "named": "always"
       }
     },
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
     "typedef": [
       true,
       "call-signature",

@@ -15,7 +15,7 @@ export function StyleProp (): PropertyDecorator {
 		TS extends EmotionStylesheet,
 	>(
 		component: T,
-		propName: string
+		propName: string,
 	): void {
 		function get (): T[keyof T] {
 			return this[`__${propName}__`];
@@ -53,7 +53,7 @@ export function StyleModifier (methodName?: string): PropertyDecorator {
 		TS extends EmotionStylesheet,
 	>(
 		component: T,
-		propName: string
+		propName: string,
 	): void {
 		function get (): T[keyof T] {
 			return this[`__${propName}__`];
@@ -69,7 +69,7 @@ export function StyleModifier (methodName?: string): PropertyDecorator {
 							if (!this.styles._ngeBindings.has(propName)) {
 								this.styles._ngeBindings.set(
 									propName,
-									this.styles[_methodName].bind(this.styles)
+									this.styles[_methodName].bind(this.styles),
 								);
 							}
 							this.ngeMarkForCheck();

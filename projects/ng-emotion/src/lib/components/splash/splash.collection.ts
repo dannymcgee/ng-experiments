@@ -83,7 +83,7 @@ export class SplashCollection implements Iterable<Splash> {
 
 		const origin =
 			coordSpace === CoordinateSpace.Local ? {
-				x, y
+				x, y,
 			} : {
 				x: x - this.rect.left,
 				y: y - this.rect.top,

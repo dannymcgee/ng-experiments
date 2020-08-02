@@ -29,9 +29,8 @@ import { Schema as EmotionComponentSchema } from './schema';
 
 function buildSelector (
 	{ name, prefix }: EmotionComponentSchema,
-	projectPrefix: string
-	): string
-{
+	projectPrefix: string,
+): string {
 	const kebab = strings.dasherize(name);
 
 	return (!!prefix)
@@ -110,7 +109,7 @@ function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {
 				source,
 				modulePath,
 				className,
-				relativePath
+				relativePath,
 			);
 
 		for (const change of declarationChanges)
@@ -128,7 +127,7 @@ function addDeclarationToNgModule (options: EmotionComponentSchema): Rule {
 					updatedSource,
 					modulePath,
 					className,
-					relativePath
+					relativePath,
 				);
 
 			for (const change of exportChanges)

@@ -1,4 +1,3 @@
-export * from './menu.animations';
 export * from './menu.component';
 export * from './menu.directive';
 export * from './menu.module';

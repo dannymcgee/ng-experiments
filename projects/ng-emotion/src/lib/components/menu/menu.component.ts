@@ -15,7 +15,7 @@ import {
 import { EmotionComponent, EmotionStylesheet, StyleModifier } from '../../core';
 import { DynamicQueryList } from '../../utils';
 import { MenuItemComponent, MenuItemRole, MenuItemSize } from './menu-item';
-import { actionMenu } from './menu.animations';
+// import { actionMenu } from '../dropdown-panel/menu.animations';
 import { MenuStyles } from './menu.component.styles';
 import { MENU_ROLES_LOOKUP } from './menu.constants';
 import { MenuRole } from './menu.types';
@@ -27,7 +27,7 @@ import { MenuRole } from './menu.types';
 		provide: EmotionStylesheet,
 		useClass: MenuStyles,
 	}],
-	animations: [actionMenu],
+	// animations: [actionMenu],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent
@@ -57,9 +57,6 @@ export class MenuComponent
 
 	@StyleModifier('role')
 	private _role: MenuRole = MenuRole.Navigation;
-
-	@HostBinding('@actionMenu')
-	hostAnimation = true;
 
 	@ContentChildren(MenuItemComponent)
 	private _menuItems: QueryList<MenuItemComponent>;

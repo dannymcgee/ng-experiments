@@ -1,9 +1,18 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	HostBinding,
+	Input,
+	OnDestroy,
+	OnInit,
+} from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { EmotionComponent, EmotionStylesheet, StyleModifier, StyleProp } from '../../../core';
+import { EmotionComponent, EmotionStylesheet, StyleModifier } from '../../../core';
 import { MenuItemStyles } from './menu-item.component.styles';
 import { MenuItemRole, MenuItemSize } from './menu-item.types';
 
@@ -37,7 +46,7 @@ export class MenuItemComponent
 			this.changeDetectorRef.markForCheck();
 	}
 
-	@StyleProp('role')
+	@StyleModifier('role')
 	private _role: MenuItemRole = MenuItemRole.Link;
 
 	constructor (

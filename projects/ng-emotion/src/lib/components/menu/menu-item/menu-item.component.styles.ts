@@ -11,6 +11,7 @@ export class MenuItemStyles extends EmotionStylesheet {
 	base = css`
 		label: menu-item;
 		${Mixins.buttonLike()};
+		width: 100%;
 
 		.border-frame {
 			${Position.absolute([0, -2, 0, 0])};
@@ -65,12 +66,31 @@ export class MenuItemStyles extends EmotionStylesheet {
 		height: ${rem(48)};
 		padding: 0 ${rem(32)};
 	`;
-	size (value: MenuItemSize): string|null {
+	size (value: MenuItemSize): string {
 		switch (value) {
 			case MenuItemSize.Small    : return this.sizeSmall;
 			case MenuItemSize.Standard : return this.sizeStandard;
 			case MenuItemSize.Large    : return this.sizeLarge;
 			default                    : return this.sizeStandard;
+		}
+	}
+
+	navLink = css`
+		label: menu-item--nav-link;
+		font-weight: 600;
+	`;
+	menuAction = css`
+		label: menu-item--action;
+		font-weight: 500;
+		padding-right: 72px;
+	`;
+	role (value: MenuItemRole): string|null {
+		this.props.role = value;
+
+		switch (value) {
+			case MenuItemRole.Link     : return this.navLink;
+			case MenuItemRole.MenuItem : return this.menuAction;
+			default                    : return this.navLink;
 		}
 	}
 

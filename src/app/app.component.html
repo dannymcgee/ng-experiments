@@ -20,7 +20,9 @@
 		Elit
 	</a>
 </nge-menu>
-<main [class]="styles.main">
+<main [class]="styles.main"
+	[ngeContextMenu]="mainContextMenu"
+>
 	<section>
 		<h4>Primary</h4>
 		<button nge-btn="primary">Primary</button>
@@ -76,3 +78,14 @@
 		</div>
 	</section>
 </main>
+
+<ng-template #mainContextMenu>
+	<nge-menu role="menu">
+		<button nge-menuitem>Lorem</button>
+		<button nge-menuitem>Ipsum</button>
+		<hr />
+		<button nge-menuitem>Dolor sit Amet</button>
+		<button nge-menuitem>Consectetur</button>
+		<button nge-menuitem>Adipiscing Elit</button>
+	</nge-menu>
+</ng-template>

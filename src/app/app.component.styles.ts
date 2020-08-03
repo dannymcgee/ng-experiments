@@ -58,7 +58,7 @@ export class AppStyles extends EmotionStylesheet
 		}
 	`;
 
-	base: string = css`
+	host: string = css`
 		label: root;
 		display: flex;
 		width: 100%;

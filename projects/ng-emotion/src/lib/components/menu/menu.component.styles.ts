@@ -7,7 +7,7 @@ import { MenuRole } from './menu.types';
 
 @Injectable()
 export class MenuStyles extends EmotionStylesheet {
-	base = css`
+	host = css`
 		label: menu;
 		display: block;
 	`;

@@ -14,7 +14,7 @@ export class ButtonStyles extends EmotionStylesheet {
 
 	props: ButtonStyleProps = {};
 
-	base = css`
+	host = css`
 		label: btn;
 		${Mixins.buttonLike('inline')};
 		height: ${rem(36)};

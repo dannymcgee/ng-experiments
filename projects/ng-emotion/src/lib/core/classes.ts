@@ -25,7 +25,7 @@ export class EmotionStylesheet
 	 * @see StyleModifier
 	 * @see StyleProp
 	 */
-	readonly base: string;
+	readonly host: string;
 
 	/** @private */
 	_ngeBindings = new Map<string, StyleBindingFn>();
@@ -62,7 +62,7 @@ export class EmotionComponent<T extends EmotionStylesheet>
 	}
 
 	ngOnInit (): void {
-		this._ngeAddClass(this.styles.base);
+		this._ngeAddClass(this.styles.host);
 		this._onInit$.next();
 	}
 

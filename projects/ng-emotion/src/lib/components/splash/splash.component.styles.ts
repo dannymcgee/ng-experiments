@@ -12,7 +12,7 @@ export class SplashStyles extends EmotionStylesheet {
 
 	props: SplashStyleProps = {};
 
-	readonly base = css`
+	readonly host = css`
 		label: splash;
 		display: block;
 		${Position.absolute('fill')}

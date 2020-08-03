@@ -8,7 +8,7 @@ import { MenuItemRole, MenuItemSize } from './menu-item.types';
 @Injectable()
 export class MenuItemStyles extends EmotionStylesheet {
 
-	base = css`
+	host = css`
 		label: menu-item;
 		${Mixins.buttonLike()};
 		width: 100%;

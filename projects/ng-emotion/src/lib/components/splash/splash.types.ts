@@ -5,11 +5,13 @@ export interface SplashGradientStop {
 	opacity: Alpha;
 }
 
+// FIXME: This should be extracted to some sort of common module
 export interface Coords {
 	x: number;
 	y: number;
 }
 
+// FIXME: This should be extracted to some sort of common module
 /** Represents the reference space for a set of coordinates. */
 export enum CoordinateSpace {
 	Viewport,

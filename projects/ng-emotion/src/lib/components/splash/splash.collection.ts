@@ -81,12 +81,10 @@ export class SplashCollection implements Iterable<Splash> {
 			this.updateRect();
 
 		const origin =
-			coordSpace === CoordinateSpace.Local ? {
-				x, y,
-			} : {
-				x: x - this.rect.left,
-				y: y - this.rect.top,
-			};
+			coordSpace === CoordinateSpace.Local
+				? { x, y }
+				: { x: x - this.rect.left,
+					y: y - this.rect.top };
 
 		const radius = this._calculateRadius(origin);
 		const id: ElementId = elementId('splash');

@@ -51,7 +51,6 @@ describe('ButtonComponent', () => {
 		spectator = createHost(`
 			<button nge-btn color="success"></button>
 		`);
-
 		const { component: button } = spectator;
 		const { styles } = button;
 

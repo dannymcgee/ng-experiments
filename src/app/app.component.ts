@@ -41,4 +41,6 @@ export class AppComponent extends EmotionComponent<AppStyles>
 
 	variant: ButtonVariant = 'primary';
 	color: ThemeColor = 'primary';
+
+	textFieldValue = '';
 }

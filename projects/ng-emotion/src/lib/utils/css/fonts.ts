@@ -1,4 +1,5 @@
 export enum FontSize {
+	Label = 12,
 	Small = 13,
 	UI    = 14,
 	Text  = 16,

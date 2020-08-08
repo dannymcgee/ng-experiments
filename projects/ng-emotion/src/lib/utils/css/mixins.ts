@@ -25,7 +25,7 @@ export namespace Mixins
 				`;
 			case Font.Label :
 				return css`
-					font: 600 ${rem(FontSize.Small)}/1 ${FontFamily.WhitneySmallCaps};
+					font: 600 ${rem(FontSize.Label)}/1 ${FontFamily.WhitneySmallCaps};
 					text-transform: lowercase;
 					font-feature-settings: "liga" 1, "smcp" 1;
 				`;
@@ -42,7 +42,7 @@ export namespace Mixins
 	}
 
 	export function heading (
-		size: Exclude<FontSize, FontSize.Small|FontSize.UI|FontSize.Text>,
+		size: Exclude<FontSize, FontSize.Label|FontSize.Small|FontSize.UI|FontSize.Text>,
 	): string {
 		return css`
 			font: 700 ${rem(size)}/1 ${FontFamily.Operator};

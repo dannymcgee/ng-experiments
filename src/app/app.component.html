@@ -77,6 +77,18 @@
 			</div>
 		</div>
 	</section>
+
+	<section>
+		<h4>Form Controls</h4>
+
+		<nge-form-field>
+			<label nge-label>Text Field</label>
+			<input nge-text-field
+				type="text"
+				[(ngModel)]="textFieldValue"
+			/>
+		</nge-form-field>
+	</section>
 </main>
 
 <ng-template #mainContextMenu>

@@ -3,7 +3,12 @@ import { Inject, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ButtonModule, MenuModule } from '@ng-emotion/components';
+import {
+	ButtonModule,
+	FormFieldModule,
+	MenuModule,
+	TextFieldModule,
+} from '@ng-emotion/components';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -15,8 +20,10 @@ import { AppComponent } from './app.component';
 	imports: [
 		BrowserModule,
 		ButtonModule,
-		MenuModule,
+		FormFieldModule,
 		FormsModule,
+		MenuModule,
+		TextFieldModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],

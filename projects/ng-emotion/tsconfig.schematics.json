@@ -28,6 +28,11 @@
       "node"
     ]
   },
-  "include": ["schematics/**/*"],
-  "exclude": ["schematics/ng-generate/*/files/**/*"]
+  "include": [
+    "schematics/**/*"
+  ],
+  "exclude": [
+    "schematics/ng-generate/*/files/**/*",
+    "schematics/**/*.spec.ts"
+  ]
 }

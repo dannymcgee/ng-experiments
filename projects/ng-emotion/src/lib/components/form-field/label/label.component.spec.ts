@@ -5,13 +5,12 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator/jest';
 import { FormFieldModule } from '../form-field.module';
 import { LabelComponent } from './label.component';
 
-@Component({ template: '' })
+@Component({})
 class LabelHostComponent {}
 
-describe('LabelComponent', () => {
+describe('Label', () => {
 
 	let spectator: SpectatorHost<LabelComponent, LabelHostComponent>;
-
 	const createHost = createHostFactory({
 		component: LabelComponent,
 		imports: [FormFieldModule],

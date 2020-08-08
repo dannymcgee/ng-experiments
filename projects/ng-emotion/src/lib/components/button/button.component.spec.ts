@@ -7,14 +7,14 @@ import { ButtonComponent } from './button.component';
 import { ButtonModule } from './button.module';
 import { ButtonVariant } from './button.types';
 
-@Component({ template: '' })
+@Component({})
 class ButtonHostComponent {
 	variant: ButtonVariant = 'primary';
 	color: ThemeColor = 'primary';
 	label = 'Button Label';
 }
 
-describe('ButtonComponent', () => {
+describe('Button', () => {
 
 	let spectator: SpectatorHost<ButtonComponent, ButtonHostComponent>;
 	const createHost = createHostFactory({

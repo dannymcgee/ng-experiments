@@ -1,0 +1,94 @@
+<div [class]="styles.value"
+	[style.background-color]="color.css()"
+></div>
+
+<div [class]="styles.popup">
+	<div [class]="styles.disc">
+		<div class="hue-wheel"></div>
+		<div class="hue-mask"></div>
+		<div class="hue-rotator"
+			[(ngeHueRotator)]="hue"
+		>
+			<div class="control-knob"
+				[style.background-color]="hue | controlKnobColor : 'hue'"
+			></div>
+		</div>
+		<div class="preview"
+			[style.background-color]="color.css()"
+		></div>
+	</div>
+	<div [class]="styles.panel">
+		<div class="channel-fields">
+			<input class="channel-fields__field"
+				type="number"
+				name="hue"
+				min="0"
+				max="360"
+				step="1"
+				[(ngModel)]="hue"
+			/>
+			<input class="channel-fields__field"
+				type="number"
+				name="saturation"
+				min="0"
+				max="100"
+				step="1"
+				[(ngModel)]="saturation"
+			/>
+			<input class="channel-fields__field"
+				type="number"
+				name="brightness"
+				min="0"
+				max="100"
+				step="1"
+				[(ngModel)]="brightness"
+			/>
+		</div>
+		<div class="slider slider--first">
+			<div class="slider__track"
+				[style.background-image]="hue | sliderTrackGradient : 'saturation'"
+			>
+				<div class="slider__clamp">
+					<div class="control-knob"
+						[style.left]="saturation | sliderKnobOffset"
+						[style.background-color]="
+							saturation | controlKnobColor
+								: 'saturation'
+								: hue"
+					></div>
+				</div>
+			</div>
+			<input class="slider__native-input"
+				type="range"
+				name="saturation-range"
+				min="0"
+				max="100"
+				step="1"
+				[(ngModel)]="saturation"
+			/>
+		</div>
+		<div class="slider">
+			<div class="slider__track"
+				[style.background-image]="hue | sliderTrackGradient : 'brightness'"
+			>
+				<div class="slider__clamp">
+					<div class="control-knob"
+						[style.left]="brightness | sliderKnobOffset"
+						[style.background-color]="
+							brightness | controlKnobColor
+								: 'brightness'
+								: hue"
+					></div>
+				</div>
+			</div>
+			<input class="slider__native-input"
+				type="range"
+				name="brightness-range"
+				min="0"
+				max="100"
+				step="1"
+				[(ngModel)]="brightness"
+			/>
+		</div>
+	</div>
+</div>

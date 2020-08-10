@@ -3,6 +3,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@ng-emotion": ["projects/ng-emotion/src/lib"],
       "@ng-emotion/*": ["projects/ng-emotion/src/lib/*"],

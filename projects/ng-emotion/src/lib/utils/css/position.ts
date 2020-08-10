@@ -5,10 +5,10 @@ export namespace Position
 	type Type = 'relative'|'absolute'|'fixed'|'sticky';
 	type Offset = string|number;
 	type Offsets = [
-		Offset|undefined,
-		Offset|undefined,
-		Offset|undefined,
-		Offset|undefined,
+		Offset,
+		(Offset|null)?,
+		(Offset|null)?,
+		(Offset|null)?,
 	];
 
 	const OFFSET_KEYS = ['top', 'right', 'bottom', 'left'];

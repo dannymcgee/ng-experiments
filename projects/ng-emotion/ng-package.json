@@ -4,7 +4,8 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "create-emotion": "create-emotion"
+      "create-emotion": "create-emotion",
+      "chroma-js": "chroma"
     }
   },
   "whitelistedNonPeerDependencies": [

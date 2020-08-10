@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { ButtonVariant } from '@ng-emotion/components';
 import { EmotionComponent, EmotionStylesheet } from '@ng-emotion/core';
-import { ThemeColor } from '@ng-emotion/utils';
+import { Colors, ThemeColor } from '@ng-emotion/utils';
+import chroma from 'chroma-js';
 
 import { AppStyles } from './app.component.styles';
 
@@ -43,4 +44,5 @@ export class AppComponent extends EmotionComponent<AppStyles>
 	color: ThemeColor = 'primary';
 
 	textFieldValue = '';
+	colorPickerValue = chroma(Colors.primary(300));
 }

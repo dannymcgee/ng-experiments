@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { css, EmotionStylesheet, injectGlobal } from '@ng-emotion/core';
-import { Colors, Font, Mixins, rem } from '@ng-emotion/utils';
+import { Font, Mixins, rem } from '@ng-emotion/utils';
 
 @Injectable()
 export class AppStyles extends EmotionStylesheet
@@ -70,6 +70,10 @@ export class AppStyles extends EmotionStylesheet
 
 		button {
 			margin: 0 8px;
+		}
+
+		nge-form-field {
+			margin-bottom: 36px;
 		}
 	`;
 

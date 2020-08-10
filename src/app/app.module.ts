@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import {
 	ButtonModule,
+	ColorPickerModule,
 	FormFieldModule,
 	MenuModule,
 	TextFieldModule,
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
 	imports: [
 		BrowserModule,
 		ButtonModule,
+		ColorPickerModule,
 		FormFieldModule,
 		FormsModule,
 		MenuModule,

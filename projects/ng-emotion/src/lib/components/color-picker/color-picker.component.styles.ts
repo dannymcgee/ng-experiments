@@ -23,7 +23,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		position: relative;
 
 		.control-knob {
-			${circle(16)};
+			${circle(12)};
 		}
 	`;
 
@@ -31,6 +31,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		label: color-picker__value;
 		${circle(32)};
 		${Position.relative([8])};
+		cursor: pointer;
 	`;
 
 	popup = css`
@@ -39,7 +40,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		align-items: center;
 		height: 103px;
 		border-radius: 51.5px 0 0 51.5px;
-		${Position.absolute([0, null, null, 0])};
+		${Position.absolute([-28, null, null, -51.5])};
 		z-index: 100;
 		backdrop-filter: blur(12px);
 		filter:
@@ -49,30 +50,31 @@ export class ColorPickerStyles extends EmotionStylesheet {
 
 	disc = css`
 		label: color-picker__disc;
-		padding: ${rem(32)};
+		padding: ${rem(24)};
 		border-radius: 50%;
 		position: relative;
 		overflow: hidden;
 		background: #FFF;
 
 		.control-knob {
-			${Position.absolute([8, null, null, 'calc(50% - 8px)'])};
+			${Position.absolute([6, null, null, 'calc(50% - 6px)'])};
 		}
 		.hue-wheel {
-			${circle(110)};
+			${circle(116)};
 			${Position.absolute(['50%', null, null, '50%'])};
 			transform: translateX(-50%) translateY(-50%);
 			background: conic-gradient(#F00, #FF0, #0F0, #0FF, #00F, #F0F, #F00);
 		}
 		.hue-mask {
-			${circle(100)};
+			${circle(108)};
 			${Position.absolute(['50%', null, null, '50%'])};
 			transform: translateX(-50%) translateY(-50%);
 			background: #FFF;
 		}
 		.preview {
-			${circle(72)};
+			${circle(88)};
 			position: relative;
+			cursor: pointer;
 		}
 		.hue-rotator {
 			${Position.absolute('fill')};
@@ -86,6 +88,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		padding: 16px 24px 16px 84px;
 		margin-left: -68px;
 		background: ${chroma('FFF').alpha(0.8).css()};
+		transform-origin: left center;
 
 		.channel-fields {
 			display: flex;
@@ -148,7 +151,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 			}
 			&__track {
 				width: 100%;
-				height: 6px;
+				height: 4px;
 				border-radius: 3px;
 			}
 			&__clamp {
@@ -156,7 +159,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 
 				.control-knob {
 					pointer-events: none;
-					${Position.absolute([0])};
+					${Position.absolute([2])};
 				}
 			}
 

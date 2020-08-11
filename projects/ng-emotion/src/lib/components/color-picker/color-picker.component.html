@@ -19,7 +19,19 @@
 	</div>
 	<div [class]="styles.panel">
 		<div class="channel-fields">
-			<input class="channel-fields__field"
+			<select class="channel-fields__field
+						   channel-fields__field--mode"
+				name="mode"
+				[(ngModel)]="colorMode"
+			>
+				<option *ngFor="let mode of colorModes"
+					[value]="mode"
+				>
+					{{ mode }}
+				</option>
+			</select>
+			<input class="channel-fields__field
+						  channel-fields__field--value"
 				type="number"
 				name="hue"
 				min="0"
@@ -27,7 +39,8 @@
 				step="1"
 				[(ngModel)]="hue"
 			/>
-			<input class="channel-fields__field"
+			<input class="channel-fields__field
+						  channel-fields__field--value"
 				type="number"
 				name="saturation"
 				min="0"
@@ -35,7 +48,8 @@
 				step="1"
 				[(ngModel)]="saturation"
 			/>
-			<input class="channel-fields__field"
+			<input class="channel-fields__field
+						  channel-fields__field--value"
 				type="number"
 				name="brightness"
 				min="0"

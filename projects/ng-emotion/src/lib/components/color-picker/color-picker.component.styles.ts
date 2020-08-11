@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import chroma from 'chroma-js';
 
 import { css, EmotionStylesheet } from '../../core';
-import { Position, rem } from '../../utils';
+import { Colors, FontFamily, Mixins, Position, rem } from '../../utils';
 
 function circle (size: number): string {
 	return css`
@@ -82,6 +82,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 
 	panel = css`
 		label: color-picker__panel;
+		min-width: ${rem(320)};
 		padding: 16px 24px 16px 84px;
 		margin-left: -68px;
 		background: ${chroma('FFF').alpha(0.8).css()};
@@ -90,10 +91,47 @@ export class ColorPickerStyles extends EmotionStylesheet {
 			display: flex;
 
 			&__field {
-				flex: 0 0 33.333%;
-				margin: 0;
-				padding: 0;
+				display: flex;
+				align-items: center;
+				height: 24px;
+				margin: 0 1px;
+				padding: 0 4px;
+				border-radius: 0;
+				border: 2px solid transparent;
+				background: transparent;
+				outline: none !important;
+				${Mixins.transition('background', 'border-color')};
+				font-family: ${FontFamily.WhitneyText};
+				font-size: 13px;
+				text-align: center;
+
+				&:first-child { margin-left: 0 }
+				&:last-child { margin-right: 0 }
+
+				&:focus {
+					background: #FFF;
+					border-color: ${Colors.primary(100)};
+				}
+
+				&--mode {
+					width: 33.333%;
+					flex: 0 0 33.333%;
+					font-weight: 800;
+					cursor: pointer;
+				}
+				&--value {
+					width: 22.222%;
+					flex: 0 0 22.222%;
+					&::-webkit-inner-spin-button,
+					&::-webkit-outer-spin-button {
+						-webkit-appearance: none;
+					}
+				}
 			}
+		}
+
+		.channel-fields:hover .channel-fields__field {
+			background: #FFF;
 		}
 
 		.slider {
@@ -106,7 +144,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 			position: relative;
 
 			&--first {
-				margin: 12px 0 8px;
+				margin: 4px 0;
 			}
 			&__track {
 				width: 100%;

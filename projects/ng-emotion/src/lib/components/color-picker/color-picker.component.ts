@@ -34,6 +34,9 @@ export class ColorPickerComponent
 
 	color: Color = chroma('FFF');
 
+	colorMode = 'HSB';
+	colorModes = ['HSB'];
+
 	// Storing these as separate properties is necessary to ensure the stability of the values.
 	// Due to floating point precision issues (or maybe just quirks of the Chroma algorithms),
 	// getting/setting any one of these directly from/to the Chroma instance causes the others

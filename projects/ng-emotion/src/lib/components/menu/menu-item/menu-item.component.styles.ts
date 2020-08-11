@@ -55,14 +55,17 @@ export class MenuItemStyles extends EmotionStylesheet {
 	}
 
 	sizeSmall = css`
+		label: menu-item--small;
 		height: ${rem(32)};
 		padding: 0 ${rem(18)};
 	`;
 	sizeStandard = css`
+		label: menu-item--standard;
 		height: ${rem(36)};
 		padding: 0 ${rem(24)};
 	`;
 	sizeLarge = css`
+		label: menu-item--large;
 		height: ${rem(48)};
 		padding: 0 ${rem(32)};
 	`;
@@ -98,6 +101,7 @@ export class MenuItemStyles extends EmotionStylesheet {
 		label: menu-item__label;
 		position: relative;
 		z-index: 2;
+		${Mixins.truncate};
 	`;
 
 	splashHost = css`

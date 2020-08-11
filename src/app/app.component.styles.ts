@@ -69,7 +69,7 @@ export class AppStyles extends EmotionStylesheet
 		}
 
 		button {
-			margin: 0 8px;
+			margin-right: ${rem(16)};
 		}
 
 		nge-form-field {
@@ -85,7 +85,7 @@ export class AppStyles extends EmotionStylesheet
 
 	field: string = css`
 		label: field;
-		margin: 0 ${rem(8)};
+		margin-right: ${rem(16)};
 
 		label {
 			display: block;
@@ -112,7 +112,8 @@ export class AppStyles extends EmotionStylesheet
 
 	sidenav = css`
 		label: sidenav;
-		flex: 0 0 12.5%;
+		flex: 0 0 20%;
+		max-width: ${rem(256)};
 		height: 100%;
 		padding: ${rem(64)} 0;
 	`;

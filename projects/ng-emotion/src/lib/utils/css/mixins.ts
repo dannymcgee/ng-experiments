@@ -45,7 +45,7 @@ export namespace Mixins
 		size: Exclude<FontSize, FontSize.Label|FontSize.Small|FontSize.UI|FontSize.Text>,
 	): string {
 		return css`
-			font: 700 ${rem(size)}/1 ${FontFamily.Operator};
+			font: 800 italic ${rem(size)}/1 ${FontFamily.Operator};
 		`;
 	}
 
@@ -69,4 +69,11 @@ export namespace Mixins
 			user-select: none;
 		`;
 	}
+
+	export const truncate = css`
+		max-width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	`;
 }

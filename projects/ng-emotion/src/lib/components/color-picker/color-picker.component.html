@@ -1,9 +1,15 @@
 <div [class]="styles.value"
 	[style.background-color]="color.css()"
+	(click)="isOpen = true"
 ></div>
 
-<div [class]="styles.popup">
-	<div [class]="styles.disc">
+<div *ngIf="isOpen"
+	[class]="styles.popup"
+	@colorPickerPopup
+>
+	<div class="disc"
+		[class]="styles.disc"
+	>
 		<div class="hue-wheel"></div>
 		<div class="hue-mask"></div>
 		<div class="hue-rotator"
@@ -15,9 +21,12 @@
 		</div>
 		<div class="preview"
 			[style.background-color]="color.css()"
+			(click)="isOpen = false"
 		></div>
 	</div>
-	<div [class]="styles.panel">
+	<div class="panel"
+		[class]="styles.panel"
+	>
 		<div class="channel-fields">
 			<select class="channel-fields__field
 						   channel-fields__field--mode"

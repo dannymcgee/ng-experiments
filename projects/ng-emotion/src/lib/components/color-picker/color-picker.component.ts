@@ -7,12 +7,13 @@ import {
 	OnInit,
 	Optional,
 } from '@angular/core';
+import { NgControl } from '@angular/forms';
 
 import chroma, { Color } from 'chroma-js';
 
-import { NgControl } from '@angular/forms';
 import { EmotionComponent, EmotionStylesheet } from '../../core';
 import { FormFieldComponent, FormFieldControl } from '../form-field';
+import { colorPickerPopup } from './color-picker.animation';
 import { ColorPickerStyles } from './color-picker.component.styles';
 
 @Component({
@@ -22,6 +23,7 @@ import { ColorPickerStyles } from './color-picker.component.styles';
 		provide: EmotionStylesheet,
 		useClass: ColorPickerStyles,
 	}],
+	animations: [colorPickerPopup],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorPickerComponent
@@ -36,6 +38,8 @@ export class ColorPickerComponent
 
 	colorMode = 'HSB';
 	colorModes = ['HSB'];
+
+	isOpen = false;
 
 	// Storing these as separate properties is necessary to ensure the stability of the values.
 	// Due to floating point precision issues (or maybe just quirks of the Chroma algorithms),

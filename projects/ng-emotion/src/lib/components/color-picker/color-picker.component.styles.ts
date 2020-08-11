@@ -43,9 +43,6 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		${Position.absolute([-28, null, null, -51.5])};
 		z-index: 100;
 		backdrop-filter: blur(12px);
-		filter:
-			drop-shadow(0 2px 4px rgba(0,0,0,0.1))
-			drop-shadow(0 6px 12px rgba(0,0,0,0.175));
 	`;
 
 	disc = css`
@@ -84,10 +81,15 @@ export class ColorPickerStyles extends EmotionStylesheet {
 
 	panel = css`
 		label: color-picker__panel;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		min-width: ${rem(320)};
-		padding: 16px 24px 16px 84px;
+		height: ${rem(80)};
+		padding: 0 ${rem(24)} 0 ${rem(84)};
 		margin-left: -68px;
-		background: ${chroma('FFF').alpha(0.8).css()};
+		border-radius: ${rem(4)};
+		background: ${chroma('F4F4F4').alpha(0.85).css()};
 		transform-origin: left center;
 
 		.channel-fields {
@@ -146,13 +148,10 @@ export class ColorPickerStyles extends EmotionStylesheet {
 			padding: 0;
 			position: relative;
 
-			&--first {
-				margin: 4px 0;
-			}
 			&__track {
 				width: 100%;
 				height: 4px;
-				border-radius: 3px;
+				border-radius: 2px;
 			}
 			&__clamp {
 				${Position.absolute([0, 4, 0, 4])};

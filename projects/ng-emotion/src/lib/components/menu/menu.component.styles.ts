@@ -31,10 +31,4 @@ export class MenuStyles extends EmotionStylesheet {
 				? this.navMenu
 				: this.actionMenu;
 	}
-
-	// actionMenuPanel = css`
-	// 	label: menu__action-menu-panel;
-	// 	height: max-content;
-	// 	overflow: hidden;
-	// `;
 }

@@ -33,6 +33,7 @@ export namespace Mixins
 				return css`
 					font: 500 ${rem(FontSize.Text)}/1.6 ${FontFamily.WhitneyText};
 				`;
+			case Font.H6 : return heading(FontSize.H6);
 			case Font.H5 : return heading(FontSize.H5);
 			case Font.H4 : return heading(FontSize.H4);
 			case Font.H3 : return heading(FontSize.H3);
@@ -44,8 +45,13 @@ export namespace Mixins
 	export function heading (
 		size: Exclude<FontSize, FontSize.Label|FontSize.Small|FontSize.UI|FontSize.Text>,
 	): string {
+		const [weight, style] =
+			size === FontSize.H6
+				? [700, 'italic']
+				: [800, 'normal'];
+
 		return css`
-			font: 800 italic ${rem(size)}/1 ${FontFamily.Operator};
+			font: ${weight} ${style} ${rem(size)}/1 ${FontFamily.Operator};
 		`;
 	}
 

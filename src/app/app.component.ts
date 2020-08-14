@@ -44,5 +44,8 @@ export class AppComponent extends EmotionComponent<AppStyles>
 	color: ThemeColor = 'primary';
 
 	textFieldValue = '';
-	colorPickerValue = chroma(Colors.primary(300));
+	primary = chroma(Colors.primary(300));
+	success = chroma(Colors.success(300));
+	warning = chroma(Colors.warning(300));
+	danger = chroma(Colors.danger(300));
 }

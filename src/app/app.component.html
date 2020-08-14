@@ -89,12 +89,36 @@
 			/>
 		</nge-form-field>
 
-		<nge-form-field>
-			<label nge-label>Color Picker</label>
-			<nge-color-picker
-				[(ngModel)]="colorPickerValue"
-			></nge-color-picker>
-		</nge-form-field>
+		<h6 id="color-pickers-label">Color Pickers</h6>
+		<div class="field-group"
+			role="group"
+			aria-labelledby="color-pickers-label"
+		>
+			<nge-form-field>
+				<label nge-label>Primary</label>
+				<nge-color-picker
+					[(ngModel)]="primary"
+				></nge-color-picker>
+			</nge-form-field>
+			<nge-form-field>
+				<label nge-label>Success</label>
+				<nge-color-picker
+					[(ngModel)]="success"
+				></nge-color-picker>
+			</nge-form-field>
+			<nge-form-field>
+				<label nge-label>Warning</label>
+				<nge-color-picker
+					[(ngModel)]="warning"
+				></nge-color-picker>
+			</nge-form-field>
+			<nge-form-field>
+				<label nge-label>Danger</label>
+				<nge-color-picker
+					[(ngModel)]="danger"
+				></nge-color-picker>
+			</nge-form-field>
+		</div>
 	</section>
 </main>
 

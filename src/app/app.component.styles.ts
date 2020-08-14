@@ -31,7 +31,9 @@ export class AppStyles extends EmotionStylesheet
 			${Mixins.transition('opacity')};
 		}
 
-		h1, h2, h3, h4, h5 {
+		h1, h2, h3, h4, h5, h6 {
+			margin: 2em 0 1.5em;
+
 			&:first-child {
 				margin-top: 0;
 			}
@@ -56,6 +58,9 @@ export class AppStyles extends EmotionStylesheet
 		h5 {
 			${Mixins.font(Font.H5)};
 		}
+		h6 {
+			${Mixins.font(Font.H6)};
+		}
 	`;
 
 	host: string = css`
@@ -74,6 +79,18 @@ export class AppStyles extends EmotionStylesheet
 
 		nge-form-field {
 			margin-bottom: 36px;
+		}
+
+		.field-group {
+			display: flex;
+
+			nge-form-field {
+				margin-right: 32px;
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
 		}
 	`;
 

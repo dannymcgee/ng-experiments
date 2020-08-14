@@ -35,7 +35,13 @@ const panelSlideIn = [
 
 export const colorPickerPopup = trigger('colorPickerPopup', [
 	transition(':enter', [
+		style({
+			width: '0',
+		}),
 		group([
+			animate(`${Anim.frameTime(8)}ms ${Anim.frameTime(3)}ms ${EaseOut.Quint}`, style ({
+				width: '*',
+			})),
 			query('.disc', wheelBounceIn, { optional: true }),
 			query('.panel', panelSlideIn, { optional: true }),
 		]),

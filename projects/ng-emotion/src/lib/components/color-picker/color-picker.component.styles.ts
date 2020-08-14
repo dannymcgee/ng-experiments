@@ -38,20 +38,24 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		label: color-picker__popup;
 		display: flex;
 		align-items: center;
-		height: 103px;
-		border-radius: 51.5px 0 0 51.5px;
-		${Position.absolute([-28, null, null, -51.5])};
+		height: 80px;
+		border-radius: 40px 0 0 40px;
+		${Position.absolute([-20, null, null, -51.5])};
 		z-index: 100;
 		backdrop-filter: blur(12px);
 	`;
 
 	disc = css`
 		label: color-picker__disc;
+		flex-shrink: 0;
 		padding: ${rem(24)};
 		border-radius: 50%;
 		position: relative;
 		overflow: hidden;
 		background: #FFF;
+		box-shadow:
+			0 0  4px ${chroma('000').alpha(0.10).css()},
+			0 0 12px ${chroma('000').alpha(0.15).css()};
 
 		.control-knob {
 			${Position.absolute([6, null, null, 'calc(50% - 6px)'])};

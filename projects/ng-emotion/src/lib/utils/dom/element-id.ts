@@ -8,6 +8,7 @@ export function elementId (prefix?: string): string {
 }
 
 function random (): string {
-	return Math.round(Math.random() * Date.now())
+	return Math
+			.round(Math.random() * Date.now())
 			.toString(16);
 }

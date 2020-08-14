@@ -70,8 +70,8 @@ export class Colors
 		const alphaHex =
 			Math.round(alpha * 255)
 				.toString(16)
-				.padStart(2, '0')
-				.toUpperCase();
+					.padStart(2, '0')
+					.toUpperCase();
 
 		return `${rgb}${alphaHex}`;
 	}

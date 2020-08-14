@@ -64,8 +64,8 @@ export class SplashHostComponent
 		this.splashCollection.updates$
 			.pipe(takeUntil(this.onDestroy$))
 			.subscribe(() => {
-					this.changeDetectorRef.markForCheck();
-				});
+				this.changeDetectorRef.markForCheck();
+			});
 	}
 
 	ngOnDestroy (): void {

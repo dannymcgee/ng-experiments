@@ -25,12 +25,12 @@ export function StyleProp (name?: string): PropertyDecorator {
 			this._onInit$
 				.pipe(first())
 				.subscribe(() => {
-						const _propName = name ?? propName;
-						this.styles.props[_propName] = value;
-						this.ngeMarkForCheck();
+					const _propName = name ?? propName;
+					this.styles.props[_propName] = value;
+					this.ngeMarkForCheck();
 
-						this[`__${propName}__`] = value;
-					});
+					this[`__${propName}__`] = value;
+				});
 		}
 
 		Object.defineProperty(component, propName, {
@@ -57,13 +57,12 @@ export function StyleToggle (): PropertyDecorator {
 			this._onInit$
 				.pipe(first())
 				.subscribe(() => {
-						const className = this.styles[propName];
-						if (typeof className === 'string') {
-							this.elementRef.nativeElement.classList.toggle(className, value);
-						}
+					const className = this.styles[propName];
+					if (typeof className === 'string')
+						this.elementRef.nativeElement.classList.toggle(className, value);
 
-						this[`__${propName}__`] = value;
-					});
+					this[`__${propName}__`] = value;
+				});
 		}
 
 		Object.defineProperty(component, propName, {
@@ -97,18 +96,18 @@ export function StyleModifier (methodName?: string): PropertyDecorator {
 			this._onInit$
 				.pipe(first())
 				.subscribe(() => {
-						const _methodName = !!methodName ? methodName : propName;
+					const _methodName = !!methodName ? methodName : propName;
 
-						if (typeof this.styles[_methodName] === 'function') {
-							if (!this.styles._ngeBindings.has(propName)) {
-								this.styles._ngeBindings.set(
-									propName,
-									this.styles[_methodName].bind(this.styles),
-								);
-							}
-							this.ngeMarkForCheck();
+					if (typeof this.styles[_methodName] === 'function') {
+						if (!this.styles._ngeBindings.has(propName)) {
+							this.styles._ngeBindings.set(
+								propName,
+								this.styles[_methodName].bind(this.styles),
+							);
 						}
-					});
+						this.ngeMarkForCheck();
+					}
+				});
 
 			this[`__${propName}__`] = value;
 		}

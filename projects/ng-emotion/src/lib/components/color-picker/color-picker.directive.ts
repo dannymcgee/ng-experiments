@@ -68,7 +68,7 @@ export class ColorPickerHueRotatorDirective implements OnInit, OnDestroy {
 
 			this._mousedown$
 				.pipe(takeUntil(this._onDestroy$))
-					.subscribe((this._onMouseDown));
+				.subscribe(this._onMouseDown);
 		}
 	}
 
@@ -105,24 +105,25 @@ export class ColorPickerHueRotatorDirective implements OnInit, OnDestroy {
 			)
 			.pipe(shareReplay({ bufferSize: 1, refCount: true }));
 
-		stopEvents$.pipe(first())
+		stopEvents$
+			.pipe(first())
 			.subscribe(() => {
-					this.document.body.classList.remove(this._grabbingClass);
-				});
+				this.document.body.classList.remove(this._grabbingClass);
+			});
 
 		this._mousemove$
 			.pipe(
-					throttleTime(0, animationFrameScheduler),
-					takeUntil(stopEvents$),
-				)
-				.subscribe(this._emitNewHue);
+				throttleTime(0, animationFrameScheduler),
+				takeUntil(stopEvents$),
+			)
+			.subscribe(this._emitNewHue);
 
 		this._mouseup$
 			.pipe(
-					take(1),
-					takeUntil(this._onDestroy$),
-				)
-				.subscribe(this._emitNewHue);
+				take(1),
+				takeUntil(this._onDestroy$),
+			)
+			.subscribe(this._emitNewHue);
 	}
 
 	private _emitNewHue = (event: MouseEvent): void => {

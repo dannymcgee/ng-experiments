@@ -1,5 +1,5 @@
 import { QueryList } from '@angular/core';
-import { Observable, PartialObserver, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
 export class DynamicQueryList<T> {
@@ -20,7 +20,8 @@ export class DynamicQueryList<T> {
 	}
 
 	subscribe (next: (value: QueryList<T>) => void): Subscription {
-		return this.observe()
+		return this
+				.observe()
 				.subscribe(next);
 	}
 

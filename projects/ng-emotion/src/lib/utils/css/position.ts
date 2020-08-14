@@ -40,18 +40,20 @@ export namespace Position
 	}
 
 	function _offsets (offsets: Offsets): string {
-		const classNames: string[] = offsets.reduce<string[]>((result, current, i) => {
-			if (current != null) {
-				const key = OFFSET_KEYS[i];
-				const value = typeof current === 'number'
-						? current + (current === 0 ? '' : 'px')
-						: current;
+		const classNames: string[] =
+			offsets.reduce<string[]>((result, current, i) => {
+				if (current != null) {
+					const key = OFFSET_KEYS[i];
+					const value =
+						typeof current === 'number'
+							? current + (current === 0 ? '' : 'px')
+							: current;
 
-				result.push(css({ [key]: value }));
-			}
+					result.push(css({ [key]: value }));
+				}
 
-			return result;
-		}, []);
+				return result;
+			}, []);
 
 		return cx(...classNames);
 	}

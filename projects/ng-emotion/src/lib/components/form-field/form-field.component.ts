@@ -79,8 +79,8 @@ export class FormFieldComponent<T>
 			.monitor(this._formControl!.elementRef)
 				.pipe(takeUntil(this.onDestroy$))
 				.subscribe((focusOrigin) => {
-						this._label!.updateState({ focused: focusOrigin !== null });
-					});
+					this._label!.updateState({ focused: focusOrigin !== null });
+				});
 
 		this.onDestroy$.subscribe(() => {
 				this._focusMonitor.stopMonitoring(this._formControl!.elementRef);

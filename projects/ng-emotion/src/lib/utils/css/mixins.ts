@@ -59,11 +59,11 @@ export namespace Mixins
 			position: relative;
 			outline: none !important;
 			${transition(
-					'background',
-					'color',
-					'border-color',
-					'box-shadow',
-				)};
+				'background',
+				'color',
+				'border-color',
+				'box-shadow',
+			)};
 			${font(Font.UI)};
 			cursor: pointer;
 			user-select: none;

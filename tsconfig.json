@@ -21,6 +21,12 @@
     },
     {
       "path": "./projects/ng-emotion/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/theme-generator/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/theme-generator/tsconfig.spec.json"
     }
 ]
 }

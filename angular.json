@@ -209,6 +209,152 @@
           }
         }
       }
+    },
+    "theme-generator": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/ng-emotion:component": {
+          "internal": true,
+          "emotionPath": "@ng-emotion/core"
+        },
+        "@schematics/angular:component": {
+          "lintFix": true
+        },
+        "@schematics/angular:class": {
+          "lintFix": true
+        },
+        "@schematics/angular:directive": {
+          "lintFix": true
+        },
+        "@schematics/angular:guard": {
+          "lintFix": true
+        },
+        "@schematics/angular:interceptor": {
+          "lintFix": true
+        },
+        "@schematics/angular:module": {
+          "lintFix": true
+        },
+        "@schematics/angular:pipe": {
+          "lintFix": true
+        },
+        "@schematics/angular:service": {
+          "lintFix": true
+        }
+      },
+      "root": "projects/theme-generator",
+      "sourceRoot": "projects/theme-generator/src",
+      "prefix": "tg",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/theme-generator",
+            "index": "projects/theme-generator/src/index.html",
+            "main": "projects/theme-generator/src/main.ts",
+            "polyfills": "projects/theme-generator/src/polyfills.ts",
+            "tsConfig": "projects/theme-generator/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/theme-generator/src/favicon.ico",
+              "projects/theme-generator/src/assets"
+            ],
+            "styles": [
+              "projects/theme-generator/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/theme-generator/src/environments/environment.ts",
+                  "with": "projects/theme-generator/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "theme-generator:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "theme-generator:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "theme-generator:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/theme-generator/src/test.ts",
+            "polyfills": "projects/theme-generator/src/polyfills.ts",
+            "tsConfig": "projects/theme-generator/tsconfig.spec.json",
+            "karmaConfig": "projects/theme-generator/karma.conf.js",
+            "assets": [
+              "projects/theme-generator/src/favicon.ico",
+              "projects/theme-generator/src/assets"
+            ],
+            "styles": [
+              "projects/theme-generator/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/theme-generator/tsconfig.app.json",
+              "projects/theme-generator/tsconfig.spec.json",
+              "projects/theme-generator/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/theme-generator/e2e/protractor.conf.js",
+            "devServerTarget": "theme-generator:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "theme-generator:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-experiments",

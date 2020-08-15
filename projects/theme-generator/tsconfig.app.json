@@ -1,0 +1,26 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/theme-generator",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@ng-emotion": ["projects/ng-emotion/src/lib"],
+      "@ng-emotion/*": ["projects/ng-emotion/src/lib/*"],
+    },
+    "types": [],
+    "plugins": [{
+      "name": "typescript-styled-plugin",
+      "lint": {
+        "validProperties": ["label"]
+      }
+    }]
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

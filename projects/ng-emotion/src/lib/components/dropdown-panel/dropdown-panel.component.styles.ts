@@ -12,10 +12,10 @@ export class DropdownPanelStyles extends EmotionStylesheet {
 		display: block;
 		height: max-content;
 		padding: ${rem(8)} 0;
-		background: ${Colors.theme('background', 100, 0.875)};
+		background: ${Colors.theme('background', 100, 0.9)};
 		border-radius: 4px;
 		overflow: hidden;
-		backdrop-filter: blur(16px);
+		backdrop-filter: blur(12px);
 		box-shadow:
 			0 1px 4px rgba(0,0,0,0.1),
 			0 8px 24px rgba(0,0,0,0.1);

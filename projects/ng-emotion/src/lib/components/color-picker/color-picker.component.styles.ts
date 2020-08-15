@@ -42,7 +42,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		border-radius: 40px 0 0 40px;
 		${Position.absolute([-20, null, null, -51.5])};
 		z-index: 100;
-		backdrop-filter: blur(12px);
+		backdrop-filter: blur(8px);
 	`;
 
 	disc = css`
@@ -93,7 +93,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 		padding: 0 ${rem(24)} 0 ${rem(84)};
 		margin-left: -68px;
 		border-radius: ${rem(4)};
-		background: ${chroma('F4F4F4').alpha(0.85).css()};
+		background: ${chroma('F5F5F5').alpha(0.9).css()};
 		transform-origin: left center;
 
 		.channel-fields {

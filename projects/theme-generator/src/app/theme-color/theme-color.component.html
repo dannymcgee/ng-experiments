@@ -1,0 +1,117 @@
+<header>
+	<h3 class="name">{{ color.name }}</h3>
+	<nge-form-field class="mode">
+		<label nge-label>Interpolation</label>
+		<select
+			[(ngModel)]="color.mode"
+		>
+			<option *ngFor="let mode of colorScaleModes"
+				[value]="mode.value"
+			>
+				{{ mode.label }}
+			</option>
+		</select>
+	</nge-form-field>
+	<button class="delete" (click)="deleted.emit()">&times;</button>
+</header>
+
+<div class="shades">
+
+	<div class="labels">
+		<span></span>
+		<span nge-label>Manual</span>
+		<span nge-label>Color</span>
+		<span nge-label>Contrast</span>
+		<span></span>
+		<span></span>
+		<span nge-label>Min (Target 3)</span>
+		<span nge-label>Max</span>
+	</div>
+
+	<div class="shade"
+		[class.shade--readonly]="shade === 0 || shade === 1000"
+		*ngFor="let shade of shades"
+	>
+		<div>
+			<label nge-label>{{ shade }}</label>
+		</div>
+		<div>
+			<input type="checkbox"
+				[disabled]="shade === 0 || shade === 1000"
+				[ngModel]="color.has(shade)"
+				(ngModelChange)="color.toggle(shade)"
+			/>
+		</div>
+		<nge-color-picker
+			[ngModel]="color.get(shade)"
+			(ngModelChange)="color.set(shade, $event)"
+		></nge-color-picker>
+		<div>
+			<div class="contrast"
+				[style.color]="color.get(shade).css()"
+			>
+				{{ color.contrast(shade) | number : '1.1-1' }}
+			</div>
+		</div>
+		<div>
+			<div class="contrast contrast--inverse"
+				[style.background-color]="color.get(shade).css()"
+			>
+				{{ color.contrast(shade) | number : '1.1-1' }}
+			</div>
+		</div>
+		<div>
+			<div class="contrast contrast--inverse"
+				[style.background-color]="color.get(shade).css()"
+				[style.color]="'#000'"
+			>
+				{{ color.contrast(shade, '#000') | number : '1.1-1' }}
+			</div>
+		</div>
+		<div>
+			<div class="contrast contrast--inverse"
+				[style.background-color]="color.get(shade).css()"
+				[style.color]="color.minContrastFor(shade, 3).css()"
+			>
+				{{ color.minContrastShadeFor(shade, 3) | shade }}
+			</div>
+		</div>
+		<div>
+			<div class="contrast contrast--inverse"
+				[style.background-color]="color.get(shade).css()"
+				[style.color]="color.maxContrastFor(shade).css()"
+			>
+				{{ color.maxContrastShadeFor(shade) | shade }}
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<footer class="debug">
+	<h5>Debug</h5>
+	<p>Test an arbitrary shade from the scale.</p>
+
+	<div class="debug-preview"
+		[style.background-color]="color.get(debugShade).hex()"
+	></div>
+
+	<label nge-label
+		[style]="{
+			display: 'flex',
+			alignItems: 'center'
+		}"
+	>
+		<span [style.width.px]="32">
+			{{ debugShade | shade }}
+		</span>
+		<input [style.width.px]="512"
+			type="range"
+			min="100"
+			max="900"
+			step="5"
+			[(ngModel)]="debugShade"
+		/>
+	</label>
+
+</footer>

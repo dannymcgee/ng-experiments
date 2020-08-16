@@ -1,7 +1,7 @@
 /** Represents a string for use as a DOM element's `id` attribute */
 export type ElementId = string;
 
-export function elementId (prefix?: string): string {
+export function elementId (prefix?: string): ElementId {
 	const pre = prefix ?? random();
 
 	return `${pre}-${random()}`;

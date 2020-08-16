@@ -10,9 +10,9 @@ export class TextFieldStyles extends EmotionStylesheet {
 	host = css`
 		label: text-field;
 		display: block;
-		width: ${rem(536)};
+		width: 100%;
 		height: ${rem(40)};
-		padding: ${rem(4)} ${rem(12)} 0;
+		padding: 0 ${rem(12)};
 		border: 2px solid #CCC;
 		font-family: ${FontFamily.WhitneyText};
 		font-size: ${FontSize.Small};

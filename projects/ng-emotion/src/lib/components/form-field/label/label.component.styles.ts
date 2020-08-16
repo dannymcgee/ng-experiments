@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 import { css, EmotionStylesheet } from '../../../core';
-import { Colors, Font, Mixins } from '../../../utils';
+import { Font, Mixins } from '../../../utils';
 import { LabelState } from './label.types';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class LabelStyles extends EmotionStylesheet {
 	`;
 
 	state = (state: LabelState) => css`
-		color: ${state.focused ? Colors.primary(100) : '#AAA'};
+		color: ${state.focused ? '#222' : '#AAA'};
 	`
 
 }

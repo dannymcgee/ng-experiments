@@ -15,7 +15,7 @@ import { LabelStyles } from './label.component.styles';
 import { LabelState } from './label.types';
 
 @Component({
-	selector: 'label[nge-label]',
+	selector: '[nge-label]',
 	templateUrl: './label.component.html',
 	providers: [{
 		provide: EmotionStylesheet,

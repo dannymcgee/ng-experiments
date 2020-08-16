@@ -3,6 +3,7 @@ import {
 	Component,
 	ElementRef,
 	HostBinding,
+	HostListener,
 	Input,
 	OnDestroy,
 	OnInit,
@@ -33,6 +34,10 @@ export class TextFieldComponent
 
 	get ngControl (): NgControl|null { return this._ngControl ?? null; }
 
+	private get _element (): HTMLInputElement|HTMLTextAreaElement|undefined {
+		return this.elementRef.nativeElement;
+	}
+
 	constructor (
 		public elementRef: ElementRef,
 		styles: EmotionStylesheet,
@@ -56,14 +61,28 @@ export class TextFieldComponent
 		super.ngOnDestroy();
 	}
 
-	writeValue (value?: string): void {}
+	@HostListener('input')
+	onInput (): void {
+		if (this._element) {
+			const { value } = this._element;
+
+			this._onChange(value);
+		}
+	}
+
+	writeValue (value?: string): void {
+		if (this._element) {
+			this._element.value = value;
+		}
+	}
 
 	private _onChange = (value?: string): void => {};
 	registerOnChange (fn: (value?: string) => void): void {
 		this._onChange = fn;
 	}
 
-	private _onTouched = (): void => {};
+	@HostListener('blur')
+	private _onTouched = (): void => {}
 	registerOnTouched (fn: () => void): void {
 		this._onTouched = fn;
 	}

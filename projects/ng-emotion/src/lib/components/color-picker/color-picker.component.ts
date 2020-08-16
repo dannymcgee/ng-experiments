@@ -94,9 +94,9 @@ export class ColorPickerComponent
 	private _updateHsbFromColor (color: Color): void {
 		let [hue, sat, val] = color.hsv();
 
-		this._hue = hue;
-		this._saturation = sat * 100;
-		this._brightness = val * 100;
+		this._hue = Number.isNaN(hue) ? 0 : Math.round(hue);
+		this._saturation = Math.round(sat * 100);
+		this._brightness = Math.round(val * 100);
 	}
 
 	private _updateHue (hue: number): void {

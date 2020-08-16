@@ -29,8 +29,7 @@ export class ColorPickerStyles extends EmotionStylesheet {
 
 	value = css`
 		label: color-picker__value;
-		${circle(32)};
-		${Position.relative([8])};
+		${circle(40)};
 		cursor: pointer;
 	`;
 

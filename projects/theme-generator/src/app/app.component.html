@@ -1,3 +1,48 @@
-<p>
-	app works!
-</p>
+<section class="theme-colors">
+	<tg-theme-color
+		*ngFor="let color of colors"
+		[color]="color"
+		(deleted)="deleteColor(color)"
+	></tg-theme-color>
+</section>
+
+<form class="new-color-form"
+	[formGroup]="newColorForm"
+	(ngSubmit)="addNewColor()"
+>
+	<h3>Add Color</h3>
+	<div class="new-color-form__fields">
+		<nge-form-field class="new-color-form__name">
+			<label nge-label>Name</label>
+			<input nge-text-field
+				formControlName="name"
+				type="text"
+				required
+			/>
+		</nge-form-field>
+		<nge-form-field class="new-color-form__base-color">
+			<label nge-label>Base</label>
+			<nge-color-picker
+				formControlName="baseColor"
+			></nge-color-picker>
+		</nge-form-field>
+		<nge-form-field class="new-color-form__mode">
+			<label nge-label>Interpolation</label>
+			<select formControlName="mode">
+				<option *ngFor="let mode of scaleModes"
+					[value]="mode.value"
+				>
+					{{ mode.label }}
+				</option>
+			</select>
+		</nge-form-field>
+	</div>
+	<div class="new-color-form__submit">
+		<button nge-btn="primary"
+			type="submit"
+			[disabled]="!newColorForm.valid"
+		>
+			Generate
+		</button>
+	</div>
+</form>

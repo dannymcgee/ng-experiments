@@ -1,1 +1,1 @@
-export * from './toggle-set';
+export * from './set';

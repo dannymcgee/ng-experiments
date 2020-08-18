@@ -1,4 +1,5 @@
 import chroma, { Color, Scale } from 'chroma-js';
+import { Observable, Subject } from 'rxjs';
 
 export enum ColorScaleMode {
 	RGB = 'rgb',
@@ -8,58 +9,43 @@ export enum ColorScaleMode {
 	Lch = 'lch',
 }
 
-export const COLOR_SHADES = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+type AnchorEntries = [number, string|Color][];
 
-export class ThemeColor implements ThemeColor {
+function isChromaColor (object: unknown): object is Color {
+	return (
+			object != null
+			&& typeof object === 'object'
+			&& object!['alpha'] !== undefined
+			&& typeof object!['alpha'] === 'function'
+		);
+}
 
-	// _palette: Map<number, Color> = new Map();
-	private _shadeValues = new Map<number, string|Color>();
-	private _scale: Scale;
-	private _mode: ColorScaleMode;
-	get mode (): ColorScaleMode { return this._mode; }
-	set mode (value: ColorScaleMode) {
-		this._mode = value;
-		this._updateScale();
-	}
+export class ThemeColor {
+	get changes$ (): Observable<void> { return this._changes$.asObservable(); }
+	protected _changes$ = new Subject<void>();
+
+	protected _anchors: Map<number, string|Color>;
+	protected _scale: Scale;
+	protected _mode: ColorScaleMode;
 
 	constructor (
 		public name: string,
-		baseColor: Color,
-		mode: ColorScaleMode = ColorScaleMode.LRGB,
+		baseColorOrAnchors: AnchorEntries | Color,
+		mode: ColorScaleMode = ColorScaleMode.RGB,
 	) {
-		this._shadeValues.set(0, '#FFF');
-		this._shadeValues.set(500, baseColor);
-		this._shadeValues.set(1000, '#000');
+		this._anchors =
+			isChromaColor(baseColorOrAnchors)
+				? new Map<number, string|Color>()
+				: new Map<number, string|Color>(baseColorOrAnchors);
 
 		this._mode = mode;
 
-		this._updateScale();
+		if (this._anchors.size)
+			this._updateScale();
 	}
 
 	get (shade: number): Color {
 		return this._scale(shade);
-	}
-
-	has (shade: number): boolean {
-		return this._shadeValues.has(shade);
-	}
-
-	toggle (shade: number): void {
-		if (this._shadeValues.has(shade))
-			this._shadeValues.delete(shade);
-		else
-			this._shadeValues.set(shade, this._scale(shade));
-
-		this._updateScale();
-	}
-
-	set (shade: number, value: Color): void {
-		this._shadeValues.set(shade, value);
-		this._updateScale();
-	}
-
-	contrast (shade: number, compare: Color|string = '#FFF'): number {
-		return chroma.contrast(this.get(shade), compare);
 	}
 
 	minContrastFor (shade: number, target: number = 4.5): Color {
@@ -108,9 +94,9 @@ export class ThemeColor implements ThemeColor {
 		return 0;
 	}
 
-	private _updateScale (): void {
+	protected _updateScale (): void {
 		const sortedEntries = Array
-			.from(this._shadeValues.entries())
+			.from(this._anchors.entries())
 			.sort((a, b) => a[0] - b[0]);
 
 		const shades = sortedEntries.map((entry) => entry[0]);
@@ -120,6 +106,52 @@ export class ThemeColor implements ThemeColor {
 			.scale(values)
 			.domain(shades)
 			.mode(this._mode);
+
+		this._changes$.next();
+	}
+}
+
+export class EditableThemeColor extends ThemeColor {
+	get mode (): ColorScaleMode { return this._mode; }
+	set mode (value: ColorScaleMode) {
+		this._mode = value;
+		this._updateScale();
+	}
+
+	constructor (
+		public name: string,
+		baseColor: Color,
+		mode: ColorScaleMode = ColorScaleMode.LRGB,
+	) {
+		super(name, baseColor, mode);
+
+		this._anchors.set(0, '#FFF');
+		this._anchors.set(500, baseColor);
+		this._anchors.set(1000, '#000');
+
+		this._updateScale();
+	}
+
+	hasAnchor (shade: number): boolean {
+		return this._anchors.has(shade);
+	}
+
+	toggleAnchor (shade: number): void {
+		if (this._anchors.has(shade))
+			this._anchors.delete(shade);
+		else
+			this._anchors.set(shade, this._scale(shade));
+
+		this._updateScale();
+	}
+
+	setAnchor (shade: number, value: Color): void {
+		this._anchors.set(shade, value);
+		this._updateScale();
+	}
+
+	contrast (shade: number, compare: Color|string = '#FFF'): number {
+		return chroma.contrast(this.get(shade), compare);
 	}
 
 }

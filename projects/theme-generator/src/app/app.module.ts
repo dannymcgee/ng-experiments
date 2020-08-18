@@ -12,12 +12,14 @@ import {
 
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
+import { GradientComponent } from './theme-color/gradient/gradient.component';
 import { ThemeColorComponent } from './theme-color/theme-color.component';
 import { ThemeColorPipe } from './theme-color/theme-color.pipe';
 
 @NgModule({
 	declarations: [
 		AppComponent,
+		GradientComponent,
 		ThemeColorComponent,
 		ThemeColorPipe,
 	],

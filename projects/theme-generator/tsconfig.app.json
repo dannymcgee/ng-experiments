@@ -16,6 +16,9 @@
       }
     }]
   },
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  },
   "files": [
     "src/main.ts",
     "src/polyfills.ts"

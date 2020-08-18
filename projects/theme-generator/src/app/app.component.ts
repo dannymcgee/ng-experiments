@@ -5,7 +5,7 @@ import { EmotionComponent, EmotionStylesheet } from '@ng-emotion/core';
 import chroma from 'chroma-js';
 
 import { AppStyles } from './app.component.styles';
-import { ColorScaleMode, ThemeColor } from './theme-color';
+import { ColorScaleMode, EditableThemeColor } from './theme-color';
 
 @Component({
 	selector: 'tg-root',
@@ -19,7 +19,7 @@ export class AppComponent
 	extends EmotionComponent<AppStyles>
 	implements OnInit, OnDestroy
 {
-	colors: ThemeColor[] = [];
+	colors: EditableThemeColor[] = [];
 	scaleModes = Object
 		.entries(ColorScaleMode)
 		.map(([label, value]) => ({ label, value }));
@@ -27,7 +27,7 @@ export class AppComponent
 	newColorForm = this._formBuilder.group({
 		name: ['', Validators.required],
 		baseColor: [chroma('AAA')],
-		mode: [ColorScaleMode.LRGB],
+		mode: [ColorScaleMode.RGB],
 	});
 
 	constructor (
@@ -49,10 +49,10 @@ export class AppComponent
 	addNewColor (): void {
 		const { name, baseColor, mode } = this.newColorForm.value;
 
-		this.colors.push(new ThemeColor(name, baseColor, mode));
+		this.colors.push(new EditableThemeColor(name, baseColor, mode));
 	}
 
-	deleteColor (color: ThemeColor): void {
+	deleteColor (color: EditableThemeColor): void {
 		this.colors = this.colors.filter((c) => c !== color);
 	}
 

@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 import { css, EmotionStylesheet } from '@ng-emotion/core';
-import { Colors, FontFamily, FontSize, Mixins, rem } from '@ng-emotion/utils';
+import { Colors, FontFamily, FontSize, Mixins, Position, rem } from '@ng-emotion/utils';
 
 @Injectable()
 export class ThemeColorStyles extends EmotionStylesheet {
@@ -72,6 +72,7 @@ export class ThemeColorStyles extends EmotionStylesheet {
 		.shade {
 			align-items: center;
 			width: ${rem(48)};
+			position: relative;
 
 			&--readonly {
 				background: #EEE;
@@ -83,12 +84,20 @@ export class ThemeColorStyles extends EmotionStylesheet {
 				}
 			}
 
-			> * {
+			> *:not(.gradient) {
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				width: ${rem(48)};
 				height: ${rem(48)};
+			}
+
+			.gradient {
+				display: flex;
+				width: ${rem(48 * 9)};
+				height: ${rem(48)};
+				padding: ${rem(3)};
+				${Position.absolute([null, null, 0, 0])};
 			}
 		}
 

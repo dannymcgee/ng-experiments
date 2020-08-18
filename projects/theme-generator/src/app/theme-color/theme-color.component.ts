@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output }
 import { EmotionComponent, EmotionStylesheet } from '@ng-emotion/core';
 import { Color } from 'chroma-js';
 
-import { ColorScaleMode, ThemeColor } from '../theme-color';
+import { ColorScaleMode, EditableThemeColor } from '../theme-color';
 import { ThemeColorStyles } from './theme-color.component.styles';
 
 @Component({
@@ -18,7 +18,7 @@ export class ThemeColorComponent
 	extends EmotionComponent<ThemeColorStyles>
 	implements OnInit, OnDestroy
 {
-	@Input() color: ThemeColor;
+	@Input() color: EditableThemeColor;
 	@Output() deleted = new EventEmitter<void>();
 
 	shades: number[] = [];

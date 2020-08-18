@@ -19,13 +19,13 @@
 
 	<div class="labels">
 		<span></span>
-		<span nge-label>Manual</span>
+		<span nge-label>Anchor</span>
 		<span nge-label>Color</span>
-		<span nge-label>Contrast</span>
+		<span nge-label>WCAG Rating</span>
 		<span></span>
 		<span></span>
-		<span nge-label>Min (Target 3)</span>
-		<span nge-label>Max</span>
+		<span nge-label>Ideal Foreground</span>
+		<span nge-label>Gradient</span>
 	</div>
 
 	<div class="shade"
@@ -38,13 +38,13 @@
 		<div>
 			<input type="checkbox"
 				[disabled]="shade === 0 || shade === 1000"
-				[ngModel]="color.has(shade)"
-				(ngModelChange)="color.toggle(shade)"
+				[ngModel]="color.hasAnchor(shade)"
+				(ngModelChange)="color.toggleAnchor(shade)"
 			/>
 		</div>
 		<nge-color-picker
 			[ngModel]="color.get(shade)"
-			(ngModelChange)="color.set(shade, $event)"
+			(ngModelChange)="color.setAnchor(shade, $event)"
 		></nge-color-picker>
 		<div>
 			<div class="contrast"
@@ -71,47 +71,18 @@
 		<div>
 			<div class="contrast contrast--inverse"
 				[style.background-color]="color.get(shade).css()"
-				[style.color]="color.minContrastFor(shade, 3).css()"
-			>
-				{{ color.minContrastShadeFor(shade, 3) | shade }}
-			</div>
-		</div>
-		<div>
-			<div class="contrast contrast--inverse"
-				[style.background-color]="color.get(shade).css()"
 				[style.color]="color.maxContrastFor(shade).css()"
 			>
 				{{ color.maxContrastShadeFor(shade) | shade }}
 			</div>
 		</div>
+		<div class="gradient"
+			*ngIf="shade === 100"
+		>
+			<tg-gradient
+				[color]="color"
+			></tg-gradient>
+		</div>
 	</div>
 
 </div>
-
-<footer class="debug">
-	<h5>Debug</h5>
-	<p>Test an arbitrary shade from the scale.</p>
-
-	<div class="debug-preview"
-		[style.background-color]="color.get(debugShade).hex()"
-	></div>
-
-	<label nge-label
-		[style]="{
-			display: 'flex',
-			alignItems: 'center'
-		}"
-	>
-		<span [style.width.px]="32">
-			{{ debugShade | shade }}
-		</span>
-		<input [style.width.px]="512"
-			type="range"
-			min="100"
-			max="900"
-			step="5"
-			[(ngModel)]="debugShade"
-		/>
-	</label>
-
-</footer>

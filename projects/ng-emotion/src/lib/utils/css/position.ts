@@ -5,7 +5,7 @@ export namespace Position
 	type Type = 'relative'|'absolute'|'fixed'|'sticky';
 	type Offset = string|number;
 	type Offsets = [
-		Offset,
+		(Offset|null),
 		(Offset|null)?,
 		(Offset|null)?,
 		(Offset|null)?,

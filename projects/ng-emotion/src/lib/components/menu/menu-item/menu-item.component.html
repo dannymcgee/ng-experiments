@@ -3,7 +3,7 @@
 	[color]="active ? 'primary' : 'background'"
 	[shade]="active ? 100 : 200"
 	[baseOpacity]="active ? 0.15 : 1"
-	blendMode="multiply"
+	[blendMode]="BlendMode.Multiply"
 ></nge-splash-host>
 <span [class]="styles.label">
 	<ng-content></ng-content>

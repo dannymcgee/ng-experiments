@@ -44,7 +44,7 @@ describe('Form Field', () => {
 				</nge-form-field>
 			`);
 			const { component: formField } = spectator;
-			const label = spectator.query(LabelComponent);
+			const label = spectator.query(LabelComponent)!;
 
 			const registerLabelSpy = spyOn(formField, 'registerLabel');
 
@@ -61,7 +61,7 @@ describe('Form Field', () => {
 				</nge-form-field>
 			`);
 			const { component: formField } = spectator;
-			const textField = spectator.query(TextFieldComponent);
+			const textField = spectator.query(TextFieldComponent)!;
 			const registerFormControlSpy = spyOn(formField, 'registerFormControl');
 
 			textField.ngOnInit();
@@ -77,8 +77,8 @@ describe('Form Field', () => {
 					<input nge-text-field />
 				</nge-form-field>
 			`);
-			const labelElement = spectator.query('label[nge-label]');
-			const inputElement = spectator.query('input[nge-text-field]');
+			const labelElement = spectator.query('label[nge-label]')!;
+			const inputElement = spectator.query('input[nge-text-field]')!;
 
 			expect(inputElement)
 				.toHaveAttribute('id');
@@ -97,8 +97,8 @@ describe('Form Field', () => {
 					/>
 				</nge-form-field>
 			`);
-			const inputElement = spectator.query('input[nge-text-field]');
-			const labelElement = spectator.query('label[nge-label]');
+			const inputElement = spectator.query('input[nge-text-field]')!;
+			const labelElement = spectator.query('label[nge-label]')!;
 
 			spectator.detectChanges();
 
@@ -116,8 +116,8 @@ describe('Form Field', () => {
 						<input nge-text-field />
 					</nge-form-field>
 				`);
-				const label = spectator.query(LabelComponent);
-				const inputElement = spectator.query<HTMLInputElement>('input[nge-text-field]');
+				const label = spectator.query(LabelComponent)!;
+				const inputElement = spectator.query<HTMLInputElement>('input[nge-text-field]')!;
 
 				const updateStateSpy = spyOn(label, 'updateState');
 

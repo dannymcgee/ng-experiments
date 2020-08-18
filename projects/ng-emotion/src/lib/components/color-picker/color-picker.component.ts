@@ -32,7 +32,7 @@ export class ColorPickerComponent
 {
 	id: string|null = null;
 
-	get ngControl (): NgControl { return this._ngControl; }
+	get ngControl (): NgControl|null { return this._ngControl ?? null; }
 
 	color: Color = chroma('FFF');
 
@@ -62,7 +62,7 @@ export class ColorPickerComponent
 		public elementRef: ElementRef,
 		styles: EmotionStylesheet,
 		private _changeDetectorRef: ChangeDetectorRef,
-		@Optional() private _formField: FormFieldComponent<Color>,
+		@Optional() private _formField?: FormFieldComponent<Color>,
 		@Optional() private _ngControl?: NgControl,
 	) {
 		super(elementRef, styles);

@@ -83,8 +83,8 @@ export class SplashCollection implements Iterable<Splash> {
 		const origin =
 			coordSpace === CoordinateSpace.Local
 				? { x, y }
-				: { x: x - this.rect.left,
-					y: y - this.rect.top };
+				: { x: x - this.rect!.left,
+					y: y - this.rect!.top };
 
 		const radius = this._calculateRadius(origin);
 		const id: ElementId = elementId('splash');
@@ -109,7 +109,7 @@ export class SplashCollection implements Iterable<Splash> {
 
 	/** Radius should be the distance between the origin and the furthest corner of the DOM rect so the effect always fills the entire element */
 	private _calculateRadius ({ x, y }: Coords): number {
-		const { width, height } = this.rect;
+		const { width, height } = this.rect!;
 		const corners: Coords[] = [
 			{ x: 0,     y: 0 },      // top left
 			{ x: width, y: 0 },      // top right

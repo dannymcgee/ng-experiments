@@ -134,6 +134,9 @@ export class ColorPickerHueRotatorDirective implements OnInit, OnDestroy {
 	}
 
 	private _calcRotation ({ x, y }: Coords): number {
+		if (!this._rect || !this._center)
+			throw new Error('Tried to calculate rotation with an undefined DOM rect!');
+
 		const { x: xCenter, y: yCenter } = this._center;
 		const xClick = x - this._rect.left;
 		const yClick = y - this._rect.top;

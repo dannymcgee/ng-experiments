@@ -13,6 +13,7 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { EmotionComponent, EmotionStylesheet, StyleModifier } from '../../../core';
+import { BlendMode } from '../../../utils';
 import { MenuItemStyles } from './menu-item.component.styles';
 import { MenuItemRole, MenuItemSize } from './menu-item.types';
 
@@ -48,6 +49,8 @@ export class MenuItemComponent
 
 	@StyleModifier('role')
 	private _role: MenuItemRole = MenuItemRole.Link;
+
+	BlendMode = BlendMode;
 
 	constructor (
 		public elementRef: ElementRef<HTMLElement>,

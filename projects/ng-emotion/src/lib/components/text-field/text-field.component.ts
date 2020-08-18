@@ -72,7 +72,7 @@ export class TextFieldComponent
 
 	writeValue (value?: string): void {
 		if (this._element) {
-			this._element.value = value;
+			this._element.value = value ?? '';
 		}
 	}
 

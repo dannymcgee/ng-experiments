@@ -40,7 +40,7 @@ export class AppModule {
 
 		this.document
 			.getElementById('hco-fonts')
-			.setAttribute('href', environment.hcoFontsLink);
+			?.setAttribute('href', environment.hcoFontsLink);
 
 		this.document.body.style.opacity = '1';
 	}

@@ -20,10 +20,18 @@ export class ColorPickerControlKnobPipe implements PipeTransform {
 			? lerp(0.75, 1, val)
 			: 1;
 
+		if (
+			(controlType === 'saturation' || controlType === 'brightness')
+			&& hue === undefined
+		)
+			throw new Error(
+				`controlKnobColor needs a 'hue' argument when controlType is '${controlType}'!`,
+				);
+
 		switch (controlType) {
 			case 'hue'        : return chroma.hsv(val, 1.0, brt).css('hsl');
-			case 'saturation' : return chroma.hsv(hue, val, brt).css('hsl');
-			case 'brightness' : return chroma.hsv(hue, 1.0, val).css('hsl');
+			case 'saturation' : return chroma.hsv(hue!, val, brt).css('hsl');
+			case 'brightness' : return chroma.hsv(hue!, 1.0, val).css('hsl');
 		}
 	}
 	// tslint:enable:newline-per-chained-call

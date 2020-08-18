@@ -28,7 +28,7 @@ export class ButtonStyles extends EmotionStylesheet {
 	`;
 
 	get variantPrimary (): string|null {
-		const color: ThemeColor = this.props.color;
+		const color: ThemeColor|undefined = this.props.color;
 
 		if (!color) return null;
 
@@ -50,7 +50,7 @@ export class ButtonStyles extends EmotionStylesheet {
 		`;
 	}
 	get variantSecondary (): string|null {
-		const color: ThemeColor = this.props.color;
+		const color: ThemeColor|undefined = this.props.color;
 
 		if (!color) return null;
 
@@ -83,7 +83,7 @@ export class ButtonStyles extends EmotionStylesheet {
 		`;
 	}
 	get variantTertiary (): string|null {
-		const color: ThemeColor = this.props.color;
+		const color: ThemeColor|undefined = this.props.color;
 
 		if (!color) return null;
 

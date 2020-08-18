@@ -33,7 +33,7 @@ export class SplashHostComponent
 	implements OnInit, OnDestroy
 {
 	@Input() trigger: ElementRef<HTMLElement>|HTMLElement;
-	@Input() color: ThemeColor;
+	@Input() color: ThemeColor|any; // FIXME
 	@Input() shade: ColorShade;
 	@Input() baseOpacity: Alpha;
 

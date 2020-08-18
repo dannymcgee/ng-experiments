@@ -42,8 +42,8 @@ export class EmotionComponent<T extends EmotionStylesheet>
 	 */
 	styles: T;
 
-	private _ngeBindingValues = new Map<string, string>();
-	private _ngeBindingChanges = new Map<string, [string, string]>();
+	private _ngeBindingValues = new Map<string, string|null>();
+	private _ngeBindingChanges = new Map<string, [string|null, string|null]>();
 
 	private _ngeShouldCheck = false;
 	private _ngeHasChanges = false;
@@ -71,7 +71,7 @@ export class EmotionComponent<T extends EmotionStylesheet>
 			for (let [key, fn] of this.styles._ngeBindings.entries()) {
 				const arg: any = this[key];
 				const next = fn(arg);
-				const current = this._ngeBindingValues.get(key);
+				const current = this._ngeBindingValues.get(key) ?? null;
 
 				if (next !== current) {
 					this._ngeHasChanges = true;
@@ -103,9 +103,9 @@ export class EmotionComponent<T extends EmotionStylesheet>
 			return;
 
 		for (const [key, [current, next]] of this._ngeBindingChanges.entries()) {
-			if (current == null)
-				this._ngeAddClass(next);
-			else if (next == null)
+			if (current === null)
+				this._ngeAddClass(next!);
+			else if (next === null)
 				this._ngeRemoveClass(current);
 			else
 				this._ngeReplaceClass(current, next);

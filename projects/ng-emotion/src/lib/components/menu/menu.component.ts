@@ -41,7 +41,7 @@ export class MenuComponent
 		if (this._contentInitialized)
 			this._updateChildSizes();
 	}
-	private _size?: MenuItemSize;
+	private _size: MenuItemSize = MenuItemSize.Standard;
 
 	@HostBinding('attr.role')
 	@Input()

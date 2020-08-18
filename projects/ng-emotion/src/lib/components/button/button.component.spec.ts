@@ -74,7 +74,7 @@ describe('Button', () => {
 		} = spectator;
 		const { styles } = button;
 
-		const className = styles.variantSecondary;
+		const className = styles.variantSecondary!;
 
 		expect(element)
 			.toHaveClass(className);
@@ -92,19 +92,19 @@ describe('Button', () => {
 		const { styles } = button;
 
 		expect(element)
-			.toHaveClass(styles.variantPrimary);
+			.toHaveClass(styles.variantPrimary!);
 
 		host.variant = 'secondary';
 		spectator.detectChanges();
 
 		expect(element)
-			.toHaveClass(styles.variantSecondary);
+			.toHaveClass(styles.variantSecondary!);
 
 		host.variant = 'tertiary';
 		spectator.detectChanges();
 
 		expect(element)
-			.toHaveClass(styles.variantTertiary);
+			.toHaveClass(styles.variantTertiary!);
 	});
 
 	it('should dynamically update when its `color` input is changed', () => {
@@ -121,21 +121,22 @@ describe('Button', () => {
 		const initialClassName = styles.variantPrimary;
 
 		expect(element)
-			.toHaveClass(initialClassName);
+			.toHaveClass(initialClassName!);
 
 		host.color = 'success';
 		spectator.detectChanges();
 		const newClassName = styles.variantPrimary;
 
-		expect(newClassName).not
+		expect(newClassName)
+			.not
 			.toEqual(initialClassName);
 
 		expect(element)
 			.not
-			.toHaveClass(initialClassName);
+			.toHaveClass(initialClassName!);
 
 		expect(element)
-			.toHaveClass(newClassName);
+			.toHaveClass(newClassName!);
 	});
 
 });
